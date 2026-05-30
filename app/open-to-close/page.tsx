@@ -38,8 +38,8 @@ const tips = [
 
 export default function Page() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black p-2 md:p-4 text-white">
-      <div className="max-w-6xl mx-auto overflow-hidden rounded-2xl border-2 border-cyan-500 shadow-[0_0_30px_rgba(6,182,212,0.25)]">
+    <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black  text-white">
+      <div className=" overflow-hidden rounded-2xl border-2 border-cyan-500 shadow-[0_0_30px_rgba(6,182,212,0.25)]">
         {/* HEADER */}
         <div className="bg-gradient-to-r from-cyan-600 via-blue-700 to-indigo-800 text-white text-center py-6 px-4 border-b-2 border-cyan-400">
           <h1 className="italic font-black text-2xl md:text-4xl leading-tight">

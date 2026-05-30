@@ -4,7 +4,7 @@
 import { useState } from "react";
 
 export default function Home() {
- const [open, setOpen] = useState<number | null>(0);
+  const [open, setOpen] = useState(0);
 
   const markets = [
     {

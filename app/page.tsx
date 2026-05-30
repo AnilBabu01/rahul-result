@@ -13,6 +13,8 @@ import {
   faqData2,
 } from "@/data/games";
 import Link from "next/link";
+import Image from "next/image";
+import download from "@/public/images/download.gif";
 
 export default function Home() {
   const [open, setOpen] = useState<number | null>(0);
@@ -93,10 +95,14 @@ export default function Home() {
 
         {/* Live Update */}
         <div className="mt-3 border-2 border-cyan-500 rounded-lg overflow-hidden">
-          <div className="bg-gradient-to-r from-cyan-500 to-blue-700 py-2 text-center animate-pulse">
-            <h2 className="text-xl font-black italic text-white">
-              📡 LIVE UPDATE 🆕
-            </h2>
+          <div className="bg-gradient-to-r from-cyan-500 to-blue-700 py-2 ">
+            <div className="flex items-center justify-center gap-2">
+              <h2 className="text-xl italic text-white">
+                📡 LIVE UPDATE
+              </h2>
+
+              <Image src={download} alt="Image" width={35} height={35} />
+            </div>
           </div>
 
           <div className="bg-slate-900">
@@ -221,11 +227,17 @@ export default function Home() {
             {forumLinks.map((item, index) => (
               <div
                 key={index}
-                className="border-2 border-cyan-500 bg-slate-950 text-center py-2 px-2 rounded-lg"
+                className="border-2 border-cyan-500 bg-slate-950 rounded-lg py-2 px-2"
               >
-                <p className="text-cyan-300 text-lg font-black italic">
-                  {item}
-                </p>
+                <div className="flex items-center justify-center gap-3">
+                  <Image src={item.image} alt="Image" width={30} height={30} />
+
+                  <Link href={item.url} className="text-cyan-300 text-lg font-black italic text-center">
+                    {item?.title}
+                  </Link>
+
+                  <Image src={item.image} alt="Image" width={30} height={30} />
+                </div>
               </div>
             ))}
           </div>

@@ -74,14 +74,92 @@ export const liveData2 = [
   },
 ];
 
+import arrow_medium from "@/public/images/arrow_medium.gif";
+import arrow_small from "@/public/images/arrow_small.gif";
+
+
 export const forumLinks = [
-  "Satta Matka Guessing Forum",
-  "Join Telegram Channel",
-  "FREE Daily 3 Ank Open To Close All Games",
-  "Weekly Jodi & Panna",
-  "FREE All Matka Charts",
-  "FREE Satta 220 Patti Favourite Panna Chart",
+  { title: "Satta Matka Guessing Forum", image: arrow_small,url:'/satta-matka-guessing-forum' },
+  { title: "Join Telegram Channel", image: arrow_small,url:'/satta-matka-guessing-forum' },
+  { title: "FREE Daily 3 Ank Open To Close All Games", image: arrow_medium,url:'/open-to-close' },
+  { title: "Weekly Jodi & Panna", image: arrow_medium ,url:'/satta-matka-guessing-forum'},
+  { title: "FREE All Matka Charts", image: arrow_medium,url:'/satta-matka-guessing-forum' },
+  { title: "FREE Satta 220 Patti Favourite Panna Chart", image: arrow_medium,url:'/satta-matka-guessing-forum' },
 ];
+
+
+export const markets = [
+  {
+    name: "Kalyan",
+    title: "MEMBERSHIP KE LIYE",
+    phone: "08829959562",
+    color: "bg-blue-900",
+  },
+  {
+    name: "MAIN BAZAR",
+    title: "BOOKING KE LIYE",
+    phone: "08829959562",
+    color: "bg-blue-900",
+  },
+  {
+    name: "RAJA-RANI MORNING",
+    open: "09:40",
+    close: "10:40",
+    result: "267-58-350",
+    color: "bg-red-600",
+  },
+  {
+    name: "MILAN DAY",
+    open: "10:30",
+    close: "11:30",
+    result: "145-09-199",
+    color: "bg-red-600",
+  },
+  {
+    name: "TIME BAZAR",
+    open: "11:45",
+    close: "12:45",
+    result: "580-31-119",
+    color: "bg-red-600",
+  },
+  {
+    name: "SRIDEVI",
+    open: "01:00",
+    close: "02:00",
+    result: "347-42-147",
+    color: "bg-red-600",
+  },
+  {
+    name: "SUPREME",
+    open: "03:00",
+    close: "04:00",
+    result: "790-68-288",
+    color: "bg-red-600",
+  },
+  {
+    name: "MADHUR DAY",
+    open: "04:30",
+    close: "05:30",
+    result: "456-55-339",
+    color: "bg-red-600",
+  },
+  {
+    name: "RAJDHANI DAY",
+    open: "05:45",
+    close: "06:45",
+    result: "781-63-148",
+    color: "bg-red-600",
+  },
+  {
+    name: "KALYAN NIGHT",
+    open: "08:00",
+    close: "09:00",
+    result: "629-79-559",
+    color: "bg-red-600",
+  },
+];
+
+
 
 export const chartData = [
   {
@@ -216,7 +294,6 @@ export const faqData2 = [
   },
 ];
 
-
 export const chartDataPanel = [
   {
     week: "19/12/2022 To 25/12/2022",
@@ -259,3 +336,79 @@ export const chartDataPanel = [
     highlight: [0, 2, 3, 5, 6],
   },
 ];
+
+
+export const topGuessers2 = [
+  {
+    id: 1,
+    name: "Rudra Bhai",
+    phone: "9693338617",
+    date: "30-05-2026",
+    games: ["Kalyan Night", "Sridevi Night", "Rajdhani Night"],
+  },
+  {
+    id: 2,
+    name: "Aman Sharma",
+    phone: "9876543210",
+    date: "30-05-2026",
+    games: ["Milan Night", "Main Bazar", "Madhur Night"],
+  },
+  {
+    id: 3,
+    name: "Vikram Singh",
+    phone: "9123456780",
+    date: "30-05-2026",
+    games: ["Time Bazar", "Kalyan", "Rajdhani"],
+  },
+  {
+    id: 4,
+    name: "Rahul Yadav",
+    phone: "9988776655",
+    date: "30-05-2026",
+    games: ["Milan Day", "Kalyan Day"],
+  },
+  {
+    id: 5,
+    name: "Deepak Kumar",
+    phone: "9871112233",
+    date: "30-05-2026",
+    games: ["Supreme Night", "Main Bazar"],
+  },
+  {
+    id: 6,
+    name: "Rakesh Verma",
+    phone: "9001122334",
+    date: "30-05-2026",
+    games: ["Rajdhani Day", "Madhur Day"],
+  },
+  {
+    id: 7,
+    name: "Suraj Patel",
+    phone: "9556677889",
+    date: "30-05-2026",
+    games: ["Kalyan Night", "Time Bazar"],
+  },
+  {
+    id: 8,
+    name: "Ankit Mishra",
+    phone: "8887776665",
+    date: "30-05-2026",
+    games: ["Milan Night", "Rajdhani Night"],
+  },
+  {
+    id: 9,
+    name: "Pankaj Gupta",
+    phone: "9112233445",
+    date: "30-05-2026",
+    games: ["Main Bazar", "Sridevi Night"],
+  },
+  {
+    id: 10,
+    name: "Sanjay Chauhan",
+    phone: "9998887776",
+    date: "30-05-2026",
+    games: ["Madhur Night", "Kalyan"],
+  },
+];
+
+

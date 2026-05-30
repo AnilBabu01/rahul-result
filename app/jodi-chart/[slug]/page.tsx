@@ -43,22 +43,25 @@ export default async function Page({ params }: PageProps) {
   ];
 
   return (
-    <div id="top" className="min-h-screen scroll-smooth bg-black py-4">
-      <div className=" px-2">
+    <div
+      id="top"
+      className="min-h-screen scroll-smooth bg-gradient-to-b from-slate-950 via-slate-900 to-black py-4 text-white"
+    >
+      <div className="px-2">
         {/* Header */}
-        <div className="overflow-hidden border-2 border-red-600">
-          <div className="bg-gradient-to-b from-purple-900 to-purple-800 py-3 text-center">
-            <h1 className="text-2xl font-bold italic uppercase text-white md:text-2xl">
+        <div className="overflow-hidden border-2 border-cyan-500 shadow-lg shadow-cyan-500/20 rounded-lg">
+          <div className="bg-gradient-to-r from-cyan-700 to-blue-900 py-4 text-center">
+            <h1 className="text-xl sm:text-2xl md:text-4xl font-black italic uppercase text-cyan-300 tracking-wide">
               {formattedTitle}
             </h1>
           </div>
 
-          <div className="border-t-2 border-red-600 bg-purple-900 py-2 text-center">
-            <h2 className="text-xl font-bold italic text-white md:text-2xl">
+          <div className="border-t-2 border-pink-500 bg-slate-900 py-4 text-center">
+            <h2 className="text-lg sm:text-xl md:text-3xl font-black italic text-pink-400">
               {formattedTitle}
             </h2>
 
-            <p className="mt-1 px-2 text-xs font-semibold italic text-white md:text-sm">
+            <p className="mt-2 px-3 text-[11px] sm:text-xs md:text-sm font-semibold italic text-slate-300 leading-relaxed">
               raja rani morning chart, raja rani morning day satta chart, day
               raja rani morning jodi chart record, raja rani morning jodi patti
               chart
@@ -67,16 +70,16 @@ export default async function Page({ params }: PageProps) {
         </div>
 
         {/* Result Section */}
-        <div className="border-2 border-red-600 bg-yellow-300 py-4 text-center">
-          <h2 className="text-1xl font-extrabold uppercase text-blue-700 md:text-1xl">
+        <div className="mt-3 border-2 border-cyan-500 bg-slate-900 py-5 text-center rounded-lg">
+          <h2 className="text-lg md:text-2xl font-black uppercase text-cyan-300">
             {formattedTitle}
           </h2>
 
-          <div className="text-3xl font-bold text-black md:text-1xl">
+          <div className="mt-2 text-3xl md:text-5xl font-black text-pink-400 tracking-wider">
             267-58-350
           </div>
 
-          <button className="rounded-full border border-yellow-700  from-yellow-300 to-yellow-700 px-1 py-2 text-lg font-bold italic text-black shadow-lg md:px-3 md:text-2xl">
+          <button className="mt-4 rounded-full bg-gradient-to-r from-cyan-500 to-blue-700 px-5 py-2 text-sm md:text-xl font-black italic text-white shadow-xl hover:scale-105 transition">
             Refresh Result
           </button>
         </div>
@@ -85,7 +88,7 @@ export default async function Page({ params }: PageProps) {
         <div className="my-4 flex justify-center">
           <a
             href="#bottom"
-            className="rounded border-2 border-yellow-500 bg-white px-1 py-1 text-lg font-bold italic text-red-600 shadow transition hover:scale-105 md:px-1 md:text-1xl"
+            className="rounded-lg border border-cyan-400 bg-slate-900 px-4 py-2 text-sm md:text-lg font-bold italic text-cyan-300 shadow-lg transition hover:bg-slate-800 hover:scale-105"
           >
             Go to Bottom
           </a>
@@ -94,7 +97,7 @@ export default async function Page({ params }: PageProps) {
         {/* Chart Table */}
         <div className="overflow-x-auto">
           <div className="flex justify-center">
-            <div className="border-4 border-purple-600 bg-white p-2 shadow-2xl">
+            <div className="border-2 border-cyan-500 bg-slate-900 p-2 shadow-2xl rounded-xl">
               <table className="border-collapse">
                 <tbody>
                   {chartData.map((row, rowIndex) => (
@@ -102,11 +105,16 @@ export default async function Page({ params }: PageProps) {
                       {row.map((num, colIndex) => (
                         <td
                           key={colIndex}
-                          className={`h-12 w-12 border border-purple-400 text-center text-2xl font-bold italic md:h-11 md:w-11 md:text-1xl ${
+                          className={`h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 border border-slate-700 text-center text-lg sm:text-xl md:text-2xl font-black italic ${
                             redNumbers.includes(num)
-                              ? "text-red-600"
-                              : "text-black"
+                              ? "text-pink-400"
+                              : "text-white"
                           }`}
+                          style={{
+                            fontFamily: "Georgia, serif",
+                            textShadow:
+                              "0px 0px 10px rgba(34,211,238,0.7)",
+                          }}
                         >
                           {num}
                         </td>
@@ -123,98 +131,105 @@ export default async function Page({ params }: PageProps) {
         <div id="bottom" className="my-4 flex justify-center">
           <a
             href="#top"
-            className="rounded border-2 border-yellow-500 bg-white px-1 py-1 text-lg font-bold italic text-red-600 shadow transition hover:scale-105 md:px-1 md:text-1xl"
+            className="rounded-lg border border-pink-400 bg-slate-900 px-4 py-2 text-sm md:text-lg font-bold italic text-pink-400 shadow-lg transition hover:bg-slate-800 hover:scale-105"
           >
             Go to Top
           </a>
         </div>
-
-        {/* Slug Display */}
       </div>
 
-      <div className="border-4 border-yellow-900 bg-yellow-300 text-center py-1">
-        <h1 className="text-blue-700 text-1xl font-extrabold uppercase tracking-wide">
+      {/* Footer Result */}
+      <div className="mx-2 border-2 border-cyan-500 bg-slate-900 text-center py-4 rounded-xl">
+        <h1 className="text-cyan-300 text-lg md:text-2xl font-black uppercase tracking-wide">
           {formattedTitle}
         </h1>
 
-        <div className="text-1xl font-extrabold text-black">267-58-350</div>
+        <div className="mt-2 text-2xl md:text-4xl font-black text-pink-400">
+          267-58-350
+        </div>
 
-        <button className="px-2 py-1 bg-yellow-600 rounded-full text-black font-bold shadow-lg hover:bg-yellow-500">
+        <button className="mt-3 px-5 py-2 bg-gradient-to-r from-pink-500 to-cyan-500 rounded-full text-white font-black shadow-lg hover:scale-105 transition">
           Refresh Result
         </button>
       </div>
 
       {/* Whatsapp Banner */}
-      <div className="flex justify-center mt-3">
-        <div className="bg-green-700 text-white px-1 py-1 rounded-lg text-1xl font-bold shadow-lg">
+      <div className="flex justify-center mt-4 px-2">
+        <div className="bg-gradient-to-r from-green-500 to-emerald-700 text-white px-5 py-3 rounded-xl text-sm md:text-lg font-black shadow-2xl text-center">
           Join our WhatsApp channel for fast Result
         </div>
       </div>
 
       {/* Navigation */}
-      <div className="bg-[#ecec9c] border mt-4 py-3">
-        <div className="flex flex-wrap justify-center gap-3 text-1xl font-bold">
-          <a href="#" className="text-green-700 hover:underline ">
+      <div className="bg-slate-900 border border-cyan-500 mt-5 py-4 mx-2 rounded-xl">
+        <div className="flex flex-wrap justify-center gap-2 md:gap-3 text-xs sm:text-sm md:text-lg font-bold">
+          <a href="#" className="text-cyan-300 hover:underline">
             Home
           </a>
 
-          <span>|</span>
+          <span className="text-slate-500">|</span>
 
-          <a href="#" className="text-pink-700 hover:underline text-1xl">
+          <a href="#" className="text-pink-400 hover:underline">
             Matka Guessing
           </a>
 
-          <span>|</span>
+          <span className="text-slate-500">|</span>
 
-          <a href="#" className="text-yellow-700 hover:underline">
+          <a href="#" className="text-yellow-300 hover:underline">
             Matka Chart
           </a>
 
-          <span>|</span>
+          <span className="text-slate-500">|</span>
 
-          <a href="#" className="text-blue-700 hover:underline">
+          <a href="#" className="text-cyan-400 hover:underline">
             Matka Play
           </a>
 
-          <span>|</span>
+          <span className="text-slate-500">|</span>
 
-          <a href="#" className="text-green-800 hover:underline">
+          <a href="#" className="text-green-400 hover:underline">
             Tara Matka
           </a>
 
-          <span>|</span>
+          <span className="text-slate-500">|</span>
 
-          <a href="#" className="text-yellow-800 hover:underline">
+          <a href="#" className="text-orange-300 hover:underline">
             Fix Matka
           </a>
 
-          <span>|</span>
+          <span className="text-slate-500">|</span>
 
-          <a href="#" className="text-red-700 hover:underline">
+          <a href="#" className="text-red-400 hover:underline">
             Sitemap
           </a>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="bg-[#ecec9c] border border-gray-400 text-center py-1">
-        <h2 className="text-red-700 text-1xl font-bold italic">
+      {/* Main Footer */}
+      <div className="bg-slate-900 border border-cyan-500 text-center py-5 mt-4 mx-2 rounded-xl shadow-lg">
+        <h2 className="text-pink-400 text-lg md:text-2xl font-black italic">
           SattaMatkaDpboss.Mobi
         </h2>
 
-        <div className=" text-1xl font-extrabold">
+        <div className="mt-3 text-sm md:text-lg font-black text-cyan-300">
           ALL RIGHTS RESERVED (2012-2026)
         </div>
 
-        <div className="text-1xl font-extrabold">SITE OWNER:-</div>
+        <div className="mt-2 text-sm md:text-lg font-black text-white">
+          SITE OWNER:-
+        </div>
 
-        <div className="text-1xl font-extrabold underline">
+        <div className="mt-2 text-sm md:text-xl font-black underline text-pink-400">
           PRO. BIG BOSS SIR
         </div>
 
-        <div className="text-blue-700 text-1xl font-extrabold">08829959562</div>
+        <div className="mt-2 text-cyan-300 text-sm md:text-xl font-black">
+          08829959562
+        </div>
 
-        <div className="text-1xl font-bold ">https://sattamatkadpboss.mobi</div>
+        <div className="mt-3 text-xs md:text-base font-bold text-slate-400 break-all px-2">
+          https://sattamatkadpboss.mobi
+        </div>
       </div>
     </div>
   );

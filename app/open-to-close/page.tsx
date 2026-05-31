@@ -1,5 +1,5 @@
 import { markets } from "@/data/games";
-
+import Link from "next/link";
 import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -139,9 +139,9 @@ export default function Page() {
             </h3>
 
             <p className="text-center text-base md:text-lg leading-8 text-slate-200">
-              Open To Close (OTC) is one of the most important concepts in
-              Satta Matka. It refers to the relationship between the opening
-              number and closing number declared in each Matka market session.
+              Open To Close (OTC) is one of the most important concepts in Satta
+              Matka. It refers to the relationship between the opening number
+              and closing number declared in each Matka market session.
             </p>
 
             <div className="mt-6 bg-slate-900 border-l-4 border-cyan-400 p-5 rounded-lg">
@@ -180,8 +180,8 @@ export default function Page() {
             </h2>
 
             <p className="text-center mt-6 text-slate-300 italic font-semibold text-base md:text-lg">
-              DPBoss updates Fix 3 Ank Open To Close for all major markets
-              twice daily:
+              DPBoss updates Fix 3 Ank Open To Close for all major markets twice
+              daily:
             </p>
 
             <div className="grid md:grid-cols-2 gap-5 mt-8">
@@ -197,9 +197,7 @@ export default function Page() {
                   2:00 PM
                 </div>
 
-                <div className="italic text-slate-400 mt-2">
-                  Updated Daily
-                </div>
+                <div className="italic text-slate-400 mt-2">Updated Daily</div>
               </div>
 
               {/* NIGHT */}
@@ -214,9 +212,7 @@ export default function Page() {
                   8:00 PM
                 </div>
 
-                <div className="italic text-slate-400 mt-2">
-                  Updated Daily
-                </div>
+                <div className="italic text-slate-400 mt-2">Updated Daily</div>
               </div>
             </div>
 
@@ -256,9 +252,7 @@ export default function Page() {
                   </div>
 
                   <p className="italic text-sm md:text-lg text-slate-200 leading-7">
-                    <span className="font-black text-white">
-                      {tip.title}
-                    </span>
+                    <span className="font-black text-white">{tip.title}</span>
                     {" — "}
                     {tip.description}
                   </p>
@@ -272,19 +266,30 @@ export default function Page() {
       {/* FOOTER */}
       <footer className="max-w-6xl mx-auto mt-6 overflow-hidden rounded-2xl border border-cyan-500 bg-gradient-to-b from-slate-900 to-black shadow-[0_0_20px_rgba(34,211,238,0.2)]">
         <div className="text-center py-1 px-1 text-sm md:text1xl font-black leading-10">
-          <span className="text-cyan-400">Home</span>
+          <Link href="/" className="text-cyan-400">
+            Home
+          </Link>
           {" | "}
-          <span className="text-pink-400">Matka Guessing</span>
+          <Link href="/satta-matka-guessing-forum" className="text-pink-400">
+            Matka Guessing
+          </Link>
           {" | "}
-          <span className="text-yellow-400">Matka Chart</span>
+          <Link href="/satta-matka-chart" className="text-yellow-400">
+            Matka Chart
+          </Link>
           {" | "}
-          <span className="text-blue-400">Matka Play</span>
+          <Link href="/online-matka-play" className="text-blue-400">
+            Matka Play
+          </Link>
           {" | "}
-          <span className="text-green-400">Tara Matka</span>
+          <Link href="/tara-matka-mumbai" className="text-green-400">
+            Tara Matka
+          </Link>
           {" | "}
-          <span className="text-orange-400">Fix Matka</span>
+          <Link href="/fix-matka-number" className="text-orange-400">
+            Fix Matka
+          </Link>
           {" | "}
-          <span className="text-red-400">Sitemap</span>
         </div>
 
         <div className="border-t border-cyan-500" />

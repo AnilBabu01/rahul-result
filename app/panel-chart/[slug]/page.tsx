@@ -1,11 +1,25 @@
 // app/jodi-chart/[slug]/page.tsx
 
 import { chartDataPanel } from "@/data/games";
-
-interface PageProps {
-  params: Promise<{
+import { Metadata } from "next";
+type Props = {
+  params: {
     slug: string;
-  }>;
+  };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+
+  const formattedSlug = slug.replace(/-/g, " ");
+
+  return {
+    title: `${formattedSlug} Chart Result`,
+    description: `Get ${formattedSlug} satta matka chart, panel chart, jodi chart and daily result updates.`,
+    alternates: {
+      canonical: `https://yourdomain.com/jodi-chart/${slug}`,
+    },
+  };
 }
 
 function MiniDigits() {
@@ -29,7 +43,7 @@ function MiniDigits() {
   );
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: Props) {
   const { slug } = await params;
 
   const formattedTitle = slug.replace(/-/g, " ");

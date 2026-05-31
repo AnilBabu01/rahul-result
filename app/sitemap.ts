@@ -1,20 +1,23 @@
-// app/sitemap.ts
+import { games } from "@/data/games";
 
-import type { MetadataRoute } from "next";
+export default function sitemap() {
 
-export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl = "https://yourdomain.com";
+
+  const urls = games.map((game) => ({
+    url: `${baseUrl}/chart/${game}`,
+    lastModified: new Date(),
+    changeFrequency: "daily" as const,
+    priority: 0.9,
+  }));
+
   return [
     {
-      url: "https://yourdomain.com",
+      url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: "daily",
       priority: 1,
     },
-    {
-      url: "https://yourdomain.com/chart",
-      lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 0.8,
-    },
+
+    ...urls,
   ];
 }

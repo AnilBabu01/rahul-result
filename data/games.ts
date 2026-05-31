@@ -1,3 +1,51 @@
+export const games = [
+  "panel-chart/kalyan-morning-panel-chart",
+  "panel-chart/kalyan-night-panel-chart",
+  "madhur-night-chart",
+  "rajdhani-day-chart",
+  "panel-chart/asha-bazar-panel-chart",
+  "main-bazar-chart",
+  "satta-matka-guessing-forum",
+  "open-to-close",
+  "weekly-jodi-panna",
+  "satta-matka-chart",
+  "all-panna-record",
+  'about-us',
+  'contact',
+  'disclaimer',
+  'privacy-policy',
+  "jodi-chart/kalyan-chart",
+  "jodi-chart/main-mazar-chart",
+  "jodi-chart/main-ratan-chart",
+  "jodi-chart/main-mumbai-chart",
+  "jodi-chart/time-bazar-chart",
+  "jodi-chart/sridevi-satta-chart",
+  "jodi-chart/sridevi-night-chart",
+  "jodi-chart/kalyan-night-chart",
+  "jodi-chart/kalyan-morning-chart",
+  "jodi-chart/madhur-morning-chart",
+  "jodi-chart/milan-day-chart",
+  "jodi-chart/milan-night-chart",
+  "jodi-chart/madhur-day-chart",
+  "jodi-chart/madhur-night-chart",
+  "jodi-chart/supreme-day-chart",
+  "jodi-chart/supreme-night-chart",
+  "jodi-chart/rajdhani-day-chart",
+  "jodi-chart/rajdhani-night-chart",
+  "jodi-chart/raja-rani-morning-chart",
+  "panel-chart/raja-rani-morning-panel-chart",
+  "jodi-chart/ratan-morning-chart",
+  "panel-chart/ratan-morning-panel-chart",
+  "jodi-chart/karantaka-day-chart",
+  "panel-chart/karantaka-day-panel-chart",
+  "jodi-chart/kalyan-morning-chart",
+  "panel-chart/panel-chartkalyan-morning-panel-chart",
+  "jodi-chart/mini-milan-chart",
+  "panel-chart/panel-chartmini-milan-panel-chart",
+  "jodi-chart/dhan-express-chart",
+  "panel-chart/dhan-express-panel-chart",
+];
+
 export const liveData = [
   {
     title: "MILAN DAY",
@@ -77,16 +125,38 @@ export const liveData2 = [
 import arrow_medium from "@/public/images/arrow_medium.gif";
 import arrow_small from "@/public/images/arrow_small.gif";
 
-
 export const forumLinks = [
-  { title: "Satta Matka Guessing Forum", image: arrow_small,url:'/satta-matka-guessing-forum' },
-  { title: "Join Telegram Channel", image: arrow_small,url:'/satta-matka-guessing-forum' },
-  { title: "FREE Daily 3 Ank Open To Close All Games", image: arrow_medium,url:'/open-to-close' },
-  { title: "Weekly Jodi & Panna", image: arrow_medium ,url:'/weekly-jodi-panna'},
-  { title: "FREE All Matka Charts", image: arrow_medium,url:'/satta-matka-chart' },
-  { title: "FREE Satta 220 Patti Favourite Panna Chart", image: arrow_medium,url:'/all-panna-record' },
+  {
+    title: "Satta Matka Guessing Forum",
+    image: arrow_small,
+    url: "/satta-matka-guessing-forum",
+  },
+  {
+    title: "Join Telegram Channel",
+    image: arrow_small,
+    url: "/satta-matka-guessing-forum",
+  },
+  {
+    title: "FREE Daily 3 Ank Open To Close All Games",
+    image: arrow_medium,
+    url: "/open-to-close",
+  },
+  {
+    title: "Weekly Jodi & Panna",
+    image: arrow_medium,
+    url: "/weekly-jodi-panna",
+  },
+  {
+    title: "FREE All Matka Charts",
+    image: arrow_medium,
+    url: "/satta-matka-chart",
+  },
+  {
+    title: "FREE Satta 220 Patti Favourite Panna Chart",
+    image: arrow_medium,
+    url: "/all-panna-record",
+  },
 ];
-
 
 export const markets = [
   {
@@ -159,8 +229,6 @@ export const markets = [
   },
 ];
 
-
-
 export const chartData = [
   {
     title: "Kalyan",
@@ -222,8 +290,6 @@ export const charts = [
   "Rajdhani Day Chart",
   "Rajdhani Night Chart",
 ];
-
-
 
 export const faqData = [
   {
@@ -339,7 +405,6 @@ export const chartDataPanel = [
   },
 ];
 
-
 export const topGuessers2 = [
   {
     id: 1,
@@ -412,5 +477,3 @@ export const topGuessers2 = [
     games: ["Madhur Night", "Kalyan"],
   },
 ];
-
-

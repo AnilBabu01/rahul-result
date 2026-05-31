@@ -1,5 +1,5 @@
 
-
+import Link from "next/link";
 
 import { Metadata } from "next";
 
@@ -509,19 +509,30 @@ export default function Page() {
       {/* FOOTER */}
       <footer className="max-w-6xl mx-auto mt-8 overflow-hidden rounded-3xl border-2 border-cyan-500 bg-slate-950 shadow-[0_0_40px_rgba(34,211,238,0.2)]">
         <div className="text-center py-4 px-2 text-1xl md:text-1xl font-black leading-10">
-          <span className="text-cyan-400">Home</span>
+          <Link href="/" className="text-cyan-400">
+            Home
+          </Link>
           {" | "}
-          <span className="text-fuchsia-400">Matka Guessing</span>
+          <Link href="/satta-matka-guessing-forum" className="text-pink-400">
+            Matka Guessing
+          </Link>
           {" | "}
-          <span className="text-yellow-300">Matka Chart</span>
+          <Link href="/satta-matka-chart" className="text-yellow-400">
+            Matka Chart
+          </Link>
           {" | "}
-          <span className="text-blue-400">Matka Play</span>
+          <Link href="/online-matka-play" className="text-blue-400">
+            Matka Play
+          </Link>
           {" | "}
-          <span className="text-green-400">Tara Matka</span>
+          <Link href="/tara-matka-mumbai" className="text-green-400">
+            Tara Matka
+          </Link>
           {" | "}
-          <span className="text-orange-400">Fix Matka</span>
+          <Link href="/fix-matka-number" className="text-orange-400">
+            Fix Matka
+          </Link>
           {" | "}
-          <span className="text-red-400">Sitemap</span>
         </div>
 
         <div className="border-t border-cyan-500" />

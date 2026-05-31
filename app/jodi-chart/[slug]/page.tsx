@@ -1,5 +1,5 @@
 // app/jodi-chart/[slug]/page.tsx
-
+import Link from "next/link";
 import { Metadata } from "next";
 type Props = {
   params: {
@@ -177,45 +177,30 @@ export default async function Page({ params }: Props) {
       {/* Navigation */}
       <div className="bg-slate-900 border border-cyan-500 mt-5 py-4 mx-2 rounded-xl">
         <div className="flex flex-wrap justify-center gap-2 md:gap-3 text-xs sm:text-sm md:text-lg font-bold">
-          <a href="#" className="text-cyan-300 hover:underline">
+          <Link href="/" className="text-cyan-400">
             Home
-          </a>
-
-          <span className="text-slate-500">|</span>
-
-          <a href="#" className="text-pink-400 hover:underline">
+          </Link>
+          {" | "}
+          <Link href="/satta-matka-guessing-forum" className="text-pink-400">
             Matka Guessing
-          </a>
-
-          <span className="text-slate-500">|</span>
-
-          <a href="#" className="text-yellow-300 hover:underline">
+          </Link>
+          {" | "}
+          <Link href="/satta-matka-chart" className="text-yellow-400">
             Matka Chart
-          </a>
-
-          <span className="text-slate-500">|</span>
-
-          <a href="#" className="text-cyan-400 hover:underline">
+          </Link>
+          {" | "}
+          <Link href="/online-matka-play" className="text-blue-400">
             Matka Play
-          </a>
-
-          <span className="text-slate-500">|</span>
-
-          <a href="#" className="text-green-400 hover:underline">
+          </Link>
+          {" | "}
+          <Link href="/tara-matka-mumbai" className="text-green-400">
             Tara Matka
-          </a>
-
-          <span className="text-slate-500">|</span>
-
-          <a href="#" className="text-orange-300 hover:underline">
+          </Link>
+          {" | "}
+          <Link href="/fix-matka-number" className="text-orange-400">
             Fix Matka
-          </a>
-
-          <span className="text-slate-500">|</span>
-
-          <a href="#" className="text-red-400 hover:underline">
-            Sitemap
-          </a>
+          </Link>
+          {" | "}
         </div>
       </div>
 

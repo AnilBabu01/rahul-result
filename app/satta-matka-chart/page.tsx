@@ -4,7 +4,7 @@ import Link from "next/link";
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `Satta Matka Chart 2026 – Jodi & Panel All Markets`,
-    description: `Get complete Satta Matka Chart 2026 — Kalyan, Milan, Rajdhani, Main Bazar & 30+ markets. Free jodi & panel chart updated daily.Bookmark SattaMatkaDpboss.Mobi now!`,
+    description: `Get complete Satta Matka Chart 2026 — Kalyan, Milan, Rajdhani, Main Bazar & 30+ markets. Free jodi & panel chart updated daily.Bookmark yourDomainName now!`,
     alternates: {
       canonical: `https://yourdomain.com/chart/satta-matka-chart`,
     },
@@ -41,7 +41,7 @@ export default function Page() {
         {/* Intro Content */}
         <div className="border-b border-fuchsia-500 px-4 py-4 text-center bg-[#1d0030]">
           <p className="font-bold italic text-lg text-pink-100 leading-relaxed">
-            Welcome to SattaMatkaDpboss.Mobi — India's most trusted destination
+            Welcome to yourDomainName — India's most trusted destination
             for Satta Matka Chart records. Get complete Kalyan Jodi Chart
             history from 1974 to 2026, Milan Day & Night Panel Chart, Rajdhani
             Day & Night Jodi Chart, Main Bazar Panel Chart, Main Mumbai Chart,

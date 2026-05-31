@@ -231,7 +231,7 @@ export default async function Page({ params }: PageProps) {
       {/* Main Footer */}
       <div className="bg-slate-900 border border-cyan-500 text-center py-4 mt-4 mx-1 rounded-xl shadow-lg">
         <h2 className="text-pink-400 text-xs sm:text-sm md:text-2xl font-black italic">
-          SattaMatkaDpboss.Mobi
+          yourDomainName
         </h2>
 
         <div className="text-[8px] sm:text-[10px] md:text-base font-black text-cyan-300 mt-2">

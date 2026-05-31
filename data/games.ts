@@ -256,7 +256,7 @@ export const faqData2 = [
     question:
       "Q1. What is DPBoss and why do millions of players visit it every day?",
     answer:
-      "DPBoss is one of India's oldest and most trusted Satta Matka result platforms, running since 2012. It covers 50 plus Matka markets including Kalyan, Milan, Rajdhani, Time Bazar and Main Bazar — all updated the moment results are declared. No login required, no payment, no membership. That is exactly why millions of players bookmark SattaMatkaDpboss.Mobi and come back every single day.",
+      "DPBoss is one of India's oldest and most trusted Satta Matka result platforms, running since 2012. It covers 50 plus Matka markets including Kalyan, Milan, Rajdhani, Time Bazar and Main Bazar — all updated the moment results are declared. No login required, no payment, no membership. That is exactly why millions of players bookmark yourDomainName and come back every single day.",
   },
   {
     question: "Q2. What is Kalyan Matka and when does its result come?",
@@ -285,9 +285,9 @@ export const faqData2 = [
       "In Satta Matka there are exactly 220 valid three-digit numbers known as Panna or Patti. Every result panel number must come from this fixed set of 220 combinations. These numbers are grouped digit-wise from 0 to 9 based on the sum of their digits. DPBoss provides the complete All Panna Record on a dedicated page, available free for all players with no login needed.",
   },
   {
-    question: "Q7. Is everything on SattaMatkaDpboss.Mobi completely free?",
+    question: "Q7. Is everything on yourDomainName completely free?",
     answer:
-      "Yes, absolutely everything on SattaMatkaDpboss.Mobi is 100% free. Live results, Jodi charts, Panel charts, Weekly Jodi Panna predictions, Open To Close daily tips, 220 Patti record and Guessing Forum — all of it is available without any payment, registration or membership fees since 2012.",
+      "Yes, absolutely everything on yourDomainName is 100% free. Live results, Jodi charts, Panel charts, Weekly Jodi Panna predictions, Open To Close daily tips, 220 Patti record and Guessing Forum — all of it is available without any payment, registration or membership fees since 2012.",
   },
   {
     question: "Q8. How quickly does DPBoss update Satta Matka results?",

@@ -1,12 +1,27 @@
 // app/jodi-chart/[slug]/page.tsx
 
-interface PageProps {
-  params: Promise<{
+import { Metadata } from "next";
+type Props = {
+  params: {
     slug: string;
-  }>;
+  };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+
+  const formattedSlug = slug.replace(/-/g, " ");
+
+  return {
+    title: `${formattedSlug} Chart Result`,
+    description: `Get ${formattedSlug} satta matka chart, panel chart, jodi chart and daily result updates.`,
+    alternates: {
+      canonical: `https://yourdomain.com/jodi-chart/${slug}`,
+    },
+  };
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: Props) {
   const { slug } = await params;
 
   const formattedTitle = slug.replace(/-/g, " ");
@@ -112,8 +127,7 @@ export default async function Page({ params }: PageProps) {
                           }`}
                           style={{
                             fontFamily: "Georgia, serif",
-                            textShadow:
-                              "0px 0px 10px rgba(34,211,238,0.7)",
+                            textShadow: "0px 0px 10px rgba(34,211,238,0.7)",
                           }}
                         >
                           {num}

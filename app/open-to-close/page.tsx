@@ -1,5 +1,17 @@
 import { markets } from "@/data/games";
 
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: `Satta Matka Open To Close | Satta Matka Fix 3 Ank | 3ank Open | 3ank Close Satta Matka`,
+    description: `Get daily Satta Matka Open To Close Fix 3 Ank on DPBoss covering all major markets. Accurate 3 Ank Open and Close numbers updated twice daily, completely free.`,
+    alternates: {
+      canonical: `https://yourdomain.com/chart/open-to-close`,
+    },
+  };
+}
+
 const markets2 = [
   "Kalyan",
   "Main Bazar",
@@ -259,7 +271,7 @@ export default function Page() {
 
       {/* FOOTER */}
       <footer className="max-w-6xl mx-auto mt-6 overflow-hidden rounded-2xl border border-cyan-500 bg-gradient-to-b from-slate-900 to-black shadow-[0_0_20px_rgba(34,211,238,0.2)]">
-        <div className="text-center py-5 px-3 text-sm md:text-2xl font-black leading-10">
+        <div className="text-center py-1 px-1 text-sm md:text1xl font-black leading-10">
           <span className="text-cyan-400">Home</span>
           {" | "}
           <span className="text-pink-400">Matka Guessing</span>
@@ -277,28 +289,28 @@ export default function Page() {
 
         <div className="border-t border-cyan-500" />
 
-        <div className="text-center py-8 px-4 space-y-3">
-          <h3 className="text-pink-400 text-2xl md:text-4xl font-black italic break-all">
+        <div className="text-center py-2 px-1 space-y-1">
+          <h3 className="text-pink-400 text-1xl md:text-1xl font-black italic break-all">
             https://sattamatkadpboss.mobi
           </h3>
 
-          <p className="font-black text-lg md:text-3xl text-white">
+          <p className="font-black text-lg md:text-1xl text-white">
             ALL RIGHTS RESERVED (2012-2026)
           </p>
 
-          <p className="font-black text-lg md:text-3xl text-cyan-300">
+          <p className="font-black text-lg md:text-1xl text-cyan-300">
             SITE OWNER:-
           </p>
 
-          <p className="font-black underline text-xl md:text-4xl text-yellow-300">
+          <p className="font-black underline text-xl md:text-1xl text-yellow-300">
             PRO. BIG BOSS SIR
           </p>
 
-          <p className="text-cyan-400 font-black text-3xl md:text-6xl mt-2 break-all">
+          <p className="text-cyan-400 font-black text-1xl md:text-1xl mt-2 break-all">
             08829959562
           </p>
 
-          <p className="font-bold text-base md:text-2xl mt-4 text-slate-300 break-all">
+          <p className="font-bold text-base md:text-1xl mt-4 text-slate-300 break-all">
             https://sattamatkadpboss.mobi
           </p>
         </div>

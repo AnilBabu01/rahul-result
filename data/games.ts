@@ -82,9 +82,9 @@ export const forumLinks = [
   { title: "Satta Matka Guessing Forum", image: arrow_small,url:'/satta-matka-guessing-forum' },
   { title: "Join Telegram Channel", image: arrow_small,url:'/satta-matka-guessing-forum' },
   { title: "FREE Daily 3 Ank Open To Close All Games", image: arrow_medium,url:'/open-to-close' },
-  { title: "Weekly Jodi & Panna", image: arrow_medium ,url:'/satta-matka-guessing-forum'},
-  { title: "FREE All Matka Charts", image: arrow_medium,url:'/satta-matka-guessing-forum' },
-  { title: "FREE Satta 220 Patti Favourite Panna Chart", image: arrow_medium,url:'/satta-matka-guessing-forum' },
+  { title: "Weekly Jodi & Panna", image: arrow_medium ,url:'/weekly-jodi-panna'},
+  { title: "FREE All Matka Charts", image: arrow_medium,url:'/satta-matka-chart' },
+  { title: "FREE Satta 220 Patti Favourite Panna Chart", image: arrow_medium,url:'/all-panna-record' },
 ];
 
 
@@ -222,6 +222,8 @@ export const charts = [
   "Rajdhani Day Chart",
   "Rajdhani Night Chart",
 ];
+
+
 
 export const faqData = [
   {

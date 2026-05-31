@@ -25,6 +25,10 @@ export default function Home() {
     setActive(active === index ? null : index);
   };
 
+  const currentDate = new Date()
+    .toLocaleDateString("en-GB")
+    .replace(/\//g, "-");
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black text-white py-2 px-2">
       <div className="max-w-[1600px] mx-auto border-2 border-cyan-400 shadow-[0_0_25px_rgba(34,211,238,0.4)] overflow-hidden rounded-xl">
@@ -97,9 +101,7 @@ export default function Home() {
         <div className="mt-3 border-2 border-cyan-500 rounded-lg overflow-hidden">
           <div className="bg-gradient-to-r from-cyan-500 to-blue-700 py-2 ">
             <div className="flex items-center justify-center gap-2">
-              <h2 className="text-xl italic text-white">
-                📡 LIVE UPDATE
-              </h2>
+              <h2 className="text-xl italic text-white">📡 LIVE UPDATE</h2>
 
               <Image src={download} alt="Image" width={35} height={35} />
             </div>
@@ -232,7 +234,10 @@ export default function Home() {
                 <div className="flex items-center justify-center gap-3">
                   <Image src={item.image} alt="Image" width={30} height={30} />
 
-                  <Link href={item.url} className="text-cyan-300 text-lg font-black italic text-center">
+                  <Link
+                    href={item.url}
+                    className="text-cyan-300 text-lg font-black italic text-center"
+                  >
                     {item?.title}
                   </Link>
 
@@ -269,7 +274,7 @@ export default function Home() {
         </div>
 
         <div className="bg-pink-500 text-center text-xl italic font-black py-3 border-b-4 border-cyan-500 text-white">
-          Date : 30-05-2026
+          Date : {currentDate}
         </div>
 
         <div className="bg-slate-900">
@@ -358,7 +363,7 @@ export default function Home() {
         {charts.map((item, index) => (
           <a
             key={index}
-            href="#"
+            href={`/jodi-chart/${item.toLowerCase().replace(/\s+/g, "-")}`}
             className="block text-center py-3 text-xl font-bold text-cyan-300 border-b border-slate-700 hover:bg-slate-800 transition"
           >
             {item}
@@ -409,7 +414,17 @@ export default function Home() {
           </h3>
 
           <p className="text-slate-300 leading-7">
-            यह वेबसाइट केवल मनोरंजन और सूचना के उद्देश्य के लिए है।
+            यह वेबसाइट (SattaMatkaDpboss.Mobi) केवल मनोरंजन और सूचना के उद्देश्य
+            के लिए है। हम किसी भी अवैध सट्टा मटका व्यवसाय से नहीं जुड़े हैं।
+            यहाँ दिखाए गए सभी परिणाम इंटरनेट पर उपलब्ध डेटा पर आधारित हैं। हम
+            जुए या सट्टा खेलने का समर्थन नहीं करते हैं। कृपया अपने देश के
+            कानूनों का पालन करें। किसी भी लाभ या हानि के लिए आप स्वयं जिम्मेदार
+            होंगे।
+          </p>
+
+          <p className="text-slate-300 leading-7">
+            Note: This site is for educational purposes only. View at your own
+            risk.
           </p>
         </div>
 
@@ -420,7 +435,9 @@ export default function Home() {
 
           <p className="mt-3 leading-7">
             यदि आप इंटरनेट पर सबसे तेज़ कल्याण मटका रिजल्ट और DPBoss गेसिंग खोज
-            रहे हैं, तो आप सही जगह पर हैं।
+            रहे हैं, तो आप सही जगह पर हैं। हमारी वेबसाइट आपको मिलन डे, मिलन
+            नाइट, राजधानी, और मेन बाजार जैसे सभी मार्केट के परिणाम बिना किसी
+            देरी के प्रदान करती है।
           </p>
         </div>
       </section>

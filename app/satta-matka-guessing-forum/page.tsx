@@ -1,4 +1,15 @@
 import { topGuessers2 } from "@/data/games";
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: `Satta Matka Guessing Chart Result`,
+    description: `Get Satta Matka Guessing satta matka chart, panel chart, jodi chart and daily result updates.`,
+    alternates: {
+      canonical: `https://yourdomain.com/chart/satta-matka-guessing-forum`,
+    },
+  };
+}
 
 export default function Page() {
   const rules = [
@@ -182,8 +193,6 @@ export default function Page() {
             </div>
           ))}
         </div>
-
-      
       </div>
     </main>
   );

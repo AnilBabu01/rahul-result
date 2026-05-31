@@ -1,11 +1,16 @@
+// app/sitemap.ts
+
 import { games } from "@/data/games";
+import type { MetadataRoute } from "next";
 
-export default function sitemap() {
-
+export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://yourdomain.com";
 
-  const urls = games.map((game) => ({
-    url: `${baseUrl}/chart/${game}`,
+  // Remove duplicate routes
+  const uniqueGames = [...new Set(games)];
+
+  const gameUrls = uniqueGames.map((game) => ({
+    url: `${baseUrl}/${game}`,
     lastModified: new Date(),
     changeFrequency: "daily" as const,
     priority: 0.9,
@@ -15,9 +20,10 @@ export default function sitemap() {
     {
       url: baseUrl,
       lastModified: new Date(),
+      changeFrequency: "daily",
       priority: 1,
     },
 
-    ...urls,
+    ...gameUrls,
   ];
 }

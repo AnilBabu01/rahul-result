@@ -201,6 +201,10 @@ export default async function Page({ params }: Props) {
             Fix Matka
           </Link>
           {" | "}
+           <Link href="/sitemap.xml" className="text-orange-400">
+            Sitemap
+          </Link>
+          {" | "}
         </div>
       </div>
 

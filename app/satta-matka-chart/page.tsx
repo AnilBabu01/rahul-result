@@ -111,6 +111,10 @@ export default function Page() {
             Fix Matka
           </Link>
           {" | "}
+           <Link href="/sitemap.xml" className="text-orange-400">
+            Sitemap
+          </Link>
+          {" | "}
         </div>
 
         <div className="border-t border-fuchsia-500" />

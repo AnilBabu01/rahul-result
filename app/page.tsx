@@ -449,7 +449,7 @@ export default function Home() {
             <a href="/satta-matka-chart">Satta Matka Chart</a>
             <a href="/tara-matka-mumbai">Tara Matka</a>
             <a href="/fix-matka-number">Fix Matka</a>
-            <a href="#">Sitemap</a>
+            <a href="/sitemap.xml">Sitemap</a>
           </div>
 
           <div className="border-t border-cyan-700 my-4"></div>

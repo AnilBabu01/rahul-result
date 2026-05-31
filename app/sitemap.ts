@@ -4,7 +4,7 @@ import { games } from "@/data/games";
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://yourdomain.com";
+  const baseUrl = "https://rahul-result.vercel.app";
 
   // Remove duplicate routes
   const uniqueGames = [...new Set(games)];

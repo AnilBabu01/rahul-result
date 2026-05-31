@@ -18,8 +18,8 @@ import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `ONLINE MATKA PLAY - SATTA MATKA`,
-    description: `Join India's most trusted Online Matka Play platform. Play Kalyan, Milan, Rajdhani & all markets at full rate. Fast withdrawals, live results & 100% trusted matka app.`,
+    title: `FIX MATKA | FIX SATTA | FIX MATKA NUMBER - SATTA MATKA`,
+    description: `Looking for Fix Matka number today? SattaMatkaDpboss.Mobi provides Fix Satta, Fix Jodi, Satta Matka Fix and live panel charts for Kalyan, Madhur, Milan & Rajdhani daily.`,
     alternates: {
       canonical: `https://yourdomain.com/chart/weekly-jodi-panna`,
     },
@@ -116,6 +116,38 @@ const weeklyNumbers = [
   "Sun. => 2-5-7-9",
 ];
 
+type ChartSectionProps = {
+  title: string;
+  data: string[];
+};
+
+function ChartSection({ title, data }: ChartSectionProps) {
+  return (
+    <div className="mb-4 rounded-2xl overflow-hidden border-2 border-orange-500 shadow-[0_0_25px_rgba(249,115,22,0.5)]">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-red-700 via-orange-600 to-yellow-500 py-4 px-3">
+        <h2 className="text-center text-lg md:text-1xl italic font-black text-white">
+          {title}
+        </h2>
+      </div>
+
+      {/* Content */}
+      <div className="bg-gradient-to-b from-zinc-950 via-neutral-900 to-black py-5">
+        <div className="flex flex-col items-center gap-2">
+          {data.map((item, index) => (
+            <p
+              key={index}
+              className="text-1xl md:text-1xl font-black italic text-yellow-300 leading-tight"
+            >
+              {item}
+            </p>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const markets = [
   {
     name: "KHAJANA",
@@ -135,38 +167,6 @@ const markets = [
   },
 ];
 
-type ChartSectionProps = {
-  title: string;
-  data: string[];
-};
-
-function ChartSection({ title, data }: ChartSectionProps) {
-  return (
-    <div className="mb-4 rounded-2xl overflow-hidden border-2 border-orange-500 shadow-[0_0_25px_rgba(249,115,22,0.5)]">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-red-700 via-orange-600 to-yellow-500 py-4 px-3">
-        <h2 className="text-center text-lg md:text-2xl italic font-black text-white">
-          {title}
-        </h2>
-      </div>
-
-      {/* Content */}
-      <div className="bg-gradient-to-b from-zinc-950 via-neutral-900 to-black py-5">
-        <div className="flex flex-col items-center gap-2">
-          {data.map((item, index) => (
-            <p
-              key={index}
-              className="text-lg md:text-3xl font-black italic text-yellow-300 leading-tight"
-            >
-              {item}
-            </p>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default function Home() {
   const currentDate = new Date()
     .toLocaleDateString("en-GB")
@@ -178,23 +178,23 @@ export default function Home() {
         {/* Header */}
         <div className="border-b-4 border-orange-500 bg-gradient-to-r from-red-900 via-orange-800 to-yellow-700 text-center py-5 px-2">
           <h1 className="text-yellow-200 text-3xl italic font-black tracking-wide animate-pulse">
-            ONLINE MATKA PLAY
+            FIX MATKA
           </h1>
         </div>
 
         {/* Description */}
         <div className="border-b-4 border-orange-500 bg-zinc-950 px-3 py-4 text-center">
           <h1 className="text-orange-300 text-xl italic font-black tracking-wide">
-            Play Online Satta Matka
+            Play Fix Matka With Us
           </h1>
 
           <p className="text-[12px] italic leading-5 text-zinc-200 mt-2">
-            online matka play, online matka, matka play, kalyan online game,
-            matka online,, matkaplay, kalyan online matka, online matka play
-            full rate app, trusted online matka app, kalyan online matka app,
-            best matka app in india, matka booking app, satta matka online,
-            online matka games, all matka play, online matka boss, kalyan online
-            matka app
+            If You Are searching for fix matka number or fix satta game then
+            your search is over here get Fix Matka for kalyan and other matka
+            bazar such as madhur fix matka. also you can get these Fix Satta,
+            Fix Matka, satta matka fix, satta fix jodi, fix jodi, satta matta
+            matka fix, fix matkà today, fix fix satta number, fix fix satta and
+            fix matkà jodi.
           </p>
         </div>
 
@@ -235,7 +235,11 @@ export default function Home() {
 
               <Image src={download} alt="Image" width={35} height={35} />
             </div>
-             {markets.map((market, index) => (
+            <div className="mx-auto max-w-7xl overflow-hidden rounded-xl border-[3px] border-[#b8870d] bg-[#edf2ef] shadow-md">
+              {/* Top Golden Line */}
+              <div className="h-2 bg-[#f4b400]" />
+
+              {markets.map((market, index) => (
                 <div
                   key={index}
                   className="flex items-center justify-center gap-4 border-b border-gray-400 py-1 px-1 last:border-b-0"
@@ -251,13 +255,14 @@ export default function Home() {
                   </button>
                 </div>
               ))}
+            </div>
           </div>
 
           <div className="max-w-7xl mx-auto p-2 bg-zinc-950">
             {/* Header */}
             <div className="bg-gradient-to-r from-red-700 via-orange-600 to-yellow-500 text-center py-3 rounded-lg">
               <h1 className="text-xl font-black italic text-white">
-                Play Online Matka
+                Play TARA MATKA
               </h1>
 
               <p className="mt-3 text-sm md:text-lg font-semibold text-white">
@@ -299,7 +304,7 @@ export default function Home() {
               </h3>
 
               <button className="mt-5 px-8 py-3 bg-black hover:bg-zinc-900 text-yellow-300 text-lg font-black italic rounded-full shadow-lg border-2 border-yellow-500 transition">
-                ONLINE MATKA PLAY
+                TARA MATKA PLAY
               </button>
 
               <p className="mt-3 text-lg font-black italic text-yellow-100">
@@ -345,7 +350,7 @@ export default function Home() {
       <section className="w-full mt-5 border-2 border-orange-500 rounded-xl overflow-hidden bg-zinc-950">
         {/* Header */}
         <div className="bg-gradient-to-r from-red-700 via-orange-600 to-yellow-500 py-3 text-center">
-          <h2 className="text-white text-2xl md:text-3xl italic font-black uppercase">
+          <h2 className="text-white text-1xl md:text-1xl italic font-black uppercase">
             SATTA MATKA PLAY RESULT
           </h2>
         </div>
@@ -362,22 +367,22 @@ export default function Home() {
               }`}
             >
               <h3
-                className={`text-xl md:text-2xl italic font-black ${item.color}`}
+                className={`text-1xl md:text-1xl italic font-black ${item.color}`}
               >
                 {item.title}
               </h3>
 
-              <p className="text-white text-3xl md:text-4xl font-black mt-1">
+              <p className="text-white text-1xl md:text-1xl font-black">
                 {item.result}
               </p>
 
               {index === 0 && (
-                <p className="text-yellow-300 text-lg font-black italic mt-1">
+                <p className="text-yellow-300 text-lg font-black italic ">
                   Jodi Panel
                 </p>
               )}
 
-              <p className="text-orange-300 text-sm md:text-lg italic font-black mt-2">
+              <p className="text-orange-300  md:text-1xl italic font-black">
                 {item.time}
               </p>
             </div>
@@ -405,7 +410,7 @@ export default function Home() {
 
       {/* Chart Links */}
       <div className="mt-4 bg-gradient-to-r from-red-700 via-orange-600 to-yellow-500 text-white text-center font-black italic text-lg px-3 py-3 rounded-t-xl">
-        Online Matka Play Jodi Charts
+        TARA MATKA Play Jodi Charts
       </div>
 
       <section className="bg-zinc-950 rounded-b-xl overflow-hidden border-2 border-orange-500">
@@ -423,7 +428,7 @@ export default function Home() {
       {/* Fixed Buttons */}
       <div className="fixed bottom-3 left-2 z-50">
         <button className="bg-gradient-to-r from-red-600 to-orange-500 hover:scale-105 transition text-white px-4 py-2 rounded-xl font-black italic shadow-lg border border-white">
-          Online Matka Play
+          TARA MATKA Play
         </button>
       </div>
 

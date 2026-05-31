@@ -243,15 +243,15 @@ export default async function Page({ params }: PageProps) {
         </div>
 
         <div className="text-[8px] sm:text-[10px] md:text-lg font-black underline text-pink-400 mt-1">
-          PRO. BIG BOSS SIR
+          FAST BOSS SIR
         </div>
 
         <div className="text-cyan-300 text-[8px] sm:text-[10px] md:text-lg font-black mt-1">
-          08829959562
+          1234567890
         </div>
 
         <div className="text-[7px] sm:text-[9px] md:text-sm font-bold break-all px-1 text-slate-400 mt-2">
-          https://sattamatkadpboss.mobi
+          https://yourdomain.com
         </div>
       </div>
     </div>

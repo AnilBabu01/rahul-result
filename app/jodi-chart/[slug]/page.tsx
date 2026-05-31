@@ -234,15 +234,15 @@ export default async function Page({ params }: Props) {
         </div>
 
         <div className="mt-2 text-sm md:text-xl font-black underline text-pink-400">
-          PRO. BIG BOSS SIR
+          FAST BOSS SIR
         </div>
 
         <div className="mt-2 text-cyan-300 text-sm md:text-xl font-black">
-          08829959562
+          1234567890
         </div>
 
         <div className="mt-3 text-xs md:text-base font-bold text-slate-400 break-all px-2">
-          https://sattamatkadpboss.mobi
+          https://yourdomain.com
         </div>
       </div>
     </div>

@@ -446,19 +446,19 @@ export default function Home() {
       <div className="max-w-7xl mx-auto mt-8">
         <div className="bg-gradient-to-r from-slate-950 via-cyan-950 to-slate-950 border border-cyan-500 rounded-xl py-6 px-4">
           <div className="flex flex-wrap justify-center gap-8 text-cyan-300 font-bold text-lg uppercase">
-            <a href="#">Satta Matka Chart</a>
-            <a href="#">Tara Matka</a>
-            <a href="#">Fix Matka</a>
+            <a href="/satta-matka-chart">Satta Matka Chart</a>
+            <a href="/tara-matka-mumbai">Tara Matka</a>
+            <a href="/fix-matka-number">Fix Matka</a>
             <a href="#">Sitemap</a>
           </div>
 
           <div className="border-t border-cyan-700 my-4"></div>
 
           <div className="flex flex-wrap justify-center gap-8 text-pink-300 font-bold text-lg uppercase">
-            <a href="#">About Us</a>
-            <a href="#">Contact Us</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Disclaimer</a>
+            <a href="/about-us">About Us</a>
+            <a href="/contact">Contact Us</a>
+            <a href="/privacy-policy">Privacy Policy</a>
+            <a href="/disclaimer">Disclaimer</a>
           </div>
         </div>
 
@@ -506,10 +506,10 @@ export default function Home() {
             <p className="text-pink-400 uppercase font-semibold">Site Owner:</p>
 
             <h4 className="text-white text-3xl font-black mt-4">
-              PRO. BIG BOSS SIR
+              FAST BOSS SIR
             </h4>
 
-            <p className="text-cyan-300 text-xl italic mt-6">08829959562</p>
+            <p className="text-cyan-300 text-xl italic mt-6">1234567890</p>
           </div>
         </div>
       </div>

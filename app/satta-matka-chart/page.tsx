@@ -103,11 +103,11 @@ export default function Page() {
             Matka Play
           </Link>
           {" | "}
-          <Link href="/tara-matka" className="text-green-400">
+          <Link href="/tara-matka-mumbai" className="text-green-400">
             Tara Matka
           </Link>
           {" | "}
-          <Link href="/fix-matka" className="text-orange-400">
+          <Link href="/fix-matka-number" className="text-orange-400">
             Fix Matka
           </Link>
           {" | "}
@@ -117,7 +117,7 @@ export default function Page() {
 
         <div className="text-center py-4 px-2 space-y-2">
           <h3 className="text-pink-400 text-lg md:text-xl font-black italic break-all">
-            https://sattamatkadpboss.mobi
+            https://yourdomain.com
           </h3>
 
           <p className="font-black text-lg md:text-xl text-white">
@@ -129,15 +129,15 @@ export default function Page() {
           </p>
 
           <p className="font-black underline text-2xl md:text-3xl text-yellow-300 animate-pulse">
-            PRO. BIG BOSS SIR
+            FAST BOSS SIR
           </p>
 
           <p className="text-cyan-400 font-black text-lg md:text-xl mt-2 break-all">
-            08829959562
+            1234567890
           </p>
 
           <p className="font-bold text-base md:text-lg mt-4 text-slate-300 break-all">
-            https://sattamatkadpboss.mobi
+            https://yourdomain.com
           </p>
         </div>
       </footer>

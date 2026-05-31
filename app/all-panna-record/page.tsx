@@ -528,7 +528,7 @@ export default function Page() {
 
         <div className="text-center py-5 px-2 space-y-2">
           <h3 className="text-fuchsia-400 text-lg md:text-1xl font-black italic break-all">
-            https://sattamatkadpboss.mobi
+            https://yourdomain.com
           </h3>
 
           <p className="font-black text-lg text-white">
@@ -540,15 +540,15 @@ export default function Page() {
           </p>
 
           <p className="font-black underline text-1xl text-yellow-300">
-            PRO. BIG BOSS SIR
+            FAST BOSS SIR
           </p>
 
           <p className="text-cyan-400 font-black text-1xl mt-3 break-all">
-            08829959562
+            1234567890
           </p>
 
           <p className="font-bold text-base mt-4 text-slate-400 break-all">
-            https://sattamatkadpboss.mobi
+            https://yourdomain.com
           </p>
         </div>
       </footer>

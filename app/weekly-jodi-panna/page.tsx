@@ -144,14 +144,14 @@ export default function Home() {
           <p className="text-xl font-black mt-4">
             कॉल :{" "}
             <span className="text-cyan-400 underline">
-              08829959562
+              1234567890
             </span>
           </p>
 
           <p className="text-xl font-black mt-2">
             कॉल :{" "}
             <span className="text-cyan-400 underline">
-              08829959562
+              1234567890
             </span>
           </p>
 
@@ -185,7 +185,7 @@ export default function Home() {
 
           <div className="text-center py-4 px-2 space-y-2">
             <h3 className="text-pink-400 text-lg md:text-xl font-black italic break-all">
-              https://sattamatkadpboss.mobi
+              https://yourdomain.com
             </h3>
 
             <p className="font-black text-lg md:text-xl text-white">
@@ -197,15 +197,15 @@ export default function Home() {
             </p>
 
             <p className="font-black underline text-xl md:text-2xl text-yellow-300">
-              PRO. BIG BOSS SIR
+              FAST BOSS SIR
             </p>
 
             <p className="text-cyan-400 font-black text-lg md:text-xl mt-2 break-all">
-              08829959562
+              1234567890
             </p>
 
             <p className="font-bold text-base md:text-lg mt-4 text-slate-300 break-all">
-              https://sattamatkadpboss.mobi
+              https://yourdomain.com
             </p>
           </div>
         </footer>

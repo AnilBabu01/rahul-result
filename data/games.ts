@@ -92,13 +92,13 @@ export const markets = [
   {
     name: "Kalyan",
     title: "MEMBERSHIP KE LIYE",
-    phone: "08829959562",
+    phone: "1234567890",
     color: "bg-blue-900",
   },
   {
     name: "MAIN BAZAR",
     title: "BOOKING KE LIYE",
-    phone: "08829959562",
+    phone: "1234567890",
     color: "bg-blue-900",
   },
   {
@@ -165,13 +165,13 @@ export const chartData = [
   {
     title: "Kalyan",
     subtitle: "MEMBERSHIP KE LIYE",
-    phone: "08829959562",
+    phone: "1234567890",
     bg: "bg-red-600",
   },
   {
     title: "MAIN BAZAR",
     subtitle: "BOOKING KE LIYE",
-    phone: "08829959562",
+    phone: "1234567890",
     bg: "bg-green-700",
   },
   {
@@ -351,7 +351,7 @@ export const topGuessers2 = [
   {
     id: 2,
     name: "Aman Sharma",
-    phone: "9876543210",
+    phone: "1234567890",
     date: "30-05-2026",
     games: ["Milan Night", "Main Bazar", "Madhur Night"],
   },

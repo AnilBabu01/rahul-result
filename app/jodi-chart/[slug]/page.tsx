@@ -1,6 +1,7 @@
 // app/jodi-chart/[slug]/page.tsx
 import Link from "next/link";
 import { Metadata } from "next";
+import { games } from "@/data/games";
 type Props = {
   params: {
     slug: string;
@@ -19,6 +20,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `https://yourdomain.com/jodi-chart/${slug}`,
     },
   };
+}
+
+export async function generateStaticParams() {
+  return games.map((game) => ({
+    slug: game.split("/").pop(),
+  }));
 }
 
 export default async function Page({ params }: Props) {

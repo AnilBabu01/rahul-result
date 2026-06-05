@@ -2,12 +2,14 @@
 
 import type { MetadataRoute } from "next";
 
+export const dynamic = 'force-static';
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://rahul-result.vercel.app/sitemap.xml",
+    sitemap: "https://sattamatkadpbos.com/sitemap.xml",
   };
 }

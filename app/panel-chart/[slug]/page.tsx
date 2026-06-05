@@ -3,6 +3,8 @@
 import { chartDataPanel } from "@/data/games";
 import Link from "next/link";
 import { Metadata } from "next";
+import { games } from "@/data/games";
+
 type Props = {
   params: {
     slug: string;
@@ -21,6 +23,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `https://yourdomain.com/jodi-chart/${slug}`,
     },
   };
+}
+
+export async function generateStaticParams() {
+  return games.map((game) => ({
+    slug: game.split("/").pop(),
+  }));
 }
 
 function MiniDigits() {
@@ -69,9 +77,9 @@ export default async function Page({ params }: Props) {
             </h2>
 
             <p className="mt-2 px-2 text-[8px] sm:text-[10px] md:text-sm font-semibold italic text-slate-300 leading-tight">
-              raja rani morning chart, raja rani morning day satta chart,
-              day raja rani morning jodi chart record, raja rani morning
-              jodi patti chart
+              raja rani morning chart, raja rani morning day satta chart, day
+              raja rani morning jodi chart record, raja rani morning jodi patti
+              chart
             </p>
           </div>
         </div>
@@ -225,7 +233,7 @@ export default async function Page({ params }: Props) {
             Fix Matka
           </Link>
           {" | "}
-           <Link href="/sitemap.xml" className="text-orange-400">
+          <Link href="/sitemap.xml" className="text-orange-400">
             Sitemap
           </Link>
           {" | "}

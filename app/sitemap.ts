@@ -3,8 +3,10 @@
 import { games } from "@/data/games";
 import type { MetadataRoute } from "next";
 
+export const dynamic = 'force-static';
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://rahul-result.vercel.app";
+  const baseUrl = "https://sattamatkadpbos.com";
 
   // Remove duplicate routes
   const uniqueGames = [...new Set(games)];

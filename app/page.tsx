@@ -217,9 +217,9 @@ export default function Home() {
                       {item.result}
                     </p>
 
-                    <p className="text-white mt-2 text-lg">
+                    {/* <p className="text-white mt-2 text-lg">
                       {item.open_time} - {item.close_time}
-                    </p>
+                    </p> */}
 
                     {/* REFRESH BUTTON */}
                     <button
@@ -306,7 +306,11 @@ export default function Home() {
             marketList?.map((item: any, index: number) => (
               <div
                 key={index}
-                className="border-b border-slate-700 relative py-5 px-2"
+                className={`border-b relative py-5 px-2 ${
+                  item?.bg_yellow_status == 1
+                    ? "bg-yellow-300 border-yellow-500"
+                    : "border-slate-700"
+                }`}
               >
                 {/* LEFT BUTTON */}
                 <Link
@@ -320,20 +324,32 @@ export default function Home() {
                 </Link>
 
                 {/* CENTER */}
-                <div className="text-center">
-                  <h3 className="text-pink-400 text-2xl font-black italic uppercase">
+                <div
+                  className={`text-center ${
+                    item?.bg_yellow_status == 1 ? "text-black" : "text-white"
+                  }`}
+                >
+                  <h3
+                    className={`text-2xl font-black italic uppercase ${
+                      item?.bg_yellow_status == 1
+                        ? "text-black"
+                        : "text-pink-400"
+                    }`}
+                  >
                     {item?.name}
                   </h3>
 
-                  <p className="text-white text-3xl font-black mt-1">
-                    {item?.result}
-                  </p>
+                  <p className="text-3xl font-black mt-1">{item?.result}</p>
 
-                  <p className="text-cyan-300 text-lg font-bold italic mt-1">
-                    {item?.open_time} - {item?.close_time}
+                  <p
+                    className={`text-lg font-bold italic mt-1 ${
+                      item?.bg_yellow_status == 1
+                        ? "text-black"
+                        : "text-cyan-300"
+                    }`}
+                  >
+                    Open {item?.open_time} - Close {item?.close_time}
                   </p>
-
-                  <p className="text-yellow-300 text-sm mt-2">{item?.date}</p>
                 </div>
 
                 {/* RIGHT BUTTON */}
@@ -367,7 +383,7 @@ export default function Home() {
           <div className="bg-slate-900 flex justify-center py-5">
             <div className="bg-gradient-to-r from-cyan-500 to-pink-500 px-5 py-3 rounded-full shadow-xl">
               <p className="text-black text-xl font-black italic">
-                support@sattamatkadpbos
+                support.sattamatkadpbos@gmail.com
               </p>
             </div>
           </div>
@@ -516,15 +532,17 @@ export default function Home() {
       </div>
 
       <section className="bg-slate-900 rounded-b-xl overflow-hidden border border-cyan-500">
-        {charts.map((item, index) => (
-          <a
-            key={index}
-            href={`/jodi-chart/${item.toLowerCase().replace(/\s+/g, "-")}`}
-            className="block text-center py-3 text-xl font-bold text-cyan-300 border-b border-slate-700 hover:bg-slate-800 transition"
-          >
-            {item}
-          </a>
-        ))}
+        {!isLoading &&
+          !isError &&
+          marketList?.slice(0, 10)?.map((item: any, index: number) => (
+            <a
+              key={index}
+              href={`/jodi-chart/${item?.name.toLowerCase().replace(/\s+/g, "-")}`}
+              className="block text-center py-3 text-xl font-bold text-cyan-300 border-b border-slate-700 hover:bg-slate-800 transition"
+            >
+              {item?.name}
+            </a>
+          ))}
       </section>
 
       {/* FAQ */}

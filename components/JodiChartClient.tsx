@@ -205,7 +205,9 @@ export default function JodiChartClient({ slug }: Props) {
                               textShadow: "0px 0px 10px rgba(34,211,238,0.7)",
                             }}
                           >
-                            {num}
+                            {typeof num === "string" && num.includes("-")
+                              ? num.split("-")[1]
+                              : num}
                           </td>
                         ))}
                       </tr>

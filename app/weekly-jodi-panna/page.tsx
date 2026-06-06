@@ -1,10 +1,41 @@
-
 import { Metadata } from "next";
+
+// =========================
+// CURRENT WEEK DATE RANGE
+// =========================
+function getCurrentWeekRange() {
+  const today = new Date();
+
+  // Monday Start
+  const currentDay = today.getDay(); // 0 = Sunday
+  const diffToMonday = currentDay === 0 ? -6 : 1 - currentDay;
+
+  const monday = new Date(today);
+  monday.setDate(today.getDate() + diffToMonday);
+
+  const sunday = new Date(monday);
+  sunday.setDate(monday.getDate() + 6);
+
+  const formatDate = (date: Date) => {
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+
+    return `${day}-${month}-${year}`;
+  };
+
+  return {
+    startDate: formatDate(monday),
+    endDate: formatDate(sunday),
+  };
+}
+
+const { startDate, endDate } = getCurrentWeekRange();
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `SATTA MATKA FREE WEEKLY JODI AND PANNA GUESSING BY SATTA MATKA MARKET`,
-    description: `Weekly Jodi Panna Chart – Get this week's Satta Matka jodi & panna results. Explore complete weekly open, close and panel numbers updated every week.`,
+    description: `Weekly Jodi Panna Chart From ${startDate} To ${endDate} – Get this week's Satta Matka jodi & panna results. Explore complete weekly open, close and panel numbers updated every week.`,
     alternates: {
       canonical: `https://sattamatkadpbos.com/chart/weekly-jodi-panna`,
     },
@@ -70,7 +101,7 @@ export default function Home() {
         {/* Panel Chart Header */}
         <div className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 border-y-4 border-cyan-400 text-center py-4">
           <h3 className="font-black italic text-lg md:text-xl text-black px-2">
-            Weekly Panel Or Patti Chart From 25-05-2026 To 31-05-2026 For
+            Weekly Panel Or Patti Chart From {startDate} To {endDate} For
             Kalyan, Milan, Kalyan Night, Rajdhani Night, Time Bazar, Main Bazar
             Market
           </h3>
@@ -92,7 +123,7 @@ export default function Home() {
         {/* Weekly Jodi Header */}
         <div className="bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 border-y-4 border-cyan-400 text-center py-4">
           <h3 className="font-black italic text-lg md:text-xl text-white px-2">
-            Weekly Jodi Chart From 25-05-2026 To 31-05-2026 For Kalyan, Milan,
+            Weekly Jodi Chart From {startDate} To {endDate} For Kalyan, Milan,
             Kalyan Night, Rajdhani Night, Time Bazar, Main Bazar Market
           </h3>
         </div>
@@ -112,7 +143,7 @@ export default function Home() {
         {/* Weekly Open Close Header */}
         <div className="bg-gradient-to-r from-green-500 via-emerald-600 to-teal-600 border-y-4 border-cyan-400 text-center py-4">
           <h3 className="font-black italic text-lg md:text-xl text-white px-2">
-            Weekly Number Open To Close From 25-05-2026 To 31-05-2026 For
+            Weekly Number Open To Close From {startDate} To {endDate} For
             Kalyan, Milan, Kalyan Night, Rajdhani Night, Time Bazar, Main Bazar
             Market
           </h3>

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+import Providers from "./Providers";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://yourdomain.com"),
+  metadataBase: new URL("https://sattamatkadpbos.com"),
 
   title: {
     default: "SATTA MATKA | KALYAN MATKA | DPBOSS",
@@ -29,9 +31,8 @@ export const metadata: Metadata = {
 
   openGraph: {
     title: "SATTA MATKA | DPBOSS",
-    description:
-      "Fast satta matka results and charts.",
-    url: "https://yourdomain.com",
+    description: "Fast satta matka results and charts.",
+    url: "https://sattamatkadpbos.com",
     siteName: "SATTA MATKA",
     locale: "en_IN",
     type: "website",
@@ -58,12 +59,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

@@ -8,7 +8,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: `SATTA MATKA 220 PATTI PANNA CHART RECORD - SATTA MATKA`,
     description: `Satta Matka All Panna Record — complete 220 Patti chart grouped by digit family 0 to 9. Find every hot panna, single pana and weekly patti list free on one page.`,
     alternates: {
-      canonical: `https://yourdomain.com/chart/all-panna-record`,
+      canonical: `https://sattamatkadpbos.com/chart/all-panna-record`,
     },
   };
 }
@@ -539,7 +539,7 @@ export default function Page() {
 
         <div className="text-center py-5 px-2 space-y-2">
           <h3 className="text-fuchsia-400 text-lg md:text-1xl font-black italic break-all">
-            https://yourdomain.com
+            https://sattamatkadpbos.com
           </h3>
 
           <p className="font-black text-lg text-white">
@@ -559,7 +559,7 @@ export default function Page() {
           </p>
 
           <p className="font-bold text-base mt-4 text-slate-400 break-all">
-            https://yourdomain.com
+            https://sattamatkadpbos.com
           </p>
         </div>
       </footer>

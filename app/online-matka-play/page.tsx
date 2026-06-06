@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: `ONLINE MATKA PLAY - SATTA MATKA`,
     description: `Join India's most trusted Online Matka Play platform. Play Kalyan, Milan, Rajdhani & all markets at full rate. Fast withdrawals, live results & 100% trusted matka app.`,
     alternates: {
-      canonical: `https://yourdomain.com/chart/weekly-jodi-panna`,
+      canonical: `https://sattamatkadpbos.com/chart/weekly-jodi-panna`,
     },
   };
 }

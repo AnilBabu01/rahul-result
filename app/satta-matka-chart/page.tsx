@@ -4,9 +4,9 @@ import Link from "next/link";
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `Satta Matka Chart 2026 – Jodi & Panel All Markets`,
-    description: `Get complete Satta Matka Chart 2026 — Kalyan, Milan, Rajdhani, Main Bazar & 30+ markets. Free jodi & panel chart updated daily.Bookmark yourDomainName now!`,
+    description: `Get complete Satta Matka Chart 2026 — Kalyan, Milan, Rajdhani, Main Bazar & 30+ markets. Free jodi & panel chart updated daily.Bookmark sattamatkadpbos now!`,
     alternates: {
-      canonical: `https://yourdomain.com/chart/satta-matka-chart`,
+      canonical: `https://sattamatkadpbos.com/chart/satta-matka-chart`,
     },
   };
 }
@@ -41,7 +41,7 @@ export default function Page() {
         {/* Intro Content */}
         <div className="border-b border-fuchsia-500 px-4 py-4 text-center bg-[#1d0030]">
           <p className="font-bold italic text-lg text-pink-100 leading-relaxed">
-            Welcome to yourDomainName — India's most trusted destination
+            Welcome to sattamatkadpbos — India's most trusted destination
             for Satta Matka Chart records. Get complete Kalyan Jodi Chart
             history from 1974 to 2026, Milan Day & Night Panel Chart, Rajdhani
             Day & Night Jodi Chart, Main Bazar Panel Chart, Main Mumbai Chart,
@@ -121,7 +121,7 @@ export default function Page() {
 
         <div className="text-center py-4 px-2 space-y-2">
           <h3 className="text-pink-400 text-lg md:text-xl font-black italic break-all">
-            https://yourdomain.com
+            https://sattamatkadpbos.com
           </h3>
 
           <p className="font-black text-lg md:text-xl text-white">
@@ -141,7 +141,7 @@ export default function Page() {
           </p>
 
           <p className="font-bold text-base md:text-lg mt-4 text-slate-300 break-all">
-            https://yourdomain.com
+            https://sattamatkadpbos.com
           </p>
         </div>
       </footer>

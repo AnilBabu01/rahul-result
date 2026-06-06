@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: `Satta Matka Open To Close | Satta Matka Fix 3 Ank | 3ank Open | 3ank Close Satta Matka`,
     description: `Get daily Satta Matka Open To Close Fix 3 Ank on DPBoss covering all major markets. Accurate 3 Ank Open and Close numbers updated twice daily, completely free.`,
     alternates: {
-      canonical: `https://yourdomain.com/chart/open-to-close`,
+      canonical: `https://sattamatkadpbos.com/chart/open-to-close`,
     },
   };
 }
@@ -300,7 +300,7 @@ export default function Page() {
 
         <div className="text-center py-2 px-1 space-y-1">
           <h3 className="text-pink-400 text-1xl md:text-1xl font-black italic break-all">
-            https://yourdomain.com
+            https://sattamatkadpbos.com
           </h3>
 
           <p className="font-black text-lg md:text-1xl text-white">
@@ -320,7 +320,7 @@ export default function Page() {
           </p>
 
           <p className="font-bold text-base md:text-1xl mt-4 text-slate-300 break-all">
-            https://yourdomain.com
+            https://sattamatkadpbos.com
           </p>
         </div>
       </footer>

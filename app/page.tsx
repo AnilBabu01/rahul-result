@@ -16,9 +16,33 @@ import Link from "next/link";
 import Image from "next/image";
 import download from "@/public/images/download.gif";
 
+import { useGetMarketListQuery } from "./redux/api/apiClient";
+
 export default function Home() {
   const [open, setOpen] = useState<number | null>(0);
   const [active, setActive] = useState<number | null>(null);
+  const [refreshingIndex, setRefreshingIndex] = useState<number | null>(null);
+  /*
+  |--------------------------------------------------------------------------
+  | RTK QUERY API CALL
+  |--------------------------------------------------------------------------
+  */
+
+  const {
+    data: marketResponse,
+    isLoading,
+    isFetching,
+    isError,
+    refetch,
+  } = useGetMarketListQuery({});
+
+  /*
+  |--------------------------------------------------------------------------
+  | MARKET DATA
+  |--------------------------------------------------------------------------
+  */
+
+  const marketList = marketResponse?.data || [];
 
   const toggle = (index: number) => {
     console.log("click");
@@ -45,28 +69,28 @@ export default function Home() {
           </h1>
 
           <h2 className="text-pink-400 text-2xl italic font-bold mt-1">
-            yourDomainName
+            sattamatkadpbos
           </h2>
         </div>
 
         {/* Description */}
         <div className="border-b-4 border-cyan-500 bg-slate-900 px-3 py-4 text-center">
           <p className="text-[12px] italic leading-5 text-slate-200">
-            yourDomainName is India's fastest and most trusted platform
-            for DPBoss Satta Matka result — Kalyan Matka, Milan Day Night,
-            Rajdhani Day Night, Main Bazar, Time Bazar and 50+ markets — all
-            updated daily at lightning speed, 100% free. Get live Kalyan Matka
-            result, DPBoss 143 guessing, free Matka Guessing Forum, complete
-            Jodi Chart and Panel Chart records from 1974 to 2026, Morning
-            Syndicate result, Syndicate Night result, Date Fix Matka and weekly
-            jodi predictions — everything in one place. No login. No payment.
-            Always free. India's most complete Satta Matka platform — 50+
-            markets, 68+ chart records, active guessing forum and expert fix
-            jodi tips. We also provide Morning Syndicate and Matka Bazar
-            Syndicate Night results directly from the Matka industry. Receive
-            weekly game updates, Date Fix information and a free Matka Number
-            Guessing Formula. Visit us daily for the fastest Matka tips and
-            tricks. Bookmark this site for easy access. Thank you!
+            sattamatkadpbos is India's fastest and most trusted platform for
+            DPBoss Satta Matka result — Kalyan Matka, Milan Day Night, Rajdhani
+            Day Night, Main Bazar, Time Bazar and 50+ markets — all updated
+            daily at lightning speed, 100% free. Get live Kalyan Matka result,
+            DPBoss 143 guessing, free Matka Guessing Forum, complete Jodi Chart
+            and Panel Chart records from 1974 to 2026, Morning Syndicate result,
+            Syndicate Night result, Date Fix Matka and weekly jodi predictions —
+            everything in one place. No login. No payment. Always free. India's
+            most complete Satta Matka platform — 50+ markets, 68+ chart records,
+            active guessing forum and expert fix jodi tips. We also provide
+            Morning Syndicate and Matka Bazar Syndicate Night results directly
+            from the Matka industry. Receive weekly game updates, Date Fix
+            information and a free Matka Number Guessing Formula. Visit us daily
+            for the fastest Matka tips and tricks. Bookmark this site for easy
+            access. Thank you!
           </p>
         </div>
 
@@ -108,24 +132,118 @@ export default function Home() {
           </div>
 
           <div className="bg-slate-900">
-            {liveData.map((item, index) => (
-              <div
-                key={index}
-                className="border-b border-slate-700 py-5 text-center"
-              >
-                <h3 className="text-cyan-300 text-2xl font-black italic">
-                  {item.title}
-                </h3>
+            {/* LOADER */}
+            {isLoading && (
+              <div className="py-10 text-center">
+                <p className="text-cyan-300 text-2xl font-black animate-pulse">
+                  Loading Market Data...
+                </p>
+              </div>
+            )}
 
-                <p className="text-pink-400 text-2xl font-black mt-1">
-                  {item.result}
+            {/* ERROR */}
+            {isError && (
+              <div className="py-10 text-center">
+                <p className="text-red-400 text-xl font-bold">
+                  Failed To Load Market Data
                 </p>
 
-                <button className="mt-3 px-8 py-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-700 text-white font-bold shadow-lg hover:scale-105 transition">
-                  Refresh
+                <button
+                  onClick={() => refetch()}
+                  className="mt-4 px-6 py-2 rounded-lg bg-pink-500 text-white font-bold"
+                >
+                  Retry
                 </button>
               </div>
-            ))}
+            )}
+
+            {/* MARKET LIST */}
+            {!isLoading &&
+              !isError &&
+              marketList
+                ?.filter((item: any) => {
+                  if (item.result === "Loading...") {
+                    return false;
+                  }
+
+                  const now = new Date();
+
+                  const convertToDate = (timeString: string) => {
+                    if (!timeString) return null;
+
+                    const [time, modifier] = timeString.split(" ");
+
+                    let [hours, minutes] = time.split(":").map(Number);
+
+                    if (modifier === "PM" && hours !== 12) {
+                      hours += 12;
+                    }
+
+                    if (modifier === "AM" && hours === 12) {
+                      hours = 0;
+                    }
+
+                    const date = new Date();
+
+                    date.setHours(hours);
+                    date.setMinutes(minutes);
+                    date.setSeconds(0);
+
+                    return date;
+                  };
+
+                  const openTime = convertToDate(item.open_time);
+                  const closeTime = convertToDate(item.close_time);
+
+                  if (!openTime || !closeTime) {
+                    return false;
+                  }
+
+                  closeTime.setMinutes(closeTime.getMinutes() + 10);
+
+                  return now >= openTime && now <= closeTime;
+                })
+
+                .map((item: any, index: number) => (
+                  <div
+                    key={index}
+                    className="border-b border-slate-700 py-5 text-center"
+                  >
+                    <h3 className="text-cyan-300 text-2xl font-black italic">
+                      {item.name}
+                    </h3>
+
+                    <p className="text-pink-400 text-2xl font-black mt-1">
+                      {item.result}
+                    </p>
+
+                    <p className="text-white mt-2 text-lg">
+                      {item.open_time} - {item.close_time}
+                    </p>
+
+                    {/* REFRESH BUTTON */}
+                    <button
+                      onClick={async () => {
+                        setRefreshingIndex(index);
+
+                        await refetch();
+
+                        setRefreshingIndex(null);
+                      }}
+                      disabled={refreshingIndex === index}
+                      className={`mt-3 px-8 py-2 rounded-full text-white font-bold shadow-lg transition
+                
+              ${
+                refreshingIndex === index
+                  ? "bg-gray-500 cursor-not-allowed"
+                  : "bg-gradient-to-r from-cyan-500 to-blue-700 hover:scale-105"
+              }
+            `}
+                    >
+                      {refreshingIndex === index ? "Refreshing..." : "Refresh"}
+                    </button>
+                  </div>
+                ))}
           </div>
         </div>
       </div>
@@ -157,41 +275,79 @@ export default function Home() {
 
         {/* Result List */}
         <div className="bg-slate-900">
-          {liveData2.map((item, index) => (
-            <div
-              key={index}
-              className="border-b border-slate-700 relative py-5 px-2"
-            >
-              {/* Left Button */}
-              <Link href={`/jodi-chart/${item?.jodi}`}>
-                <button className="absolute left-2 top-1/2 -translate-y-1/2 bg-cyan-500 text-black text-sm md:text-lg px-3 py-1 rounded-md font-black shadow">
-                  Jodi
-                </button>
-              </Link>
-
-              {/* Center Content */}
-              <div className="text-center">
-                <h3 className="text-pink-400 text-2xl font-black italic">
-                  {item.title}
-                </h3>
-
-                <p className="text-white text-2xl font-black mt-1">
-                  {item.result}
-                </p>
-
-                <p className="text-cyan-300 text-lg font-bold italic mt-1">
-                  {item.time}
-                </p>
-              </div>
-
-              {/* Right Button */}
-              <Link href={`/panel-chart/${item?.panel}`}>
-                <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-pink-500 text-white text-sm md:text-lg px-3 py-1 rounded-md font-black shadow">
-                  Panel
-                </button>
-              </Link>
+          {/* LOADING */}
+          {isLoading && (
+            <div className="py-10 text-center">
+              <p className="text-cyan-300 text-2xl font-black animate-pulse">
+                Loading Market Data...
+              </p>
             </div>
-          ))}
+          )}
+
+          {/* ERROR */}
+          {isError && (
+            <div className="py-10 text-center">
+              <p className="text-red-400 text-xl font-bold">
+                Failed To Load Market List
+              </p>
+
+              <button
+                onClick={refetch}
+                className="mt-4 px-6 py-2 bg-pink-500 rounded-lg font-bold"
+              >
+                Retry
+              </button>
+            </div>
+          )}
+
+          {/* MARKET LIST */}
+          {!isLoading &&
+            !isError &&
+            marketList?.map((item: any, index: number) => (
+              <div
+                key={index}
+                className="border-b border-slate-700 relative py-5 px-2"
+              >
+                {/* LEFT BUTTON */}
+                <Link
+                  href={`/jodi-chart/${item?.name
+                    ?.toLowerCase()
+                    ?.replace(/\s+/g, "-")}`}
+                >
+                  <button className="absolute left-2 top-1/2 -translate-y-1/2 bg-cyan-500 text-black text-sm md:text-lg px-3 py-1 rounded-md font-black shadow">
+                    Jodi
+                  </button>
+                </Link>
+
+                {/* CENTER */}
+                <div className="text-center">
+                  <h3 className="text-pink-400 text-2xl font-black italic uppercase">
+                    {item?.name}
+                  </h3>
+
+                  <p className="text-white text-3xl font-black mt-1">
+                    {item?.result}
+                  </p>
+
+                  <p className="text-cyan-300 text-lg font-bold italic mt-1">
+                    {item?.open_time} - {item?.close_time}
+                  </p>
+
+                  <p className="text-yellow-300 text-sm mt-2">{item?.date}</p>
+                </div>
+
+                {/* RIGHT BUTTON */}
+                <Link
+                  href={`/panel-chart/${item?.name
+                    ?.toLowerCase()
+                    ?.replace(/\s+/g, "-")}`}
+                >
+                  <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-pink-500 text-white text-sm md:text-lg px-3 py-1 rounded-md font-black shadow">
+                    Panel
+                  </button>
+                </Link>
+              </div>
+            ))}
         </div>
 
         {/* Support Section */}
@@ -211,7 +367,7 @@ export default function Home() {
           <div className="bg-slate-900 flex justify-center py-5">
             <div className="bg-gradient-to-r from-cyan-500 to-pink-500 px-5 py-3 rounded-full shadow-xl">
               <p className="text-black text-xl font-black italic">
-                support@yourDomainName
+                support@sattamatkadpbos
               </p>
             </div>
           </div>
@@ -414,12 +570,11 @@ export default function Home() {
           </h3>
 
           <p className="text-slate-300 leading-7">
-            यह वेबसाइट (yourDomainName) केवल मनोरंजन और सूचना के उद्देश्य
-            के लिए है। हम किसी भी अवैध सट्टा मटका व्यवसाय से नहीं जुड़े हैं।
-            यहाँ दिखाए गए सभी परिणाम इंटरनेट पर उपलब्ध डेटा पर आधारित हैं। हम
-            जुए या सट्टा खेलने का समर्थन नहीं करते हैं। कृपया अपने देश के
-            कानूनों का पालन करें। किसी भी लाभ या हानि के लिए आप स्वयं जिम्मेदार
-            होंगे।
+            यह वेबसाइट (sattamatkadpbos) केवल मनोरंजन और सूचना के उद्देश्य के
+            लिए है। हम किसी भी अवैध सट्टा मटका व्यवसाय से नहीं जुड़े हैं। यहाँ
+            दिखाए गए सभी परिणाम इंटरनेट पर उपलब्ध डेटा पर आधारित हैं। हम जुए या
+            सट्टा खेलने का समर्थन नहीं करते हैं। कृपया अपने देश के कानूनों का
+            पालन करें। किसी भी लाभ या हानि के लिए आप स्वयं जिम्मेदार होंगे।
           </p>
 
           <p className="text-slate-300 leading-7">
@@ -494,7 +649,7 @@ export default function Home() {
         <div className="flex justify-center mt-10 mb-10">
           <div className="bg-slate-900 border border-cyan-500 rounded-3xl shadow-lg w-full max-w-md text-center p-8">
             <h3 className="text-cyan-300 text-2xl font-black italic">
-              yourDomainName
+              sattamatkadpbos
             </h3>
 
             <p className="text-slate-300 mt-4 font-semibold">

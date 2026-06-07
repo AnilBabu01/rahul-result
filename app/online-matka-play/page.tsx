@@ -412,7 +412,7 @@ export default function Home() {
         {charts.map((item, index) => (
           <a
             key={index}
-            href={`/jodi-chart/${item.toLowerCase().replace(/\s+/g, "-")}`}
+            href={`/jodi-chart/${item.toLowerCase().replace(/\s+/g, "-")}-jodi-chart`}
             className="block text-center py-4 text-xl font-black text-yellow-300 border-b border-zinc-800 hover:bg-orange-900 transition-all duration-300"
           >
             {item}

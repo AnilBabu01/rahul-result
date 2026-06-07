@@ -4,35 +4,164 @@ import type { MetadataRoute } from "next";
 
 export const dynamic = "force-static";
 
-type MarketItem = {
-  id: number;
-  name: string;
-  result: string;
-  date: string;
-};
-
-function slugify(text: string) {
-  return text
-    .toLowerCase()
-    .replace(/\[.*?\]/g, "") // remove [main]
-    .replace(/&/g, "and")
-    .replace(/\s+/g, "-")
-    .replace(/[^a-z0-9-]/g, "")
-    .replace(/-+/g, "-")
-    .replace(/^-|-$/g, "");
-}
+const gameNames = [
+  "kalyan-morning",
+  "milan-morning",
+  "sridevi",
+  "main-bazar-morning",
+  "madhuri",
+  "rajdhani-morning-main",
+  "sridevi-morning",
+  "maharani",
+  "karnataka-day",
+  "time-bazar-morning",
+  "main-sridevi-day",
+  "time-bazar",
+  "tara-mumbai-day",
+  "prabhat",
+  "diamond",
+  "time-bazar-day",
+  "milan-day",
+  "main-bazar-day",
+  "puna-bazar",
+  "new-time-bazar",
+  "kalyan",
+  "sridevi-night",
+  "diamond-night",
+  "madhuri-night",
+  "night-time-bazar",
+  "tara-mumbai-night",
+  "milan-night",
+  "rajdhani-night",
+  "main-bazar",
+  "main-sridevi",
+  "maharani-day",
+  "parel-day",
+  "bombay-day",
+  "kalyan-night",
+  "1000-dollar-day",
+  "1000-dollar-night",
+  "mahakal",
+  "sridevi-day",
+  "prabhat-night",
+  "old-main-mumbai",
+  "madhur-morning",
+  "madhur-day",
+  "madhur-night",
+  "shri-day",
+  "shri-night",
+  "ratan-khatri",
+  "worli-morning",
+  "worli-night",
+  "maharani-night",
+  "jay-shree-day",
+  "sri-dhanalaxmi",
+  "bombay-night",
+  "sunday-bazar",
+  "padmavathi",
+  "padmavathi-night",
+  "lucky-day",
+  "kalyan-sridevi",
+  "kalyan-sridevi-night",
+  "central-mumbai",
+  "super-goa-day",
+  "kuber-morning",
+  "mumbai-day",
+  "meena-bazar-day",
+  "star-tara-morning",
+  "star-tara-day",
+  "star-tara-night",
+  "puna-night-main",
+  "supreme-day",
+  "supreme-night",
+  "sita-morning",
+  "srilakshmi",
+  "worli-mumbai-day",
+  "main-mumbai-rk",
+  "worli-mumbai",
+  "sita-day",
+  "country-bazar",
+  "dadar-bazar",
+  "rose-bazar-day",
+  "rose-bazar-night",
+  "janta-morning",
+  "central-bombay",
+  "teen-patti",
+  "durga-night",
+  "mahadevi",
+  "super-time",
+  "kaali",
+  "main-mumbai-night",
+  "sita-night",
+  "kamal-morning",
+  "kamal-day",
+  "kamal-night",
+  "khatri-morning",
+  "andhra-morning",
+  "andhra-day",
+  "andhra-night",
+  "mahadevi-morning",
+  "mahadevi-night",
+  "delhi-bazar",
+  "ratan-day",
+  "worli-mumbai-night",
+  "rajdhani-day",
+  "time-night",
+  "mohini",
+  "super-matka",
+  "bombay-rajshree-day",
+  "bombay-rajshree-night",
+  "cb",
+  "chandni-morning",
+  "gujrat-morning",
+  "gujrat-night",
+  "gowa",
+  "rakhi-morning",
+  "ratna-morning",
+  "geeta-morning",
+  "ratna-day",
+  "ratna-night",
+  "tulsi-morning",
+  "meena-morning",
+  "srilaxmi-day",
+  "ntr-morning",
+  "ntr-day",
+  "ntr-night",
+  "maya-bazar",
+  "super-king",
+  "super-king-night",
+  "meena-bazar",
+  "day-bombay",
+  "night-bombay",
+  "sitara-bazar",
+  "mangal-bazar",
+  "mangal-morning",
+  "mangal-day",
+  "mangal-night",
+  "gama-morning",
+  "gama-day",
+  "gama-night",
+  "milan-bazar-morning",
+  "milan-bazar-day",
+  "milan-bazar-night",
+  "asha-bazar",
+  "sangam",
+  "kohinoor-day",
+  "kohinoor-night",
+];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://sattamatkadpbos.com";
 
-  // STATIC PAGES
-  const staticGames = [
-    "panel-chart/kalyan-morning-panel-chart",
-    "panel-chart/kalyan-night-panel-chart",
-    "madhur-night-chart",
-    "rajdhani-day-chart",
-    "panel-chart/asha-bazar-panel-chart",
-    "main-bazar-chart",
+  // AUTO GENERATE GAME URLS
+  const gameRoutes = gameNames.flatMap((name) => [
+    `panel-chart/${name}-panel-chart`,
+    `jodi-chart/${name}-jodi-chart`,
+  ]);
+
+  // OTHER STATIC PAGES
+  const staticPages = [
+    "",
     "satta-matka-guessing-forum",
     "open-to-close",
     "weekly-jodi-panna",
@@ -44,52 +173,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "privacy-policy",
   ];
 
-  // FETCH MARKET LIST API
-  let marketGames: string[] = [];
-
-  try {
-    const res = await fetch(
-      "https://sattamatkadpbos.com/apis/client_cron_market.php?action=get_market_list",
-      {
-        next: { revalidate: 3600 }, // 1 hour cache
-      }
-    );
-
-    const json = await res.json();
-
-    if (json?.status && Array.isArray(json.data)) {
-      marketGames = json.data.flatMap((item: MarketItem) => {
-        const slug = slugify(item.name);
-
-        return [
-          `jodi-chart/${slug}-chart`,
-          `panel-chart/${slug}-panel-chart`,
-        ];
-      });
-    }
-  } catch (error) {
-    console.error("Sitemap API Error:", error);
-  }
-
   // MERGE + REMOVE DUPLICATES
-  const uniqueGames = [...new Set([...staticGames, ...marketGames])];
+  const allRoutes = [...new Set([...staticPages, ...gameRoutes])];
 
-  // GENERATE URLS
-  const gameUrls = uniqueGames.map((game) => ({
-    url: `${baseUrl}/${game}`,
+  // GENERATE SITEMAP
+  return allRoutes.map((route) => ({
+    url: route ? `${baseUrl}/${route}` : baseUrl,
     lastModified: new Date(),
     changeFrequency: "daily" as const,
-    priority: 0.9,
+    priority: route === "" ? 1 : 0.9,
   }));
-
-  return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 1,
-    },
-
-    ...gameUrls,
-  ];
 }

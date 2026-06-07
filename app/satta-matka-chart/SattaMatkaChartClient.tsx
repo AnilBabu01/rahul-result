@@ -35,7 +35,7 @@ export default function SattaMatkaChartClient() {
                 key={index}
                 href={`/jodi-chart/${item?.name
                   ?.toLowerCase()
-                  ?.replace(/\s+/g, "-")}`}
+                  ?.replace(/\s+/g, "-")}-jodi-chart`}
                 className="block text-center py-4 text-lg md:text-xl font-black text-cyan-300 border-b border-fuchsia-900 hover:bg-fuchsia-700 hover:text-white transition-all duration-300"
               >
                 ✦ {item?.name}

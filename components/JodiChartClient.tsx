@@ -40,9 +40,16 @@ export default function JodiChartClient({ slug }: Props) {
     try {
       setLoading(true);
 
+      const cleanTitle = formattedTitle
+        .replace(/[_-]+/g, " ") // convert _ and - to space
+        .trim()
+        .split(" ")
+        .slice(0, -2) // remove last 2 words
+        .join(" ");
+
       const response = await fetch(
         `https://sattamatkadpbos.com/apis/client_cron_market.php?action=get_results&name=${encodeURIComponent(
-          formattedTitle,
+          cleanTitle,
         )}&from_date=${fromDate}&to_date=${toDate}`,
         {
           cache: "no-store",
@@ -56,7 +63,7 @@ export default function JodiChartClient({ slug }: Props) {
 
         for (let i = 0; i < data.data.length; i += 7) {
           rows.push(
-            data.data.slice(i, i + 7).map((item: any) => item.result || "--"),
+            data?.data?.reverse()?.slice(i, i + 7).map((item: any) => item.result || "--"),
           );
         }
 

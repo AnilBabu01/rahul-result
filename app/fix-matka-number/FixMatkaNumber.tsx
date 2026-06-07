@@ -233,6 +233,7 @@ export default function FixMatkaNumber() {
                   className={`text-xl italic font-black ${
                     item?.bg_yellow_status == 1
                       ? "text-black"
+               
                       : "text-yellow-300"
                   }`}
                 >
@@ -298,7 +299,7 @@ export default function FixMatkaNumber() {
               key={index}
               href={`/jodi-chart/${item?.name
                 ?.toLowerCase()
-                .replace(/\s+/g, "-")}`}
+                .replace(/\s+/g, "-")}-jodi-chart`}
               className="block text-center py-4 text-xl font-black text-yellow-300 border-b border-zinc-800 hover:bg-orange-900 transition-all duration-300"
             >
               {item?.name}

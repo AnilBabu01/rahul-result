@@ -268,6 +268,13 @@ function generateWeeklyChart(data: ApiItem[]): WeeklyRow[] {
 export default function PanelChartClient({ slug }: Props) {
   const formattedTitle = slug.replace(/-/g, " ").toUpperCase();
 
+  const cleanTitle = formattedTitle
+    .replace(/[_-]+/g, " ") // convert _ and - to space
+    .trim()
+    .split(" ")
+    .slice(0, -2) // remove last 2 words
+    .join(" ");
+
   const today = new Date().toISOString().split("T")[0];
 
   const [fromDate, setFromDate] = useState("2026-06-01");
@@ -275,18 +282,18 @@ export default function PanelChartClient({ slug }: Props) {
   const [toDate, setToDate] = useState(today);
 
   const { data, isLoading, isFetching, refetch } = useGetMarketResultQuery({
-    name: formattedTitle,
+    name: cleanTitle,
     fromDate,
     toDate,
   });
-
-  console.log("API DATA =", data);
 
   /* =========================================================
      API DATA
   ========================================================= */
 
-  const apiData: ApiItem[] = data?.data || [];
+  // const apiData: ApiItem[] = data?.data || [];
+
+  const apiData: ApiItem[] = [...(data?.data || [])].reverse();
 
   /* =========================================================
      WEEKLY DATA

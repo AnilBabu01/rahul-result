@@ -29,8 +29,6 @@ function getCurrentWeekRange() {
 
 const currentWeekRange = getCurrentWeekRange();
 
-
-
 const panelChart = [
   "0 => 235 460 118 334 668",
   "1 => 236 579 119 588 669",
@@ -115,8 +113,6 @@ const markets = [
 ];
 
 export default function TaraMatkaChart() {
- 
-
   const {
     data: marketResponse,
     isLoading,
@@ -231,32 +227,47 @@ export default function TaraMatkaChart() {
         <div>
           {!isLoading &&
             !isError &&
-            marketList?.slice(0,30)?.map((item: any, index: number) => (
-              <div
-                key={index}
-                className={`border-b border-zinc-700 text-center py-4 ${
-                  item?.bg_yellow_status == 1
-                    ? "bg-yellow-300 border-yellow-500"
-                    : "border-slate-700"
-                }`}
-              >
-                <h3 className={`text-xl italic font-black ${item.color}`}>
-                  {item.name}
-                </h3>
+            marketList
+              ?.filter((item: any) =>
+                [
+                  "SRIDEVI",
+                  "TIME BAZAR",
+                  "MILAN DAY",
+                  "RAJDHANI DAY",
+                  "KALYAN",
+                  "SRIDEVI NIGHT",
+                  "MILAN NIGHT",
+                  "RAJDHANI NIGHT",
+                  "KALYAN NIGHT",
+                  "MAIN BAZAR",
+                ].includes(item?.name),
+              )
+              ?.map((item: any, index: number) => (
+                <div
+                  key={index}
+                  className={`border-b border-zinc-700 text-center py-4 ${
+                    item?.bg_yellow_status == 1
+                      ? "bg-yellow-300 border-yellow-500"
+                      : "border-slate-700"
+                  }`}
+                >
+                  <h3 className={`text-xl italic font-black ${item.color}`}>
+                    {item.name}
+                  </h3>
 
-                <p className="text-white text-xl font-black">{item.result}</p>
+                  <p className="text-white text-xl font-black">{item.result}</p>
 
-                {index === 0 && (
-                  <p className="text-yellow-300 text-lg font-black italic ">
-                    Jodi Panel
+                  {index === 0 && (
+                    <p className="text-yellow-300 text-lg font-black italic ">
+                      Jodi Panel
+                    </p>
+                  )}
+
+                  <p className="text-orange-300 italic font-black">
+                    {item.open_time} - {item.close_time}
                   </p>
-                )}
-
-                <p className="text-orange-300 italic font-black">
-                  {item.open_time} - {item.close_time}
-                </p>
-              </div>
-            ))}
+                </div>
+              ))}
         </div>
       </section>
 

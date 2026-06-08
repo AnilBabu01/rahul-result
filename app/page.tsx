@@ -161,6 +161,20 @@ export default function Home() {
             {!isLoading &&
               !isError &&
               marketList
+                ?.filter((item: any) =>
+                  [
+                    "SRIDEVI",
+                    "TIME BAZAR",
+                    "MILAN DAY",
+                    "RAJDHANI DAY",
+                    "KALYAN",
+                    "SRIDEVI NIGHT",
+                    "MILAN NIGHT",
+                    "RAJDHANI NIGHT",
+                    "KALYAN NIGHT",
+                    "MAIN BAZAR",
+                  ].includes(item?.name),
+                )
                 ?.filter((item: any) => {
                   if (item.result === "Loading...") {
                     return false;
@@ -303,67 +317,82 @@ export default function Home() {
           {/* MARKET LIST */}
           {!isLoading &&
             !isError &&
-            marketList?.map((item: any, index: number) => (
-              <div
-                key={index}
-                className={`border-b relative py-5 px-2 ${
-                  item?.bg_yellow_status == 1
-                    ? "bg-yellow-300 border-yellow-500"
-                    : "border-slate-700"
-                }`}
-              >
-                {/* LEFT BUTTON */}
-                <Link
-                  href={`/jodi-chart/${item?.name
-                    ?.toLowerCase()
-                    ?.replace(/\s+/g, "-")}-chart`}
-                >
-                  <button className="absolute left-2 top-1/2 -translate-y-1/2 bg-cyan-500 text-black text-sm md:text-lg px-3 py-1 rounded-md font-black shadow">
-                    Jodi
-                  </button>
-                </Link>
-
-                {/* CENTER */}
+            marketList
+              ?.filter((item: any) =>
+                [
+                  "SRIDEVI",
+                  "TIME BAZAR",
+                  "MILAN DAY",
+                  "RAJDHANI DAY",
+                  "KALYAN",
+                  "SRIDEVI NIGHT",
+                  "MILAN NIGHT",
+                  "RAJDHANI NIGHT",
+                  "KALYAN NIGHT",
+                  "MAIN BAZAR",
+                ].includes(item?.name),
+              )
+              ?.map((item: any, index: number) => (
                 <div
-                  className={`text-center ${
-                    item?.bg_yellow_status == 1 ? "text-black" : "text-white"
+                  key={index}
+                  className={`border-b relative py-5 px-2 ${
+                    item?.bg_yellow_status == 1
+                      ? "bg-yellow-300 border-yellow-500"
+                      : "border-slate-700"
                   }`}
                 >
-                  <h3
-                    className={`text-2xl font-black italic uppercase ${
-                      item?.bg_yellow_status == 1
-                        ? "text-black"
-                        : "text-pink-400"
+                  {/* LEFT BUTTON */}
+                  <Link
+                    href={`/jodi-chart/${item?.name
+                      ?.toLowerCase()
+                      ?.replace(/\s+/g, "-")}-chart`}
+                  >
+                    <button className="absolute left-2 top-1/2 -translate-y-1/2 bg-cyan-500 text-black text-sm md:text-lg px-3 py-1 rounded-md font-black shadow">
+                      Jodi
+                    </button>
+                  </Link>
+
+                  {/* CENTER */}
+                  <div
+                    className={`text-center ${
+                      item?.bg_yellow_status == 1 ? "text-black" : "text-white"
                     }`}
                   >
-                    {item?.name}
-                  </h3>
+                    <h3
+                      className={`text-2xl font-black italic uppercase ${
+                        item?.bg_yellow_status == 1
+                          ? "text-black"
+                          : "text-pink-400"
+                      }`}
+                    >
+                      {item?.name}
+                    </h3>
 
-                  <p className="text-3xl font-black mt-1">{item?.result}</p>
+                    <p className="text-3xl font-black mt-1">{item?.result}</p>
 
-                  <p
-                    className={`text-lg font-bold italic mt-1 ${
-                      item?.bg_yellow_status == 1
-                        ? "text-black"
-                        : "text-cyan-300"
-                    }`}
+                    <p
+                      className={`text-lg font-bold italic mt-1 ${
+                        item?.bg_yellow_status == 1
+                          ? "text-black"
+                          : "text-cyan-300"
+                      }`}
+                    >
+                      Open {item?.open_time} - Close {item?.close_time}
+                    </p>
+                  </div>
+
+                  {/* RIGHT BUTTON */}
+                  <Link
+                    href={`/panel-chart/${item?.name
+                      ?.toLowerCase()
+                      ?.replace(/\s+/g, "-")}-chart`}
                   >
-                    Open {item?.open_time} - Close {item?.close_time}
-                  </p>
+                    <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-pink-500 text-white text-sm md:text-lg px-3 py-1 rounded-md font-black shadow">
+                      Panel
+                    </button>
+                  </Link>
                 </div>
-
-                {/* RIGHT BUTTON */}
-                <Link
-                  href={`/panel-chart/${item?.name
-                    ?.toLowerCase()
-                    ?.replace(/\s+/g, "-")}-chart`}
-                >
-                  <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-pink-500 text-white text-sm md:text-lg px-3 py-1 rounded-md font-black shadow">
-                    Panel
-                  </button>
-                </Link>
-              </div>
-            ))}
+              ))}
         </div>
 
         {/* Support Section */}
@@ -534,15 +563,30 @@ export default function Home() {
       <section className="bg-slate-900 rounded-b-xl overflow-hidden border border-cyan-500">
         {!isLoading &&
           !isError &&
-          marketList?.slice(0, 10)?.map((item: any, index: number) => (
-            <a
-              key={index}
-              href={`/jodi-chart/${item?.name.toLowerCase().replace(/\s+/g, "-")}-chart`}
-              className="block text-center py-3 text-xl font-bold text-cyan-300 border-b border-slate-700 hover:bg-slate-800 transition"
-            >
-              {item?.name}
-            </a>
-          ))}
+          marketList
+            ?.filter((item: any) =>
+              [
+                "SRIDEVI",
+                "TIME BAZAR",
+                "MILAN DAY",
+                "RAJDHANI DAY",
+                "KALYAN",
+                "SRIDEVI NIGHT",
+                "MILAN NIGHT",
+                "RAJDHANI NIGHT",
+                "KALYAN NIGHT",
+                "MAIN BAZAR",
+              ].includes(item?.name),
+            )
+            ?.map((item: any, index: number) => (
+              <a
+                key={index}
+                href={`/jodi-chart/${item?.name.toLowerCase().replace(/\s+/g, "-")}-chart`}
+                className="block text-center py-3 text-xl font-bold text-cyan-300 border-b border-slate-700 hover:bg-slate-800 transition"
+              >
+                {item?.name}
+              </a>
+            ))}
       </section>
 
       {/* FAQ */}

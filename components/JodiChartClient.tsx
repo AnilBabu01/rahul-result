@@ -41,10 +41,10 @@ export default function JodiChartClient({ slug }: Props) {
       setLoading(true);
 
       const cleanTitle = formattedTitle
-        .replace(/[_-]+/g, " ") // convert _ and - to space
+        .replace(/[_-]+/g, " ")
         .trim()
         .split(" ")
-        .slice(0, -1) // remove last 2 words
+        .slice(0, -1)
         .join(" ");
 
       const response = await fetch(
@@ -59,11 +59,15 @@ export default function JodiChartClient({ slug }: Props) {
       const data = await response.json();
 
       if (data?.data && Array.isArray(data.data)) {
+        const reverseData = [...data.data].reverse();
+
         const rows: string[][] = [];
 
-        for (let i = 0; i < data.data.length; i += 7) {
+        for (let i = 0; i < reverseData.length; i += 7) {
           rows.push(
-            data?.data?.reverse()?.slice(i, i + 7).map((item: any) => item.result || "--"),
+            reverseData
+              .slice(i, i + 7)
+              .map((item: any) => item.result || "--"),
           );
         }
 
@@ -101,23 +105,23 @@ export default function JodiChartClient({ slug }: Props) {
   return (
     <div
       id="top"
-      className="min-h-screen scroll-smooth bg-gradient-to-b from-slate-950 via-slate-900 to-black py-4 text-white"
+      className="min-h-screen bg-gradient-to-b from-[#0f172a] via-[#111827] to-black text-white py-4"
     >
-      <div className="px-2">
-        {/* Header */}
-        <div className="overflow-hidden border-2 border-cyan-500 shadow-lg shadow-cyan-500/20 rounded-lg">
-          <div className="bg-gradient-to-r from-cyan-700 to-blue-900 py-4 text-center">
-            <h1 className="text-xl sm:text-2xl md:text-4xl font-black italic uppercase text-cyan-300 tracking-wide">
+      <div className="max-w-7xl mx-auto px-2">
+        {/* HEADER */}
+        <div className="rounded-2xl overflow-hidden border border-yellow-500 shadow-2xl shadow-yellow-500/10">
+          <div className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 py-5 text-center">
+            <h1 className="md:text-1xl md:text-1xl font-black italic tracking-wider text-black drop-shadow-lg">
               {formattedTitle}
             </h1>
           </div>
 
-          <div className="border-t-2 border-pink-500 bg-slate-900 py-4 text-center">
-            <h2 className="text-lg sm:text-xl md:text-3xl font-black italic text-pink-400">
-              {formattedTitle}
+          <div className="bg-[#111827] border-t border-yellow-500 px-3 py-5 text-center">
+            <h2 className="text-lg md:text-1xl font-black text-yellow-400 italic">
+              {formattedTitle} Jodi Chart
             </h2>
 
-            <p className="mt-2 px-3 text-[11px] sm:text-xs md:text-sm font-semibold italic text-slate-300 leading-relaxed lowercase">
+            <p className="mt-3 text-[11px] sm:text-sm text-slate-300 leading-relaxed lowercase">
               {formattedTitle} chart, {formattedTitle} result satta chart,{" "}
               {formattedTitle} result matka chart, {formattedTitle} jodi chart
               record, day night {formattedTitle} matka chart result,{" "}
@@ -129,30 +133,33 @@ export default function JodiChartClient({ slug }: Props) {
           </div>
         </div>
 
-        {/* Result Section */}
-        <div className="mt-3 border-2 border-cyan-500 bg-slate-900 py-5 text-center rounded-lg">
-          <h2 className="text-lg md:text-2xl font-black uppercase text-cyan-300">
+        {/* LIVE RESULT */}
+        <div className="mt-4 rounded-2xl border border-emerald-500 bg-[#111827] p-5 text-center shadow-lg">
+          <div className="inline-block rounded-full bg-emerald-500/20 px-4 py-1 text-xs md:text-sm font-bold text-emerald-400 border border-emerald-500">
+            LIVE RESULT
+          </div>
+
+          <h2 className="mt-3 text-xl md:text-1xl font-black text-white uppercase">
             {formattedTitle}
           </h2>
 
-          <div className="mt-2 text-3xl md:text-5xl font-black text-pink-400 tracking-wider">
+          <div className="mt-4 text-2xl md:text-3xl font-black tracking-[6px] text-yellow-400 drop-shadow-lg">
             {latestResult}
           </div>
 
           <button
             onClick={fetchChartData}
-            className="mt-4 rounded-full bg-gradient-to-r from-cyan-500 to-blue-700 px-5 py-2 text-sm md:text-xl font-black italic text-white shadow-xl hover:scale-105 transition"
+            className="mt-5 rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 px-6 py-3 text-sm md:text-lg font-black text-black transition hover:scale-105"
           >
             {loading ? "Refreshing..." : "Refresh Result"}
           </button>
         </div>
 
-        {/* DATE FILTER SECTION */}
-        <div className="mt-4 border-2 border-pink-500 bg-slate-900 rounded-xl p-4">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-            {/* FROM DATE */}
-            <div className="flex flex-col w-full md:w-auto">
-              <label className="mb-1 text-cyan-300 font-bold text-sm">
+        {/* DATE FILTER */}
+        <div className="mt-5 rounded-2xl border border-cyan-500 bg-[#111827] p-4">
+          <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+            <div className="w-full md:w-auto">
+              <label className="block mb-2 text-sm font-bold text-cyan-400">
                 From Date
               </label>
 
@@ -160,13 +167,12 @@ export default function JodiChartClient({ slug }: Props) {
                 type="date"
                 value={fromDate}
                 onChange={(e) => setFromDate(e.target.value)}
-                className="bg-slate-800 border border-cyan-500 rounded-lg px-4 py-2 text-white outline-none"
+                className="w-full rounded-xl border border-cyan-500 bg-slate-900 px-4 py-3 text-white outline-none"
               />
             </div>
 
-            {/* TO DATE */}
-            <div className="flex flex-col w-full md:w-auto">
-              <label className="mb-1 text-pink-400 font-bold text-sm">
+            <div className="w-full md:w-auto">
+              <label className="block mb-2 text-sm font-bold text-pink-400">
                 To Date
               </label>
 
@@ -174,172 +180,177 @@ export default function JodiChartClient({ slug }: Props) {
                 type="date"
                 value={toDate}
                 onChange={(e) => setToDate(e.target.value)}
-                className="bg-slate-800 border border-pink-500 rounded-lg px-4 py-2 text-white outline-none"
+                className="w-full rounded-xl border border-pink-500 bg-slate-900 px-4 py-3 text-white outline-none"
               />
             </div>
           </div>
         </div>
 
-        {/* Go Bottom Button */}
-        <div className="my-4 flex justify-center">
+        {/* GO BOTTOM */}
+        <div className="flex justify-center mt-5">
           <a
             href="#bottom"
-            className="rounded-lg border border-cyan-400 bg-slate-900 px-4 py-2 text-sm md:text-lg font-bold italic text-cyan-300 shadow-lg transition hover:bg-slate-800 hover:scale-105"
+            className="rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 px-5 py-3 text-sm md:text-lg font-black text-black transition hover:scale-105"
           >
-            Go to Bottom
+            Go to Bottom ↓
           </a>
         </div>
 
-        {/* Chart Table */}
-        <div className="overflow-x-auto">
-          <div className="flex justify-center">
-            <div className="border-2 border-cyan-500 bg-slate-900 p-2 shadow-2xl rounded-xl">
-              <table className="border-collapse">
-                <tbody>
-                  {chartData.length > 0 ? (
-                    chartData.map((row, rowIndex) => (
-                      <tr key={rowIndex}>
-                        {row.map((num, colIndex) => (
-                          <td
-                            key={colIndex}
-                            className={`h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 border border-slate-700 text-center text-lg sm:text-xl md:text-2xl font-black italic ${
-                              redNumbers.includes(num)
-                                ? "text-pink-400"
-                                : "text-white"
-                            }`}
-                            style={{
-                              fontFamily: "Georgia, serif",
-                              textShadow: "0px 0px 10px rgba(34,211,238,0.7)",
-                            }}
-                          >
-                            {typeof num === "string" && num.includes("-")
-                              ? num.split("-")[1]
-                              : num}
-                          </td>
-                        ))}
-                      </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td
-                        colSpan={7}
-                        className="text-center py-10 text-cyan-300 font-bold"
-                      >
-                        {loading ? "Loading Chart..." : "No Data Found"}
-                      </td>
+        {/* TABLE */}
+        <div className="mt-5 overflow-x-auto">
+          <div className="min-w-max rounded-2xl border border-yellow-500 bg-[#111827] p-3 shadow-2xl">
+            <table className="border-collapse mx-auto">
+              <tbody>
+                {chartData.length > 0 ? (
+                  chartData.map((row, rowIndex) => (
+                    <tr key={rowIndex}>
+                      {row.map((num, colIndex) => (
+                        <td
+                          key={colIndex}
+                          className={`h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20 border border-slate-700 text-center text-xl md:text-1xl font-black italic transition-all duration-200 hover:bg-slate-800 ${
+                            redNumbers.includes(num)
+                              ? "text-red-400"
+                              : "text-white"
+                          }`}
+                          style={{
+                            fontFamily: "Georgia, serif",
+                            textShadow:
+                              "0px 0px 12px rgba(250,204,21,0.5)",
+                          }}
+                        >
+                          {typeof num === "string" && num.includes("-")
+                            ? num.split("-")[1]
+                            : num}
+                        </td>
+                      ))}
                     </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
+                  ))
+                ) : (
+                  <tr>
+                    <td
+                      colSpan={7}
+                      className="py-10 text-center text-lg font-bold text-cyan-300"
+                    >
+                      {loading ? "Loading Chart..." : "No Data Found"}
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
 
-        {/* Bottom Button */}
-        <div id="bottom" className="my-4 flex justify-center">
+        {/* GO TOP */}
+        <div id="bottom" className="flex justify-center mt-5">
           <a
             href="#top"
-            className="rounded-lg border border-pink-400 bg-slate-900 px-4 py-2 text-sm md:text-lg font-bold italic text-pink-400 shadow-lg transition hover:bg-slate-800 hover:scale-105"
+            className="rounded-full bg-gradient-to-r from-pink-500 to-purple-500 px-5 py-3 text-sm md:text-lg font-black text-white transition hover:scale-105"
           >
-            Go to Top
+            ↑ Go to Top
           </a>
         </div>
-      </div>
 
-      {/* Footer Result */}
-      <div className="mx-2 border-2 border-cyan-500 bg-slate-900 text-center py-4 rounded-xl">
-        <h1 className="text-cyan-300 text-lg md:text-2xl font-black uppercase tracking-wide">
-          {formattedTitle}
-        </h1>
+        {/* FOOTER RESULT */}
+        <div className="mt-5 rounded-2xl border border-emerald-500 bg-[#111827] py-5 text-center">
+          <h2 className="text-xl md:text-1xl font-black text-emerald-400 uppercase">
+            {formattedTitle}
+          </h2>
 
-        <div className="mt-2 text-2xl md:text-4xl font-black text-pink-400">
-          {latestResult}
+          <div className="mt-3 text-1xl md:text-3xl font-black tracking-[5px] text-yellow-400">
+            {latestResult}
+          </div>
+
+          <button
+            onClick={fetchChartData}
+            className="mt-5 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 px-6 py-3 text-sm md:text-lg font-black text-black transition hover:scale-105"
+          >
+            {loading ? "Refreshing..." : "Refresh Result"}
+          </button>
         </div>
 
-        <button
-          onClick={fetchChartData}
-          className="mt-3 px-5 py-2 bg-gradient-to-r from-pink-500 to-cyan-500 rounded-full text-white font-black shadow-lg hover:scale-105 transition"
-        >
-          {loading ? "Refreshing..." : "Refresh Result"}
-        </button>
-      </div>
-
-      {/* Whatsapp Banner */}
-      <div className="flex justify-center mt-4 px-2">
-        <div className="bg-gradient-to-r from-green-500 to-emerald-700 text-white px-5 py-3 rounded-xl text-sm md:text-lg font-black shadow-2xl text-center">
-          Join our WhatsApp channel for fast Result
-        </div>
-      </div>
-
-      {/* Navigation */}
-      <div className="bg-slate-900 border border-cyan-500 mt-5 py-4 mx-2 rounded-xl">
-        <div className="flex flex-wrap justify-center gap-2 md:gap-3 text-xs sm:text-sm md:text-lg font-bold">
-          <Link href="/" className="text-cyan-400">
-            Home
-          </Link>
-
-          {" | "}
-
-          <Link href="/satta-matka-guessing-forum" className="text-pink-400">
-            Matka Guessing
-          </Link>
-
-          {" | "}
-
-          <Link href="/satta-matka-chart" className="text-yellow-400">
-            Matka Chart
-          </Link>
-
-          {" | "}
-
-          <Link href="/online-matka-play" className="text-blue-400">
-            Matka Play
-          </Link>
-
-          {" | "}
-
-          <Link href="/tara-matka-mumbai" className="text-green-400">
-            Tara Matka
-          </Link>
-
-          {" | "}
-
-          <Link href="/fix-matka-number" className="text-orange-400">
-            Fix Matka
-          </Link>
-
-          {" | "}
-
-          <Link href="/sitemap.xml" className="text-orange-400">
-            Sitemap
-          </Link>
-        </div>
-      </div>
-
-      {/* Main Footer */}
-      <div className="bg-slate-900 border border-cyan-500 text-center py-5 mt-4 mx-2 rounded-xl shadow-lg">
-        <h2 className="text-pink-400 text-lg md:text-2xl font-black italic">
-          sattamatkadp
-        </h2>
-
-        <div className="mt-3 text-sm md:text-lg font-black text-cyan-300">
-          ALL RIGHTS RESERVED (2012-2026)
+        {/* WHATSAPP */}
+        <div className="mt-5 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-700 p-4 text-center shadow-2xl">
+          <div className="text-sm md:text-xl font-black text-white">
+            Join our WhatsApp channel for Fast Result
+          </div>
         </div>
 
-        <div className="mt-2 text-sm md:text-lg font-black text-white">
-          SITE OWNER:-
+        {/* NAVIGATION */}
+        <div className="mt-5 rounded-2xl border border-cyan-500 bg-[#111827] p-4">
+          <div className="flex flex-wrap justify-center gap-3 text-xs sm:text-sm md:text-base font-bold">
+            <Link href="/" className="text-cyan-400 hover:text-white">
+              Home
+            </Link>
+
+            <Link
+              href="/satta-matka-guessing-forum"
+              className="text-pink-400 hover:text-white"
+            >
+              Matka Guessing
+            </Link>
+
+            <Link
+              href="/satta-matka-chart"
+              className="text-yellow-400 hover:text-white"
+            >
+              Matka Chart
+            </Link>
+
+            <Link
+              href="/online-matka-play"
+              className="text-blue-400 hover:text-white"
+            >
+              Matka Play
+            </Link>
+
+            <Link
+              href="/tara-matka-mumbai"
+              className="text-green-400 hover:text-white"
+            >
+              Tara Matka
+            </Link>
+
+            <Link
+              href="/fix-matka-number"
+              className="text-orange-400 hover:text-white"
+            >
+              Fix Matka
+            </Link>
+
+            <Link
+              href="/sitemap.xml"
+              className="text-purple-400 hover:text-white"
+            >
+              Sitemap
+            </Link>
+          </div>
         </div>
 
-        <div className="mt-2 text-sm md:text-xl font-black underline text-pink-400">
-          FAST BOSS SIR
-        </div>
+        {/* MAIN FOOTER */}
+        <div className="mt-5 rounded-2xl border border-yellow-500 bg-[#111827] px-4 py-6 text-center shadow-2xl">
+          <h2 className="md:text-1xl md:text-2xl font-black italic text-yellow-400">
+            sattamatkadp
+          </h2>
 
-        <div className="mt-2 text-cyan-300 text-sm md:text-xl font-black">
-          1234567890
-        </div>
+          <div className="mt-4 text-sm md:text-xl font-black text-cyan-300">
+            ALL RIGHTS RESERVED (2012-2026)
+          </div>
 
-        <div className="mt-3 text-xs md:text-base font-bold text-slate-400 break-all px-2">
-          https://sattamatkadpb.net
+          <div className="mt-3 text-sm md:text-lg font-black text-white">
+            SITE OWNER :-
+          </div>
+
+          <div className="mt-2 text-lg md:md:text-1xl font-black underline text-pink-400">
+            FAST BOSS SIR
+          </div>
+
+          <div className="mt-3 text-cyan-300 text-lg md:md:text-1xl font-black">
+            1234567890
+          </div>
+
+          <div className="mt-4 break-all text-xs md:text-base font-bold text-slate-400">
+            https://sattamatkadpb.net
+          </div>
         </div>
       </div>
     </div>

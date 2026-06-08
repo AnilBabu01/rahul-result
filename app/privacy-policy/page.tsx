@@ -2,140 +2,131 @@ import Link from "next/link";
 
 export default function PrivacyPolicyPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black">
+    <main className="min-h-screen bg-gradient-to-b from-indigo-950 via-slate-900 to-black text-white">
+      
       {/* Header */}
-      <header className="bg-slate-950 border-b-4 border-yellow-500">
-        <div className="max-w-7xl mx-auto py-8">
-          <div className="flex justify-center items-center gap-4">
+      <header className="bg-indigo-950/80 backdrop-blur border-b border-indigo-500/30">
+        <div className="max-w-7xl mx-auto py-8 px-4">
+          <div className="flex justify-center items-center gap-5">
+            
             {/* Logo */}
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-yellow-400 to-amber-600 flex items-center justify-center shadow-xl">
-              <span className="text-1xl font-black text-black">$</span>
+            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-indigo-400 to-purple-600 flex items-center justify-center shadow-xl rotate-3">
+              <span className="text-2xl font-black text-black">$</span>
             </div>
 
-            <div>
-              <h1 className="text-1xl font-black text-yellow-400">
+            <div className="text-center">
+              <h1 className="text-2xl font-black text-indigo-300">
                 Satta Matka
               </h1>
-
-              <p className="text-1xl font-bold text-cyan-400">
+              <p className="text-sm font-bold text-purple-300">
                 Premium Boss
               </p>
             </div>
+
           </div>
         </div>
       </header>
 
-      {/* Top Divider */}
-      <div className="h-1 bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-500" />
+      {/* Top Line */}
+      <div className="h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" />
 
       {/* Content */}
-      <section className="py-10 px-4">
-        <div className="max-w-5xl mx-auto">
-          <div className="bg-slate-900 border border-yellow-500/20 rounded-3xl shadow-2xl p-6 md:p-10">
+      <section className="py-12 px-4">
+        <div className="max-w-4xl mx-auto">
+
+          {/* Card */}
+          <div className="bg-slate-900/70 backdrop-blur border border-indigo-500/20 rounded-3xl shadow-2xl p-6 md:p-10">
+
             {/* Title */}
             <div className="flex items-center gap-4 mb-10">
-              <div className="w-2 h-16 rounded-full bg-gradient-to-b from-yellow-400 to-amber-600" />
+              <div className="w-2 h-14 rounded-full bg-gradient-to-b from-indigo-400 to-purple-600" />
 
-              <h2 className="text-1xl md:text-1xl font-black text-yellow-400">
+              <h2 className="text-xl md:text-3xl font-black text-indigo-300">
                 प्राइवेसी पॉलिसी (Privacy Policy)
               </h2>
             </div>
 
             {/* Intro */}
-            <p className="text-slate-300 text-lg md:text-xl leading-10">
-              हम आपकी गोपनीयता (Privacy) का सम्मान करते हैं।
-              <span className="font-bold text-yellow-400">
-                {" "}
-                Satta Matka Premium Boss
+            <p className="text-slate-300 text-lg leading-8">
+              हम आपकी गोपनीयता का सम्मान करते हैं।
+              <span className="font-bold text-indigo-300">
+                {" "} Satta Matka Premium Boss
               </span>{" "}
-              पर आपकी जानकारी को सुरक्षित रखने का प्रयास किया जाता है।
-              यह पेज हमारी प्राइवेसी पॉलिसी को समझाने के लिए बनाया गया है।
+              पर आपकी जानकारी सुरक्षित रखने का पूरा प्रयास किया जाता है।
+              यह पेज केवल जानकारी के लिए है।
             </p>
 
-            {/* Section 1 */}
-            <div className="mt-12">
-              <h3 className="text-2xl md:text-2xl font-black text-yellow-400 mb-4">
-                1. डेटा सुरक्षा और गोपनीयता
-              </h3>
+            {/* Section Box */}
+            <div className="mt-10 space-y-8">
 
-              <div className="h-px bg-slate-700 mb-6" />
+              {/* 1 */}
+              <div className="p-5 rounded-2xl bg-slate-800/60 border border-indigo-500/10">
+                <h3 className="text-xl font-bold text-indigo-300 mb-3">
+                  1. डेटा सुरक्षा और गोपनीयता
+                </h3>
+                <p className="text-slate-300 leading-7">
+                  हम किसी भी प्रकार की निजी संवेदनशील जानकारी जैसे बैंक,
+                  आधार, पैन आदि नहीं मांगते। आपकी सामान्य विज़िट जानकारी
+                  सुरक्षित रखी जाती है।
+                </p>
+              </div>
 
-              <p className="text-slate-300 text-lg leading-9">
-                हम अपने उपयोगकर्ताओं से किसी भी प्रकार की संवेदनशील निजी
-                जानकारी जैसे बैंक खाता संख्या, आधार कार्ड, पैन कार्ड या
-                अन्य व्यक्तिगत दस्तावेज़ नहीं मांगते हैं। हमारी वेबसाइट
-                पर आने वाले विजिटर्स की जानकारी सुरक्षित रखने का प्रयास
-                किया जाता है।
-              </p>
-            </div>
+              {/* 2 */}
+              <div className="p-5 rounded-2xl bg-slate-800/60 border border-indigo-500/10">
+                <h3 className="text-xl font-bold text-indigo-300 mb-3">
+                  2. विज्ञापन और बाहरी लिंक
+                </h3>
+                <p className="text-slate-300 leading-7">
+                  वेबसाइट पर तृतीय पक्ष लिंक या विज्ञापन हो सकते हैं।
+                  उनकी नीतियों के लिए हम जिम्मेदार नहीं हैं।
+                </p>
+              </div>
 
-            {/* Section 2 */}
-            <div className="mt-12">
-              <h3 className="text-1xl md:text-2xl font-black text-yellow-400 mb-4">
-                2. विज्ञापन और बाहरी लिंक
-              </h3>
+              {/* 3 */}
+              <div className="p-5 rounded-2xl bg-slate-800/60 border border-indigo-500/10">
+                <h3 className="text-xl font-bold text-indigo-300 mb-3">
+                  3. Cookies का उपयोग
+                </h3>
+                <p className="text-slate-300 leading-7">
+                  बेहतर अनुभव के लिए Cookies का उपयोग किया जा सकता है,
+                  जिससे वेबसाइट प्रदर्शन सुधरता है।
+                </p>
+              </div>
 
-              <div className="h-px bg-slate-700 mb-6" />
+              {/* 4 */}
+              <div className="p-5 rounded-2xl bg-slate-800/60 border border-indigo-500/10">
+                <h3 className="text-xl font-bold text-indigo-300 mb-3">
+                  4. नीति में परिवर्तन
+                </h3>
+                <p className="text-slate-300 leading-7">
+                  समय-समय पर पॉलिसी अपडेट की जा सकती है। सभी बदलाव इसी
+                  पेज पर दिखाए जाएंगे।
+                </p>
+              </div>
 
-              <p className="text-slate-300 text-1xl leading-9">
-                हमारी वेबसाइट पर कुछ तृतीय पक्ष विज्ञापन या बाहरी वेबसाइटों
-                के लिंक हो सकते हैं। इन वेबसाइटों की सामग्री, सेवाओं और
-                नीतियों के लिए हम जिम्मेदार नहीं हैं। किसी भी बाहरी लिंक
-                का उपयोग करना उपयोगकर्ता की अपनी जिम्मेदारी होगी।
-              </p>
-            </div>
-
-            {/* Section 3 */}
-            <div className="mt-12">
-              <h3 className="text-1xl md:text-2xl font-black text-yellow-400 mb-4">
-                3. Cookies का उपयोग
-              </h3>
-
-              <div className="h-px bg-slate-700 mb-6" />
-
-              <p className="text-slate-300 text-1xl leading-9">
-                बेहतर यूजर अनुभव प्रदान करने के लिए हमारी वेबसाइट Cookies
-                का उपयोग कर सकती है। Cookies केवल वेबसाइट के प्रदर्शन और
-                उपयोग को बेहतर बनाने के लिए उपयोग की जाती हैं।
-              </p>
-            </div>
-
-            {/* Section 4 */}
-            <div className="mt-12">
-              <h3 className="text-1xl md:text-3xl font-black text-yellow-400 mb-4">
-                4. नीति में परिवर्तन
-              </h3>
-
-              <div className="h-px bg-slate-700 mb-6" />
-
-              <p className="text-slate-300 text-1xls leading-9">
-                समय-समय पर हमारी प्राइवेसी पॉलिसी में बदलाव किया जा सकता
-                है। किसी भी अपडेट की जानकारी इसी पेज पर उपलब्ध कराई जाएगी।
-              </p>
             </div>
 
             {/* Disclaimer */}
-            <div className="mt-12 rounded-2xl border border-yellow-500/20 bg-slate-800 p-6">
-              <h4 className="text-1xl font-bold text-yellow-400 mb-3">
+            <div className="mt-10 rounded-2xl border border-purple-500/20 bg-slate-800/50 p-6">
+              <h4 className="text-lg font-bold text-purple-300 mb-2">
                 महत्वपूर्ण सूचना
               </h4>
-
-              <p className="text-slate-300 leading-8">
-                यह वेबसाइट केवल जानकारी प्रदान करने के उद्देश्य से बनाई
-                गई है। हम किसी भी प्रकार की अवैध गतिविधि या जुए को बढ़ावा
-                नहीं देते हैं।
+              <p className="text-slate-300 leading-7">
+                यह वेबसाइट केवल जानकारी प्रदान करती है। हम किसी भी अवैध
+                गतिविधि या जुए को बढ़ावा नहीं देते।
               </p>
             </div>
 
             {/* Button */}
-            <div className="flex justify-center mt-12">
+            <div className="flex justify-center mt-10">
               <Link
                 href="/"
-                className="px-10 py-4 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-600 text-black font-black text-lg shadow-lg hover:scale-105 transition-all duration-300"
+                className="px-8 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold shadow-lg hover:scale-105 transition"
               >
                 होम पेज पर वापस जाएं
               </Link>
             </div>
+
           </div>
         </div>
       </section>

@@ -10,8 +10,7 @@ import { useGetMarketListQuery } from "../redux/api/apiClient";
 function getCurrentWeekRange() {
   const today = new Date();
 
-  // Monday = start of week
-  const currentDay = today.getDay(); // 0 = Sunday
+  const currentDay = today.getDay();
   const diffToMonday = currentDay === 0 ? -6 : 1 - currentDay;
 
   const startDate = new Date(today);
@@ -68,26 +67,26 @@ type ChartSectionProps = {
 
 function ChartSection({ title, data }: ChartSectionProps) {
   return (
-    <div className="mb-4 rounded-2xl overflow-hidden border-2 border-orange-500 shadow-[0_0_25px_rgba(249,115,22,0.5)]">
+    <div className="mb-6 overflow-hidden rounded-3xl border border-cyan-500/40 bg-[#0b1220] shadow-[0_0_25px_rgba(6,182,212,0.25)]">
       {/* Header */}
-      <div className="bg-gradient-to-r from-red-700 via-orange-600 to-yellow-500 py-4 px-3">
-        <h2 className="text-center text-lg md:text-xl italic font-black text-white">
+      <div className="bg-gradient-to-r from-cyan-700 via-blue-700 to-indigo-700 px-4 py-4">
+        <h2 className="text-center text-lg font-black italic tracking-wide text-white md:text-xl">
           {title}
         </h2>
       </div>
 
       {/* Content */}
-      <div className="bg-gradient-to-b from-zinc-950 via-neutral-900 to-black py-5">
-        <div className="flex flex-col items-center gap-2">
-          {data.map((item, index) => (
-            <p
-              key={index}
-              className="text-lg md:text-xl font-black italic text-yellow-300 leading-tight"
-            >
+      <div className="grid gap-3 px-4 py-5 sm:grid-cols-2 lg:grid-cols-3">
+        {data.map((item, index) => (
+          <div
+            key={index}
+            className="rounded-2xl border border-cyan-400/20 bg-[#111827] px-4 py-3 text-center transition-all duration-300 hover:scale-[1.02] hover:border-cyan-400"
+          >
+            <p className="text-sm font-black italic tracking-wide text-cyan-200 md:text-lg">
               {item}
             </p>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -116,115 +115,116 @@ export default function TaraMatkaChart() {
   const {
     data: marketResponse,
     isLoading,
-    isFetching,
     isError,
-    refetch,
   } = useGetMarketListQuery({});
 
   const marketList = marketResponse?.data || [];
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-black via-zinc-950 to-black text-white py-2 px-2">
-      <div className="max-w-[1600px] mx-auto border-2 border-orange-500 shadow-[0_0_30px_rgba(249,115,22,0.6)] overflow-hidden rounded-2xl">
+    <main className="min-h-screen bg-gradient-to-b from-[#020617] via-[#07111f] to-black px-2 py-3 text-white">
+      <div className="mx-auto max-w-[1600px] overflow-hidden rounded-3xl border border-cyan-500/40 bg-[#081120] shadow-[0_0_40px_rgba(6,182,212,0.2)]">
         {/* Header */}
-        <div className="border-b-4 border-orange-500 bg-gradient-to-r from-red-900 via-orange-800 to-yellow-700 text-center py-5 px-2">
-          <h1 className="text-yellow-200 text-3xl italic font-black tracking-wide animate-pulse">
+        <div className="border-b border-cyan-500/30 bg-gradient-to-r from-cyan-800 via-blue-800 to-indigo-800 px-4 py-6 text-center">
+          <h1 className="animate-pulse text-3xl font-black italic tracking-widest text-cyan-100 md:text-4xl">
             TARA MATKA PLAY
           </h1>
+
+          <p className="mt-2 text-sm font-semibold tracking-wide text-cyan-200">
+            Fast Result • Jodi Chart • Panel Chart
+          </p>
         </div>
 
         {/* Description */}
-        <div className="border-b-4 border-orange-500 bg-zinc-950 px-3 py-4 text-center">
-          <h1 className="text-orange-300 text-xl italic font-black tracking-wide">
+        <div className="border-b border-cyan-500/20 bg-[#0b1220] px-4 py-5 text-center">
+          <h2 className="text-2xl font-black italic text-cyan-300">
             Play TARA MATKA
-          </h1>
+          </h2>
 
-          <p className="text-[12px] italic leading-5 text-zinc-200 mt-2">
-            MUMBAI DAY MATKA JODI CHART TARA In this satta matka chart page you
-            get - TARA MUMBAI DAY matka, TARA MUMBAI DAY satta, TARA MUMBAI DAY
-            satta matka chart, TARA MUMBAI DAY matka chart, TARA MUMBAI DAY
-            satta chart, TARA MUMBAI DAY matka chart, TARA MUMBAI DAY matka jodi
-            chart, TARA MUMBAI DAY matka panel chart, TARA MUMBAI DAY matka
-            record, TARA MUMBAI DAY paper chart.
+          <p className="mx-auto mt-3 max-w-5xl text-[13px] leading-6 text-slate-300">
+            MUMBAI DAY MATKA JODI CHART TARA In this satta matka chart
+            page you get TARA MUMBAI DAY satta matka chart, panel chart,
+            jodi chart, paper chart, open close record and weekly charts.
           </p>
         </div>
 
         {/* Current Week */}
-        <div className="bg-gradient-to-r from-yellow-500 via-orange-500 to-red-600 text-center py-3 border-b-4 border-orange-500">
-          <h2 className="text-black text-xl md:text-2xl font-black italic">
+        <div className="bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 px-3 py-4 text-center">
+          <h2 className="text-xl font-black italic text-white md:text-2xl">
             Current Week : {currentWeekRange}
           </h2>
         </div>
 
         {/* Lucky Number */}
-        <div className="border-y-4 border-orange-500 bg-gradient-to-r from-red-950 via-orange-950 to-yellow-950">
-          <div className="bg-black text-center border-b border-orange-500 py-2">
-            <h2 className="text-2xl italic font-black text-yellow-300">
-              Today Satta Matka Lucky Number
-            </h2>
+        <div className="grid gap-4 border-y border-cyan-500/30 bg-[#0f172a] px-4 py-5 md:grid-cols-2">
+          <div className="rounded-2xl border border-cyan-500/30 bg-[#111827] p-5 text-center">
+            <h3 className="text-xl font-black italic text-cyan-300">
+              Ank (शुभांक)
+            </h3>
+
+            <p className="mt-3 text-5xl font-black tracking-wider text-white">
+              2-5-7-8
+            </p>
           </div>
 
-          <div className="grid grid-cols-2 text-center py-4 px-2 gap-4">
-            <div>
-              <h3 className="text-orange-300 text-xl italic font-black">
-                Ank (शुभांक)
-              </h3>
+          <div className="rounded-2xl border border-blue-500/30 bg-[#111827] p-5 text-center">
+            <h3 className="text-xl font-black italic text-blue-300">
+              Final Ank
+            </h3>
 
-              <p className="text-4xl font-black text-white mt-2">2-5-7-8</p>
-            </div>
-
-            <div>
-              <h3 className="text-yellow-300 text-xl italic font-black">
-                Final Ank
-              </h3>
-
-              <p className="text-3xl font-black text-white mt-2">K-5, M-*</p>
-            </div>
+            <p className="mt-3 text-4xl font-black tracking-wide text-white">
+              K-5, M-*
+            </p>
           </div>
         </div>
 
         {/* Live Update */}
-        <div className="mt-3 border-2 border-orange-500 rounded-xl overflow-hidden">
-          <div className="bg-gradient-to-r from-red-600 via-orange-500 to-yellow-500 py-2">
-            <div className="flex items-center justify-center gap-2">
-              <h2 className="text-xl italic font-black text-white animate-pulse">
+        <div className="m-3 overflow-hidden rounded-3xl border border-cyan-500/30 bg-[#0b1220]">
+          <div className="bg-gradient-to-r from-cyan-700 via-blue-700 to-indigo-700 py-3">
+            <div className="flex items-center justify-center gap-3">
+              <h2 className="text-2xl font-black italic text-white animate-pulse">
                 📡 LIVE UPDATE
               </h2>
 
-              <Image src={download} alt="Image" width={35} height={35} />
+              <Image src={download} alt="download" width={35} height={35} />
             </div>
+          </div>
 
-            <div className="mx-auto max-w-7xl overflow-hidden rounded-xl border-[3px] border-[#b8870d] bg-[#edf2ef] shadow-md">
-              <div className="h-2 bg-[#f4b400]" />
+          <div className="grid gap-4 p-4 md:grid-cols-2">
+            {markets.map((market, index) => (
+              <div
+                key={index}
+                className="rounded-2xl border border-cyan-500/20 bg-[#111827] p-4 shadow-lg"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <h2 className="text-lg font-black italic tracking-wide text-cyan-200">
+                      {market.name}
+                    </h2>
 
-              {markets.map((market, index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-center gap-4 border-b border-gray-400 py-1 px-1 last:border-b-0"
-                >
-                  <h2 className="text-center text-[10px] font-black italic uppercase tracking-wide text-[#2a1a1a] md:text-[16px]">
-                    {market.name} {market.result}
-                  </h2>
+                    <p className="mt-1 text-2xl font-black text-white">
+                      {market.result}
+                    </p>
+                  </div>
 
-                  <button className="rounded-full border border-[#d8c06c] bg-gradient-to-b from-[#3e0074] via-[#250047] to-[#120022] px-2 py-1 text-[10px] font-extrabold text-white shadow-[0_0_15px_rgba(255,215,0,0.7)] transition-all hover:scale-105 ">
+                  <button className="rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 text-sm font-black text-white transition-all duration-300 hover:scale-105">
                     Refresh
                   </button>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
       {/* Results */}
-      <section className="w-full mt-5 border-2 border-orange-500 rounded-xl overflow-hidden bg-zinc-950">
-        <div className="bg-gradient-to-r from-red-700 via-orange-600 to-yellow-500 py-3 text-center">
-          <h2 className="text-white text-xl italic font-black uppercase">
+      <section className="mt-6 overflow-hidden rounded-3xl border border-cyan-500/30 bg-[#081120]">
+        <div className="bg-gradient-to-r from-cyan-700 via-blue-700 to-indigo-700 py-4 text-center">
+          <h2 className="text-2xl font-black italic uppercase tracking-wide text-white">
             SATTA MATKA PLAY RESULT
           </h2>
         </div>
 
-        <div>
+        <div className="grid gap-4 p-4 md:grid-cols-2 lg:grid-cols-3">
           {!isLoading &&
             !isError &&
             marketList
@@ -245,25 +245,27 @@ export default function TaraMatkaChart() {
               ?.map((item: any, index: number) => (
                 <div
                   key={index}
-                  className={`border-b border-zinc-700 text-center py-4 ${
+                  className={`rounded-2xl border p-5 text-center transition-all duration-300 hover:-translate-y-1 ${
                     item?.bg_yellow_status == 1
-                      ? "bg-yellow-300 border-yellow-500"
-                      : "border-slate-700"
+                      ? "border-yellow-400 bg-yellow-300/10"
+                      : "border-cyan-500/20 bg-[#111827]"
                   }`}
                 >
-                  <h3 className={`text-xl italic font-black ${item.color}`}>
+                  <h3 className={`text-2xl font-black italic ${item.color}`}>
                     {item.name}
                   </h3>
 
-                  <p className="text-white text-xl font-black">{item.result}</p>
+                  <p className="mt-2 text-3xl font-black text-white">
+                    {item.result}
+                  </p>
 
                   {index === 0 && (
-                    <p className="text-yellow-300 text-lg font-black italic ">
+                    <p className="mt-2 text-lg font-black italic text-cyan-300">
                       Jodi Panel
                     </p>
                   )}
 
-                  <p className="text-orange-300 italic font-black">
+                  <p className="mt-3 font-black italic text-slate-300">
                     {item.open_time} - {item.close_time}
                   </p>
                 </div>
@@ -272,7 +274,7 @@ export default function TaraMatkaChart() {
       </section>
 
       {/* Charts */}
-      <section className="w-full mt-5">
+      <section className="mt-6">
         <ChartSection
           title={`Weekly Panel Or Patti Chart From ${currentWeekRange}`}
           data={panelChart}
@@ -290,13 +292,15 @@ export default function TaraMatkaChart() {
       </section>
 
       {/* Chart Links */}
-      <div className="mt-4 bg-gradient-to-r from-red-700 via-orange-600 to-yellow-500 text-white text-center font-black italic text-lg px-3 py-3 rounded-t-xl">
+      <div className="mt-6 rounded-t-3xl bg-gradient-to-r from-cyan-700 via-blue-700 to-indigo-700 px-4 py-4 text-center text-xl font-black italic text-white">
         TARA MATKA Play Jodi Charts
       </div>
 
-      <section className="bg-zinc-950 rounded-b-xl overflow-hidden border-2 border-orange-500">
+      <section className="overflow-hidden rounded-b-3xl border border-cyan-500/30 bg-[#081120]">
         {isLoading && (
-          <div className="text-center text-white py-5">Loading...</div>
+          <div className="py-6 text-center text-lg font-bold text-white">
+            Loading...
+          </div>
         )}
 
         {!isLoading &&
@@ -307,7 +311,7 @@ export default function TaraMatkaChart() {
               href={`/jodi-chart/${item?.name
                 ?.toLowerCase()
                 .replace(/\s+/g, "-")}-chart`}
-              className="block text-center py-4 text-xl font-black text-yellow-300 border-b border-zinc-800 hover:bg-orange-900 transition-all duration-300"
+              className="block border-b border-cyan-500/10 px-4 py-4 text-center text-lg font-black text-cyan-200 transition-all duration-300 hover:bg-cyan-900/30 hover:text-white"
             >
               {item?.name}
             </a>
@@ -316,13 +320,13 @@ export default function TaraMatkaChart() {
 
       {/* Fixed Buttons */}
       <div className="fixed bottom-3 left-2 z-50">
-        <button className="bg-gradient-to-r from-red-600 to-orange-500 hover:scale-105 transition text-white px-4 py-2 rounded-xl font-black italic shadow-lg border border-white">
-          TARA MATKA Play
+        <button className="rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3 font-black italic text-white shadow-xl transition-all duration-300 hover:scale-105">
+          TARA MATKA PLAY
         </button>
       </div>
 
       <div className="fixed bottom-3 right-2 z-50">
-        <button className="bg-yellow-400 border-4 border-orange-500 text-black px-5 py-2 rounded-2xl font-black italic shadow-lg hover:scale-105 transition">
+        <button className="rounded-2xl border border-cyan-300 bg-white px-5 py-3 font-black italic text-cyan-900 shadow-xl transition-all duration-300 hover:scale-105">
           Refresh
         </button>
       </div>

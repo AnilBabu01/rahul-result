@@ -272,7 +272,7 @@ export default function PanelChartClient({ slug }: Props) {
     .replace(/[_-]+/g, " ") // convert _ and - to space
     .trim()
     .split(" ")
-    .slice(0, -2) // remove last 2 words
+    .slice(0, -1) // remove last 2 words
     .join(" ");
 
   const today = new Date().toISOString().split("T")[0];

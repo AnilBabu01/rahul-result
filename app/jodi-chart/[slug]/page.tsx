@@ -34,6 +34,7 @@ export async function generateMetadata({
 // STATIC ROUTES
 // =========================
 
+
 export async function generateStaticParams() {
   return games.map((game) => ({
     slug: game.split("/").pop(),

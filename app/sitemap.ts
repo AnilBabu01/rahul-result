@@ -150,13 +150,14 @@ const gameNames = [
   "kohinoor-night",
 ];
 
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://sattamatkadpbos.com";
 
   // AUTO GENERATE GAME URLS
   const gameRoutes = gameNames.flatMap((name) => [
-    `panel-chart/${name}-panel-chart`,
-    `jodi-chart/${name}-jodi-chart`,
+    `panel-chart/${name}-chart`,
+    `jodi-chart/${name}-chart`,
   ]);
 
   // OTHER STATIC PAGES

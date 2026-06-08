@@ -316,7 +316,7 @@ export default function Home() {
                 <Link
                   href={`/jodi-chart/${item?.name
                     ?.toLowerCase()
-                    ?.replace(/\s+/g, "-")}-jodi-chart`}
+                    ?.replace(/\s+/g, "-")}-chart`}
                 >
                   <button className="absolute left-2 top-1/2 -translate-y-1/2 bg-cyan-500 text-black text-sm md:text-lg px-3 py-1 rounded-md font-black shadow">
                     Jodi
@@ -356,7 +356,7 @@ export default function Home() {
                 <Link
                   href={`/panel-chart/${item?.name
                     ?.toLowerCase()
-                    ?.replace(/\s+/g, "-")}-panel-chart`}
+                    ?.replace(/\s+/g, "-")}-chart`}
                 >
                   <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-pink-500 text-white text-sm md:text-lg px-3 py-1 rounded-md font-black shadow">
                     Panel
@@ -537,7 +537,7 @@ export default function Home() {
           marketList?.slice(0, 10)?.map((item: any, index: number) => (
             <a
               key={index}
-              href={`/jodi-chart/${item?.name.toLowerCase().replace(/\s+/g, "-")}-jodi-chart`}
+              href={`/jodi-chart/${item?.name.toLowerCase().replace(/\s+/g, "-")}-chart`}
               className="block text-center py-3 text-xl font-bold text-cyan-300 border-b border-slate-700 hover:bg-slate-800 transition"
             >
               {item?.name}

@@ -80,7 +80,7 @@ export default function SattaMatkaChartClient() {
 
         <div className="text-center py-4 px-2 space-y-2">
           <h3 className="text-pink-400 text-lg md:text-xl font-black italic break-all">
-            https://sattamatkadpbos.com
+            https://sattamatkadpb.net
           </h3>
 
           <p className="font-black text-lg md:text-xl text-white">
@@ -100,7 +100,7 @@ export default function SattaMatkaChartClient() {
           </p>
 
           <p className="font-bold text-base md:text-lg mt-4 text-slate-300 break-all">
-            https://sattamatkadpbos.com
+            https://sattamatkadpb.net
           </p>
         </div>
       </footer>

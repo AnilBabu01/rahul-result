@@ -4,7 +4,7 @@ import "./globals.css";
 import Providers from "./Providers";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sattamatkadpbos.com"),
+  metadataBase: new URL("https://sattamatkadpb.net"),
 
   title: {
     default: "SATTA MATKA | KALYAN MATKA | DPBOSS",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SATTA MATKA | DPBOSS",
     description: "Fast satta matka results and charts.",
-    url: "https://sattamatkadpbos.com",
+    url: "https://sattamatkadpb.net",
     siteName: "SATTA MATKA",
     locale: "en_IN",
     type: "website",

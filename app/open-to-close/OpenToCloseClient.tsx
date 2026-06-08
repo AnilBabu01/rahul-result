@@ -318,7 +318,7 @@ export default function OpenToCloseClient() {
 
         <div className="text-center py-2 px-1 space-y-1">
           <h3 className="text-pink-400 text-1xl md:text-1xl font-black italic break-all">
-            https://sattamatkadpbos.com
+            https://sattamatkadpb.net
           </h3>
 
           <p className="font-black text-lg md:text-1xl text-white">
@@ -338,7 +338,7 @@ export default function OpenToCloseClient() {
           </p>
 
           <p className="font-bold text-base md:text-1xl mt-4 text-slate-300 break-all">
-            https://sattamatkadpbos.com
+            https://sattamatkadpb.net
           </p>
         </div>
       </footer>

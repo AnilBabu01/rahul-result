@@ -152,7 +152,7 @@ const gameNames = [
 
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://sattamatkadpbos.com";
+  const baseUrl = "https://sattamatkadpb.net";
 
   // AUTO GENERATE GAME URLS
   const gameRoutes = gameNames.flatMap((name) => [

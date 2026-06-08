@@ -538,7 +538,7 @@ export default function PanelChartClient({ slug }: Props) {
       {/* Main Footer */}
       <div className="bg-slate-900 border border-cyan-500 text-center py-5 mt-4 mx-2 rounded-xl shadow-lg">
         <h2 className="text-pink-400 text-lg md:text-2xl font-black italic">
-          sattamatkadpbos
+          sattamatkadp
         </h2>
 
         <div className="mt-3 text-sm md:text-lg font-black text-cyan-300">
@@ -558,7 +558,7 @@ export default function PanelChartClient({ slug }: Props) {
         </div>
 
         <div className="mt-3 text-xs md:text-base font-bold text-slate-400 break-all px-2">
-          https://sattamatkadpbos.com
+          https://sattamatkadpb.net
         </div>
       </div>
     </div>

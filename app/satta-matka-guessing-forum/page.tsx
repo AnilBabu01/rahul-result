@@ -6,7 +6,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: `Satta Matka Guessing Chart Result`,
     description: `Get Satta Matka Guessing satta matka chart, panel chart, jodi chart and daily result updates.`,
     alternates: {
-      canonical: `https://sattamatkadpbos.com/chart/satta-matka-guessing-forum`,
+      canonical: `https://sattamatkadpb.net/chart/satta-matka-guessing-forum`,
     },
   };
 }

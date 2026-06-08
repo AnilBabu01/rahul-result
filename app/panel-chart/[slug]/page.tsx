@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${formattedSlug} Chart Result`,
     description: `Get ${formattedSlug} satta matka chart, panel chart, jodi chart and daily result updates.`,
     alternates: {
-      canonical: `https://sattamatkadpbos.com/panel-chart/${slug}-chart`,
+      canonical: `https://sattamatkadpb.net/panel-chart/${slug}-chart`,
     },
   };
 }

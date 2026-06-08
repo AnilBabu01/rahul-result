@@ -37,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: `SATTA MATKA FREE WEEKLY JODI AND PANNA GUESSING BY SATTA MATKA MARKET`,
     description: `Weekly Jodi Panna Chart From ${startDate} To ${endDate} – Get this week's Satta Matka jodi & panna results. Explore complete weekly open, close and panel numbers updated every week.`,
     alternates: {
-      canonical: `https://sattamatkadpbos.com/chart/weekly-jodi-panna`,
+      canonical: `https://sattamatkadpb.net/chart/weekly-jodi-panna`,
     },
   };
 }
@@ -216,7 +216,7 @@ export default function Home() {
 
           <div className="text-center py-4 px-2 space-y-2">
             <h3 className="text-pink-400 text-lg md:text-xl font-black italic break-all">
-              https://sattamatkadpbos.com
+              https://sattamatkadpb.net
             </h3>
 
             <p className="font-black text-lg md:text-xl text-white">
@@ -236,7 +236,7 @@ export default function Home() {
             </p>
 
             <p className="font-bold text-base md:text-lg mt-4 text-slate-300 break-all">
-              https://sattamatkadpbos.com
+              https://sattamatkadpb.net
             </p>
           </div>
         </footer>

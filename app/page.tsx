@@ -16,7 +16,10 @@ import Link from "next/link";
 import Image from "next/image";
 import download from "@/public/images/download.gif";
 
-import { useGetMarketListQuery } from "./redux/api/apiClient";
+import {
+  useGetMarketListQuery,
+  useGetAllMatchQuery,
+} from "./redux/api/apiClient";
 
 export default function Home() {
   const [open, setOpen] = useState<number | null>(0);
@@ -36,11 +39,18 @@ export default function Home() {
     refetch,
   } = useGetMarketListQuery({});
 
+  const { data, isLoading: marketLoading, error } = useGetAllMatchQuery({});
+
   /*
   |--------------------------------------------------------------------------
   | MARKET DATA
   |--------------------------------------------------------------------------
   */
+
+  console.log(
+    "data is https://manage.sattamatkadpbos.com/api/allMatch",
+    data?.data,
+  );
 
   const marketList = marketResponse?.data || [];
 
@@ -156,6 +166,38 @@ export default function Home() {
                 </button>
               </div>
             )}
+
+            {!marketLoading &&
+              !isError &&
+              data?.data?.map((item: any, index: number) => (
+                <div
+                  key={index}
+                  className="border-b border-slate-700 py-5 text-center"
+                >
+                  <h3 className="text-cyan-300 text-2xl font-black italic">
+                    {item.name}
+                  </h3>
+
+                  {/* <p className="text-pink-400 text-2xl font-black mt-1">
+                      {item.result}
+                    </p> */}
+
+                  {/* <p className="text-white mt-2 text-lg">
+                      {item.open_time} - {item.close_time}
+                    </p> */}
+
+                  {/* REFRESH BUTTON */}
+                  <Link
+                    href={`/fatafat/${item?.name
+                      ?.toLowerCase()
+                      ?.replace(/\s+/g, "-")}`}
+                  >
+                    <button className="mt-5 bg-cyan-500 text-black text-sm md:text-lg px-3 py-1 rounded-md font-black shadow">
+                      View Result
+                    </button>
+                  </Link>
+                </div>
+              ))}
 
             {/* MARKET LIST */}
             {!isLoading &&

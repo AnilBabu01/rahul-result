@@ -22,7 +22,7 @@ export const apiClient = createApi({
     },
   }),
 
-  tagTypes: ["getmarketlist"],
+  tagTypes: ["getmarketlist", "allMatch", "result30days"],
 
   endpoints: (builder) => ({
     getMarketList: builder.query({
@@ -39,8 +39,34 @@ export const apiClient = createApi({
 
       providesTags: ["getmarketlist"],
     }),
-    
+
+    getAllMatch: builder.query({
+      query: () => ({
+        url: "https://manage.sattamatkadpbos.com/api/allMatch",
+        method: "GET",
+      }),
+
+      providesTags: ["allMatch"],
+    }),
+
+    getResult30Days: builder.query({
+      query: (name) => ({
+        url: `https://manage.sattamatkadpbos.com/api/get-result-30-days?name=${encodeURIComponent(
+          name,
+        )}`,
+        method: "GET",
+      }),
+
+      providesTags: ["result30days"],
+    }),
+
+
   }),
 });
 
-export const { useGetMarketListQuery, useGetMarketResultQuery } = apiClient;
+export const {
+  useGetMarketListQuery,
+  useGetMarketResultQuery,
+  useGetAllMatchQuery,
+  useGetResult30DaysQuery
+} = apiClient;

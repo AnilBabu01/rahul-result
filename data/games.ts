@@ -142,6 +142,7 @@ const gameNames = [
   "sangam",
   "kohinoor-day",
   "kohinoor-night",
+  "rajdhani-fatafat"
 ];
 
 export const games = [

@@ -231,6 +231,7 @@ export const liveData2 = [
 import arrow_medium from "@/public/images/arrow_medium.gif";
 import arrow_small from "@/public/images/arrow_small.gif";
 
+
 export const forumLinks = [
   {
     title: "Satta Matka Guessing Forum",

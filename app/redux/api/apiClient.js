@@ -60,6 +60,13 @@ export const apiClient = createApi({
       providesTags: ["result30days"],
     }),
 
+    getAppData: builder.query({
+      query: () => ({
+        url: `https://manage.sattamatkadpbos.com/api/getdata`,
+        method: "GET",
+      }),
+    }),
+
 
   }),
 });
@@ -68,5 +75,6 @@ export const {
   useGetMarketListQuery,
   useGetMarketResultQuery,
   useGetAllMatchQuery,
-  useGetResult30DaysQuery
+  useGetResult30DaysQuery,
+  useGetAppDataQuery
 } = apiClient;

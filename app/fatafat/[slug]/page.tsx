@@ -1,5 +1,3 @@
-// app/jodi-chart/[slug]/page.tsx
-
 import { Metadata } from "next";
 import { games } from "@/data/games";
 import FatafatClient from "@/components/FatafatClient";
@@ -10,13 +8,7 @@ type Props = {
   }>;
 };
 
-// =========================
-// SEO METADATA
-// =========================
-
-export async function generateMetadata({
-  params,
-}: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
 
   const formattedSlug = slug.replace(/-/g, " ");
@@ -30,20 +22,11 @@ export async function generateMetadata({
   };
 }
 
-// =========================
-// STATIC ROUTES
-// =========================
-
-
 export async function generateStaticParams() {
   return games.map((game) => ({
     slug: game.split("/").pop(),
   }));
 }
-
-// =========================
-// PAGE
-// =========================
 
 export default async function Page({ params }: Props) {
   const { slug } = await params;

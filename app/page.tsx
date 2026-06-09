@@ -19,6 +19,7 @@ import download from "@/public/images/download.gif";
 import {
   useGetMarketListQuery,
   useGetAllMatchQuery,
+  useGetAppDataQuery,
 } from "./redux/api/apiClient";
 
 export default function Home() {
@@ -41,16 +42,19 @@ export default function Home() {
 
   const { data, isLoading: marketLoading, error } = useGetAllMatchQuery({});
 
+  const {
+    data: appData,
+    isLoading: appLoading,
+    error: appError,
+  } = useGetAppDataQuery({});
+
+  console.log("appData", appData?.data?.telegram_channel);
+
   /*
   |--------------------------------------------------------------------------
   | MARKET DATA
   |--------------------------------------------------------------------------
   */
-
-  console.log(
-    "data is https://manage.sattamatkadpbos.com/api/allMatch",
-    data?.data,
-  );
 
   const marketList = marketResponse?.data || [];
 
@@ -190,7 +194,7 @@ export default function Home() {
                   <Link
                     href={`/fatafat/${item?.name
                       ?.toLowerCase()
-                      ?.replace(/\s+/g, "-")}`}
+                      ?.replace(/\s+/g, "-")}-chart`}
                   >
                     <button className="mt-5 bg-cyan-500 text-black text-sm md:text-lg px-3 py-1 rounded-md font-black shadow">
                       View Result
@@ -299,7 +303,16 @@ export default function Home() {
             जीतो ढेर सारी धनराशि।
           </p>
 
-          <button className="mt-3 bg-pink-500 hover:bg-pink-600 transition text-white px-6 py-2 rounded-full text-lg italic font-bold shadow-lg">
+          <button
+            onClick={() => {
+              console.log("APK URL", appData?.data?.apk_url);
+
+              if (appData?.data?.apk_url) {
+                window.open(appData.data.apk_url, "_blank");
+              }
+            }}
+            className="mt-3 bg-pink-500 hover:bg-pink-600 transition text-white px-6 py-2 rounded-full text-lg italic font-bold shadow-lg"
+          >
             Play Online Matka
           </button>
 
@@ -425,7 +438,7 @@ export default function Home() {
           <div className="bg-slate-900 flex justify-center py-5">
             <div className="bg-gradient-to-r from-cyan-500 to-pink-500 px-5 py-3 rounded-full shadow-xl">
               <p className="text-black text-xl font-black italic">
-                support.sattamatkadpbos@gmail.com
+                {appData?.data?.support_email}
               </p>
             </div>
           </div>
@@ -440,25 +453,56 @@ export default function Home() {
           </div>
 
           <div className="bg-slate-900 p-3 space-y-3">
-            {forumLinks.map((item, index) => (
-              <div
-                key={index}
-                className="border-2 border-cyan-500 bg-slate-950 rounded-lg py-2 px-2"
-              >
-                <div className="flex items-center justify-center gap-3">
-                  <Image src={item.image} alt="Image" width={30} height={30} />
+            {forumLinks.map((item, index) => {
+              const isTelegram = item.title === "Join Telegram Channel";
 
-                  <Link
-                    href={item.url}
-                    className="text-cyan-300 text-lg font-black italic text-center"
-                  >
-                    {item?.title}
-                  </Link>
+              return (
+                <div
+                  key={index}
+                  className="border-2 border-cyan-500 bg-slate-950 rounded-lg py-2 px-2"
+                >
+                  <div className="flex items-center justify-center gap-3">
+                    <Image
+                      src={item.image}
+                      alt="Image"
+                      width={30}
+                      height={30}
+                    />
 
-                  <Image src={item.image} alt="Image" width={30} height={30} />
+                    {isTelegram ? (
+                      <a
+                        href={appData?.data?.telegram_channel || "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-cyan-300 text-lg font-black italic text-center"
+                        onClick={() =>
+                          console.log(
+                            "appData",
+                            appData?.data?.telegram_channel,
+                          )
+                        }
+                      >
+                        {item?.title}
+                      </a>
+                    ) : (
+                      <Link
+                        href={item.url}
+                        className="text-cyan-300 text-lg font-black italic text-center"
+                      >
+                        {item?.title}
+                      </Link>
+                    )}
+
+                    <Image
+                      src={item.image}
+                      alt="Image"
+                      width={30}
+                      height={30}
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
@@ -468,7 +512,16 @@ export default function Home() {
             Fast Result
           </button>
 
-          <button className="bg-gradient-to-r from-cyan-500 to-blue-700 text-white px-4 py-2 rounded-md text-lg font-bold shadow-lg">
+          <button
+            onClick={() => {
+              console.log("APK URL", appData?.data?.apk_url);
+
+              if (appData?.data?.apk_url) {
+                window.open(appData.data.apk_url, "_blank");
+              }
+            }}
+            className="bg-gradient-to-r from-cyan-500 to-blue-700 text-white px-4 py-2 rounded-md text-lg font-bold shadow-lg"
+          >
             Matka Play
           </button>
         </div>
@@ -478,93 +531,6 @@ export default function Home() {
           <button className="bg-slate-950 border-4 border-cyan-400 text-cyan-300 px-3 py-2 rounded-2xl text-lg italic font-black shadow-2xl">
             Refresh
           </button>
-        </div>
-      </div>
-
-      {/* Open Close Zone */}
-      <div className="mt-4 border-2 border-cyan-500 rounded-xl overflow-hidden">
-        <div className="bg-gradient-to-r from-cyan-700 to-blue-900 text-white font-black italic text-lg px-3 py-2">
-          ⇒ OPEN TO CLOSE FREE GAME ZONE
-        </div>
-
-        <div className="bg-pink-500 text-center text-xl italic font-black py-3 border-b-4 border-cyan-500 text-white">
-          Date : {currentDate}
-        </div>
-
-        <div className="bg-slate-900">
-          {chartData.map((item, index) => (
-            <div
-              key={index}
-              className="border-b-2 border-cyan-500 py-5 text-center"
-            >
-              <div className="bg-gradient-to-r from-cyan-500 to-blue-700 inline-block px-4 py-2 text-white text-xl italic font-black rounded-lg shadow-lg">
-                {item.title}
-              </div>
-
-              {item.subtitle && (
-                <>
-                  <h2 className="text-cyan-300 text-2xl font-black italic mt-2">
-                    {item.subtitle}
-                  </h2>
-
-                  <h3 className="text-white text-xl font-bold italic">
-                    CALL KARE
-                  </h3>
-
-                  <p className="text-pink-400 text-2xl font-black italic">
-                    {item.phone}
-                  </p>
-                </>
-              )}
-
-              {item.number && (
-                <>
-                  <h2 className="text-cyan-300 text-4xl font-black italic mt-2">
-                    {item.number}
-                  </h2>
-
-                  <p className="text-pink-400 text-2xl font-black italic px-2 mt-2">
-                    {item.result}
-                  </p>
-                </>
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* Bottom Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2">
-          {/* LEFT */}
-          <div className="border-r border-cyan-500">
-            <div className="bg-cyan-700 text-white text-xl font-black italic px-3 py-2">
-              TOP GUSSER
-            </div>
-
-            {topGuessers.map((item, index) => (
-              <div
-                key={index}
-                className="bg-slate-900 text-cyan-300 text-lg font-bold italic border-b border-slate-700 px-3 py-2"
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-
-          {/* RIGHT */}
-          <div>
-            <div className="bg-pink-600 text-white text-xl font-black italic px-3 py-2">
-              FAST RESULT
-            </div>
-
-            {fastResult.map((item, index) => (
-              <div
-                key={index}
-                className="bg-slate-900 text-pink-300 text-lg font-bold italic border-b border-slate-700 px-3 py-2"
-              >
-                {item}
-              </div>
-            ))}
-          </div>
         </div>
       </div>
 

@@ -23,7 +23,7 @@ function slugify(text: string) {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://sattamatkadpbos.com";
+  const baseUrl = "https://sattamatkadpb.net/";
 
   // STATIC PAGES
   const staticGames = [
@@ -50,7 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     const res = await fetch(
-      "https://sattamatkadpbos.com/apis/client_cron_market.php?action=get_market_list",
+      "https://sattamatkadpbos.com//apis/client_cron_market.php?action=get_market_list",
       {
         next: { revalidate: 3600 }, // 1 hour cache
       },

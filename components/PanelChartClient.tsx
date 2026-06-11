@@ -1,5 +1,3 @@
-// app/panel-chart/[slug]/page.tsx
-
 "use client";
 
 import { useMemo, useState } from "react";
@@ -36,108 +34,65 @@ export async function generateStaticParams() {
 }
 
 /* =========================================================
-   MINI DIGITS
+   MINI DIGITS (Optimized for light background readability)
 ========================================================= */
 function MiniDigits({ value }: { value: string }) {
-  console.log("from MiniDigits =", value);
-
-  /*
-    POSSIBLE VALUES
-
-    224-8
-    224-8-205
-    ""
-  */
-
-  // DEFAULT
   let left = ["-", "-", "-"];
   let right = ["-", "-", "-"];
 
   if (value) {
     const parts = value.split("-");
-
-    /*
-      224-8
-      LEFT = 224
-    */
     if (parts.length === 2) {
       const first = parts[0] || "";
-
       left = [first[0] || "-", first[1] || "-", first[2] || "-"];
     }
-
-    /*
-      224-8-205
-      LEFT = 224
-      RIGHT = 205
-    */
     if (parts.length >= 3) {
       const first = parts[0] || "";
       const last = parts[2] || "";
-
       left = [first[0] || "-", first[1] || "-", first[2] || "-"];
-
       right = [last[0] || "-", last[1] || "-", last[2] || "-"];
     }
   }
 
   return (
-    <div className="absolute inset-0 pointer-events-none flex flex-col justify-between text-[9px] sm:text-[10px] md:text-[11px] font-extrabold leading-none text-cyan-300">
-      {/* ROW 1 */}
-      <div className="flex justify-between p-[1px]">
+    <div className="absolute inset-0 pointer-events-none flex flex-col justify-between p-1 text-[9px] sm:text-[10px] md:text-[11px] font-medium leading-none text-slate-400">
+      <div className="flex justify-between">
         <span>{left[0]}</span>
-
         <span>{right[0]}</span>
       </div>
-
-      {/* ROW 2 */}
-      <div className="flex justify-between p-[1px]">
+      <div className="flex justify-between">
         <span>{left[1]}</span>
-
         <span>{right[1]}</span>
       </div>
-
-      {/* ROW 3 */}
-      <div className="flex justify-between p-[1px]">
+      <div className="flex justify-between">
         <span>{left[2]}</span>
-
         <span>{right[2]}</span>
       </div>
     </div>
   );
 }
+
 /* =========================================================
    DATE HELPERS
 ========================================================= */
-
 function formatDate(date: Date) {
   const dd = String(date.getDate()).padStart(2, "0");
   const mm = String(date.getMonth() + 1).padStart(2, "0");
   const yyyy = date.getFullYear();
-
   return `${dd}/${mm}/${yyyy}`;
 }
 
-
-
 function apiDateToObj(dateStr: string) {
-  // 06-06-2026
   const [dd, mm, yyyy] = dateStr.split("-");
-
   return new Date(Number(yyyy), Number(mm) - 1, Number(dd));
 }
 
 function getMonday(date: Date) {
   const d = new Date(date);
-
-  const day = d.getDay(); // 0 sunday
-
+  const day = d.getDay();
   const diff = day === 0 ? -6 : 1 - day;
-
   d.setDate(d.getDate() + diff);
-
   d.setHours(0, 0, 0, 0);
-
   return d;
 }
 
@@ -145,16 +100,9 @@ function getWeekKey(start: Date, end: Date) {
   return `${formatDate(start)} To ${formatDate(end)}`;
 }
 
-/* =========================================================
-   RESULT -> JODI
-   467-71-344 => 71
-========================================================= */
-
 function getJodi(result: string) {
   if (!result) return "";
-
   const parts = result.split("-");
-
   return parts[1] || "";
 }
 
@@ -164,82 +112,46 @@ function getJodi(result: string) {
 function generateWeeklyChart(data: ApiItem[]): WeeklyRow[] {
   if (!data || data.length === 0) return [];
 
-  /* =====================================================
-     SORT DATE
-  ===================================================== */
   const sorted = [...data].sort((a, b) => {
     return apiDateToObj(a.date).getTime() - apiDateToObj(b.date).getTime();
   });
 
-  /* =====================================================
-     DATE => FULL RESULT
-     DATE => JODI
-  ===================================================== */
   const resultMap: Record<string, string> = {};
-
   const jodiMap: Record<string, string> = {};
 
   sorted.forEach((item) => {
     const dateObj = apiDateToObj(item.date);
-
     const key = formatDate(dateObj);
-
-    // FULL RESULT
     resultMap[key] = item.result || "";
-
-    // JODI
     jodiMap[key] = getJodi(item.result);
   });
 
-  /* =====================================================
-     FIRST + LAST DATE
-  ===================================================== */
   const firstDate = apiDateToObj(sorted[0].date);
-
   const lastDate = apiDateToObj(sorted[sorted.length - 1].date);
 
-  /* =====================================================
-     START FROM MONDAY
-  ===================================================== */
   let currentWeekStart = getMonday(firstDate);
-
   const rows: WeeklyRow[] = [];
 
   while (currentWeekStart <= lastDate) {
     const weekStart = new Date(currentWeekStart);
-
     const weekEnd = new Date(currentWeekStart);
-
     weekEnd.setDate(weekEnd.getDate() + 6);
 
     const values: string[] = [];
-
     const results: string[] = [];
-
     const highlight: number[] = [];
 
-    /* =====================================================
-       7 DAYS
-    ===================================================== */
     for (let i = 0; i < 7; i++) {
       const currentDate = new Date(weekStart);
-
       currentDate.setDate(currentDate.getDate() + i);
-
       const key = formatDate(currentDate);
 
-      // FULL RESULT
       const fullResult = resultMap[key] || "";
-
-      // JODI
       const jodi = jodiMap[key] || "";
 
-      // PUSH
       results.push(fullResult);
-
       values.push(jodi);
 
-      // HIGHLIGHT DOUBLE
       if (jodi && jodi.length === 2 && jodi[0] === jodi[1]) {
         highlight.push(i);
       }
@@ -247,19 +159,11 @@ function generateWeeklyChart(data: ApiItem[]): WeeklyRow[] {
 
     rows.push({
       week: getWeekKey(weekStart, weekEnd),
-
-      // FULL RESULT ARRAY
       results,
-
-      // JODI ARRAY
       values,
-
       highlight,
     });
 
-    /* =====================================================
-       NEXT WEEK
-    ===================================================== */
     currentWeekStart.setDate(currentWeekStart.getDate() + 7);
   }
 
@@ -267,23 +171,20 @@ function generateWeeklyChart(data: ApiItem[]): WeeklyRow[] {
 }
 
 /* =========================================================
-   COMPONENT
+   COMPONENT (MODERN LIGHT THEME RE-DESIGN)
 ========================================================= */
-
 export default function PanelChartClient({ slug }: Props) {
   const formattedTitle = slug.replace(/-/g, " ").toUpperCase();
 
   const cleanTitle = formattedTitle
-    .replace(/[_-]+/g, " ") // convert _ and - to space
+    .replace(/[_-]+/g, " ")
     .trim()
     .split(" ")
-    .slice(0, -1) // remove last 2 words
+    .slice(0, -1)
     .join(" ");
 
   const today = new Date().toISOString().split("T")[0];
-
   const [fromDate, setFromDate] = useState("2026-06-01");
-
   const [toDate, setToDate] = useState(today);
 
   const { data, isLoading, isFetching, refetch } = useGetMarketResultQuery({
@@ -292,296 +193,265 @@ export default function PanelChartClient({ slug }: Props) {
     toDate,
   });
 
-
-  /* =========================================================
-     API DATA
-  ========================================================= */
-
-  // const apiData: ApiItem[] = data?.data || [];
-
   const apiData: ApiItem[] = [...(data?.data || [])].reverse();
-
-  /* =========================================================
-     WEEKLY DATA
-  ========================================================= */
 
   const chartDataPanel = useMemo(() => {
     return generateWeeklyChart(apiData);
   }, [apiData]);
 
-  const {
-  data: appData,
-  isLoading: appLoading,
-  error: appError,
-} = useGetAppDataQuery({});
-
-console.log("appData", appData?.data?.WhatsAppchannel);
-
-  /* =========================================================
-     LATEST RESULT
-  ========================================================= */
+  const { data: appData } = useGetAppDataQuery({});
 
   const latestResult =
     apiData?.length > 0 ? apiData[apiData.length - 1]?.result : "Loading...";
 
-
   return (
-    <div
-      id="top"
-      className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black py-2 text-white"
-    >
-      <div className="w-full px-1 sm:px-2">
-        {/* HEADER */}
-        <div className="overflow-hidden border-2 border-cyan-500 shadow-lg shadow-cyan-500/20">
-          <div className="bg-gradient-to-r from-cyan-700 to-blue-900 py-3 text-center">
-            <h1 className="text-sm sm:text-lg md:text-3xl font-black italic uppercase text-cyan-300 tracking-wide">
+    <div id="top" className="min-h-screen bg-slate-50 py-6 text-slate-800 antialiased font-sans">
+      <div className="max-w-6xl mx-auto px-4">
+        
+        {/* HEADER SECTION */}
+        <header className="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden mb-6">
+          <div className="bg-slate-900 px-6 py-5 text-center">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-white uppercase">
               {formattedTitle}
             </h1>
           </div>
-
-          <div className="border-t-2 border-pink-500 bg-slate-900 py-3 text-center">
-            <h2 className="text-xs sm:text-base md:text-2xl font-black italic text-pink-400">
-              {formattedTitle}
+          <div className="p-6 bg-white border-t border-slate-100 text-center">
+            <h2 className="text-sm sm:text-base font-semibold text-indigo-600 mb-2 uppercase tracking-wider">
+              Live Performance Tracker
             </h2>
-            <p className="lowercase">
+            <p className="text-xs sm:text-sm text-slate-500 leading-relaxed max-w-3xl mx-auto capitalize">
               {formattedTitle} panel chart, dhan express night panel patti
               record chart, day {formattedTitle} matka panel chart,{" "}
               {formattedTitle} panel chart guessing, {formattedTitle} matka day
               night panel chart, {formattedTitle} chart panel, day dhan express
-              penal chart record, {formattedTitle} panel chart result
+              penal chart record, {formattedTitle} panel chart result.
             </p>
           </div>
-        </div>
+        </header>
 
-        {/* RESULT */}
-        <div className="border-2 border-cyan-500 bg-slate-900 py-3 text-center mt-2">
-          <h2 className="text-xs sm:text-sm md:text-xl font-extrabold uppercase text-cyan-300">
+        {/* HERO LATEST RESULT BAR */}
+        <section className="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-6 text-center mb-6">
+          <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-1">
+            Latest Result
+          </span>
+          <h2 className="text-lg sm:text-xl font-bold text-slate-700 uppercase mb-2">
             {formattedTitle}
           </h2>
-
-          <div className="text-lg sm:text-3xl md:text-5xl font-black text-pink-400 mt-1">
+          <div className="text-3xl sm:text-5xl md:text-6xl font-black tracking-wider text-indigo-600 my-2">
             {latestResult}
           </div>
-
           <button
             onClick={() => refetch()}
-            className="mt-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-700 px-4 py-2 text-[10px] sm:text-sm md:text-lg font-black italic text-white shadow-lg hover:scale-105 transition"
+            className="mt-4 inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 transition active:scale-95"
           >
-            {isFetching ? "Refreshing..." : "Refresh Result"}
+            {isFetching ? (
+              <>
+                <svg className="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                </svg>
+                Updating Record...
+              </>
+            ) : (
+              "Refresh Dashboard"
+            )}
           </button>
-        </div>
+        </section>
 
-        {/* DATE FILTER */}
-        <div className="mt-4 border-2 border-pink-500 bg-slate-900 rounded-xl p-4">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-            <div className="flex flex-col w-full md:w-auto">
-              <label className="mb-1 text-cyan-300 font-bold text-sm">
+        {/* DATE CONTROLS */}
+        <section className="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-5 mb-6">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col w-full sm:w-auto sm:min-w-[200px]">
+              <label className="mb-1.5 text-xs font-bold text-slate-500 uppercase tracking-wider">
                 From Date
               </label>
-
               <input
                 type="date"
                 value={fromDate}
                 onChange={(e) => setFromDate(e.target.value)}
-                className="bg-slate-800 border border-cyan-500 rounded-lg px-4 py-2 text-white outline-none"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm text-slate-700 font-medium focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition"
               />
             </div>
-
-            <div className="flex flex-col w-full md:w-auto">
-              <label className="mb-1 text-pink-400 font-bold text-sm">
+            <div className="flex flex-col w-full sm:w-auto sm:min-w-[200px]">
+              <label className="mb-1.5 text-xs font-bold text-slate-500 uppercase tracking-wider">
                 To Date
               </label>
-
               <input
                 type="date"
                 value={toDate}
                 onChange={(e) => setToDate(e.target.value)}
-                className="bg-slate-800 border border-pink-500 rounded-lg px-4 py-2 text-white outline-none"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm text-slate-700 font-medium focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition"
               />
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* GO BOTTOM */}
-        <div className="my-3 flex justify-center">
+        {/* ANCHOR LINK */}
+        <div className="mb-6 flex justify-center">
           <a
             href="#bottom"
-            className="rounded border border-cyan-400 bg-slate-900 px-3 py-2 text-[10px] sm:text-xs md:text-sm font-bold italic text-cyan-300 shadow-lg hover:bg-slate-800 transition"
+            className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-500 shadow-sm hover:bg-slate-50 hover:text-slate-700 transition"
           >
-            Go to Bottom
+            Scroll to Bottom ↓
           </a>
         </div>
 
-        {/* LOADING */}
-        {isLoading && (
-          <div className="text-center py-10 text-cyan-300 font-black text-xl">
-            Loading Chart...
+        {/* MAIN CHART CONTAINER */}
+        <main className="bg-white rounded-2xl border border-slate-200/80 shadow-md overflow-hidden mb-6">
+          
+          {/* HEADER ROW */}
+          <div className="grid grid-cols-8 bg-slate-100 border-b border-slate-200 text-center font-bold text-[10px] sm:text-xs md:text-sm text-slate-600 uppercase tracking-wider py-3">
+            <div className="flex items-center justify-center">Week Period</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+            <div>Sun</div>
           </div>
-        )}
 
-        {/* CHART */}
-        {!isLoading && (
-          <div className="w-full border-[2px] sm:border-[3px] border-cyan-500 bg-slate-900 shadow-2xl overflow-hidden">
-            {chartDataPanel.map((row, rowIndex) => (
-              <div
-                key={rowIndex}
-                className="grid grid-cols-8 border-b border-slate-700"
-              >
-                {/* DATE */}
-                <div className="flex flex-col items-center justify-center border-r border-slate-700 bg-slate-800 py-[2px]">
-                  <div className="text-[5px] sm:text-[7px] md:text-[11px] font-black italic leading-none text-cyan-300">
-                    {row.week.split(" To ")[0]}
-                  </div>
+          {/* LOADING STATE */}
+          {isLoading && (
+            <div className="text-center py-20 text-slate-400 font-medium text-base animate-pulse">
+              Generating dynamic matrix data...
+            </div>
+          )}
 
-                  <div className="text-[6px] sm:text-[9px] md:text-[14px] font-black italic leading-none text-pink-400">
-                    To
-                  </div>
-
-                  <div className="text-[5px] sm:text-[7px] md:text-[11px] font-black italic leading-none text-cyan-300">
-                    {row.week.split(" To ")[1]}
-                  </div>
-                </div>
-
-                {/* VALUES */}
-                {row.values.map((value, index) => (
-                  <div
-                    key={index}
-                    className="relative flex h-[34px] sm:h-[45px] md:h-[65px] items-center justify-center border-r border-slate-700 bg-slate-950"
-                  >
-                    <MiniDigits value={row.results[index]} />
-
-                    <span
-                      className={`relative z-10 text-[10px] sm:text-[12px] md:text-[22px] font-black italic leading-none ${
-                        row.highlight.includes(index)
-                          ? "text-pink-400"
-                          : "text-white"
-                      }`}
-                      style={{
-                        fontFamily: "Georgia, serif",
-                        textShadow: "0px 0px 10px rgba(34,211,238,0.8)",
-                      }}
-                    >
-                      {value || "-"}
+          {/* GRID ROWS */}
+          {!isLoading && (
+            <div className="divide-y divide-slate-100">
+              {chartDataPanel.map((row, rowIndex) => (
+                <div
+                  key={rowIndex}
+                  className="grid grid-cols-8 transition hover:bg-slate-50/50"
+                >
+                  {/* TIME PERIOD COLUMN */}
+                  <div className="flex flex-col items-center justify-center bg-slate-50/80 p-2 text-center border-r border-slate-100">
+                    <span className="text-[7px] sm:text-[9px] md:text-xs font-semibold text-slate-500 whitespace-nowrap">
+                      {row.week.split(" To ")[0]}
+                    </span>
+                    <span className="text-[6px] sm:text-[8px] md:text-[10px] font-bold text-slate-400 my-0.5 uppercase tracking-tighter">
+                      to
+                    </span>
+                    <span className="text-[7px] sm:text-[9px] md:text-xs font-semibold text-slate-500 whitespace-nowrap">
+                      {row.week.split(" To ")[1]}
                     </span>
                   </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        )}
 
-        {/* GO TOP */}
-        <div id="bottom" className="my-3 flex justify-center">
+                  {/* VALUE ITEMS */}
+                  {row.values.map((value, index) => (
+                    <div
+                      key={index}
+                      className="relative flex h-11 sm:h-16 md:h-20 items-center justify-center border-r last:border-r-0 border-slate-100 bg-white"
+                    >
+                      {/* Mini Digits Background Layer */}
+                      <MiniDigits value={row.results[index]} />
+
+                      {/* Focal Value */}
+                      <span
+                        className={`relative z-10 text-xs sm:text-base md:text-2xl font-black tracking-tight ${
+                          row.highlight.includes(index)
+                            ? "text-rose-500 bg-rose-50 px-1 sm:px-2 py-0.5 rounded-lg"
+                            : "text-slate-800"
+                        }`}
+                        style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}
+                      >
+                        {value || "-"}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          )}
+        </main>
+
+        {/* BOTTOM NAVIGATIONS & ADDITIONAL STATS */}
+        <div id="bottom" className="mb-6 flex justify-center">
           <a
             href="#top"
-            className="rounded border border-pink-400 bg-slate-900 px-3 py-2 text-[10px] sm:text-xs md:text-sm font-bold italic text-pink-400 shadow-lg hover:bg-slate-800 transition"
+            className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-500 shadow-sm hover:bg-slate-50 hover:text-slate-700 transition"
           >
-            Go to Top
+            Scroll to Top ↑
           </a>
         </div>
 
-        {/* FOOTER RESULT */}
-        <div className="border-2 border-cyan-500 bg-slate-900 text-center py-3 mt-3 mx-1">
-          <h1 className="text-cyan-300 text-xs sm:text-sm md:text-xl font-black uppercase tracking-wide">
-            {formattedTitle}
-          </h1>
-
-          <div className="text-lg sm:text-2xl md:text-4xl font-black text-pink-400 mt-1">
+        {/* SUB FOOTER WIDGET */}
+        <section className="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-6 text-center mb-6">
+          <h3 className="text-slate-700 text-sm font-bold uppercase tracking-wider mb-1">
+            {formattedTitle} Summary Terminal
+          </h3>
+          <div className="text-2xl sm:text-3xl font-black text-indigo-600 tracking-wide">
             {latestResult}
           </div>
-
           <button
             onClick={() => refetch()}
-            className="mt-3 px-4 py-2 bg-gradient-to-r from-pink-500 to-cyan-500 rounded-full text-white text-[10px] sm:text-xs md:text-base font-black shadow-lg hover:scale-105 transition"
+            className="mt-4 px-5 py-2 bg-slate-900 text-white text-xs font-bold rounded-xl shadow-sm hover:bg-slate-800 transition"
           >
-            {isFetching ? "Refreshing..." : "Refresh Result"}
+            {isFetching ? "Syncing..." : "Manual Force Sync"}
           </button>
-        </div>
-      </div>
-      {/* Whatsapp Banner */}
-      <div className="flex justify-center mt-4 px-2">
-        <div
-          onClick={() => {
-            if (appData?.data?.WhatsAppchannel) {
-              window.open(appData.data.WhatsAppchannel, "_blank");
-            }
-          }}
-          className="bg-gradient-to-r from-green-500 to-emerald-700 text-white px-5 py-3 rounded-xl text-sm md:text-lg font-black shadow-2xl text-center cursor-pointer hover:scale-105 transition-transform duration-200"
-        >
-          Join our WhatsApp channel for fast Result
-        </div>
-      </div>
+        </section>
 
-      {/* Navigation */}
-      <div className="bg-slate-900 border border-cyan-500 mt-5 py-4 mx-2 rounded-xl">
-        <div className="flex flex-wrap justify-center gap-2 md:gap-3 text-xs sm:text-sm md:text-lg font-bold">
-          <Link href="/" className="text-cyan-400">
-            Home
-          </Link>
-
-          {" | "}
-
-          <Link href="/satta-matka-guessing-forum" className="text-pink-400">
-            Matka Guessing
-          </Link>
-
-          {" | "}
-
-          <Link href="/satta-matka-chart" className="text-yellow-400">
-            Matka Chart
-          </Link>
-
-          {" | "}
-
-          <Link href="/online-matka-play" className="text-blue-400">
-            Matka Play
-          </Link>
-
-          {" | "}
-
-          <Link href="/tara-matka-mumbai" className="text-green-400">
-            Tara Matka
-          </Link>
-
-          {" | "}
-
-          <Link href="/fix-matka-number" className="text-orange-400">
-            Fix Matka
-          </Link>
-
-          {" | "}
-
-          <Link href="/sitemap.xml" className="text-orange-400">
-            Sitemap
-          </Link>
-        </div>
-      </div>
-
-      {/* Main Footer */}
-      <div className="bg-slate-900 border border-cyan-500 text-center py-5 mt-4 mx-2 rounded-xl shadow-lg">
-        <h2 className="text-pink-400 text-lg md:text-2xl font-black italic">
-          sattamatkadpbos
-        </h2>
-
-        <div className="mt-3 text-sm md:text-lg font-black text-cyan-300">
-          ALL RIGHTS RESERVED (2012-2026)
+        {/* WHATSAPP BANNER */}
+        <div className="flex justify-center mb-6">
+          <div
+            onClick={() => {
+              if (appData?.data?.WhatsAppchannel) {
+                window.open(appData.data.WhatsAppchannel, "_blank");
+              }
+            }}
+            className="w-full bg-emerald-600 text-white px-6 py-4 rounded-2xl font-bold text-sm sm:text-base md:text-lg shadow-sm text-center cursor-pointer hover:bg-emerald-700 transition duration-150 flex items-center justify-center gap-2"
+          >
+            <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.455L0 24zm6.59-4.846c1.66.986 3.292 1.481 4.793 1.481 5.379 0 9.754-4.31 9.758-9.605.002-2.564-1.002-4.974-2.824-6.795C16.5 2.412 14.106 1.41 11.554 1.41c-5.388 0-9.762 4.312-9.765 9.608-.001 1.637.447 3.14 1.294 4.516l-.988 3.606 3.702-.959z" />
+            </svg>
+            Join our WhatsApp channel for instantaneous results
+          </div>
         </div>
 
-        <div className="mt-2 text-sm md:text-lg font-black text-white">
-          SITE OWNER:-
-        </div>
+        {/* NAVIGATION PIPELINE */}
+        <nav className="bg-white border border-slate-200/80 p-4 rounded-2xl mb-6 shadow-sm">
+          <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 text-xs sm:text-sm font-semibold text-slate-500">
+            <Link href="/" className="hover:text-indigo-600 transition">Home</Link>
+            <span className="text-slate-300">|</span>
+            <Link href="/satta-matka-guessing-forum" className="hover:text-indigo-600 transition">Matka Guessing</Link>
+            <span className="text-slate-300">|</span>
+            <Link href="/satta-matka-chart" className="hover:text-indigo-600 transition">Matka Chart</Link>
+            <span className="text-slate-300">|</span>
+            <Link href="/online-matka-play" className="hover:text-indigo-600 transition">Matka Play</Link>
+            <span className="text-slate-300">|</span>
+            <Link href="/tara-matka-mumbai" className="hover:text-indigo-600 transition">Tara Matka</Link>
+            <span className="text-slate-300">|</span>
+            <Link href="/fix-matka-number" className="hover:text-indigo-600 transition">Fix Matka</Link>
+            <span className="text-slate-300">|</span>
+            <Link href="/sitemap.xml" className="hover:text-indigo-600 transition">Sitemap</Link>
+          </div>
+        </nav>
 
-        <div className="mt-2 text-sm md:text-xl font-black underline text-pink-400">
-          FAST BOSS SIR
-        </div>
+        {/* SYSTEM FOOTER */}
+        <footer className="bg-white border border-slate-200/80 text-center p-6 rounded-2xl shadow-sm">
+          <h2 className="text-slate-800 text-lg font-bold tracking-tight">
+            sattamatkadpb
+          </h2>
+          <div className="mt-2 text-xs font-bold text-slate-400 uppercase tracking-widest">
+            All Rights Reserved © 2012 - 2026
+          </div>
+          <hr className="my-4 border-slate-100" />
+          <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+            Site Executive Owner
+          </div>
+          <div className="mt-0.5 text-base font-black text-slate-700 tracking-wide uppercase">
+            Fast Boss Sir
+          </div>
+          <div className="mt-2 inline-block bg-slate-50 text-indigo-600 font-mono font-bold text-sm px-4 py-1.5 rounded-xl border border-slate-200/60">
+            {appData?.data?.whatsapp_number ?? "1234567890"}
+          </div>
+          <div className="mt-4 text-[11px] font-medium text-slate-400">
+            https://sattamatkadpb.net/
+          </div>
+        </footer>
 
-        <div className="mt-2 text-cyan-300 text-sm md:text-xl font-black">
-          {appData?.data?.whatsapp_number ?? "1234567890"}
-        </div>
-
-        <div className="mt-3 text-xs md:text-base font-bold text-slate-400 break-all px-2">
-          https://sattamatkadpbos.com
-        </div>
       </div>
     </div>
   );

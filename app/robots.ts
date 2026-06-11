@@ -10,6 +10,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://sattamatkadpbos.com/sitemap.xml",
+    sitemap: "https://sattamatkadpb.net/sitemap.xml",
   };
 }

@@ -37,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: `SATTA MATKA FREE WEEKLY JODI AND PANNA GUESSING BY SATTA MATKA MARKET`,
     description: `Weekly Jodi Panna Chart From ${startDate} To ${endDate} – Get this week's Satta Matka jodi & panna results. Explore complete weekly open, close and panel numbers updated every week.`,
     alternates: {
-      canonical: `https://sattamatkadpbos.com/chart/weekly-jodi-panna`,
+      canonical: `https://sattamatkadpbos.com//chart/weekly-jodi-panna`,
     },
   };
 }
@@ -76,170 +76,195 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-black via-slate-950 to-black p-2 text-white">
-      <div className="border-4 border-cyan-500 rounded-2xl overflow-hidden shadow-[0_0_25px_rgba(34,211,238,0.4)]">
-
-        {/* Header */}
-        <section className="bg-gradient-to-r from-cyan-600 via-blue-700 to-purple-700 text-white text-center border-b-4 border-cyan-400 py-3">
-          <h1 className="text-xl md:text-2xl font-black italic uppercase tracking-wide">
-            SATTA MATKA WEEKLY JODI AND PANNA
+    <main className="min-h-screen bg-slate-50 py-8 px-4 sm:px-6 lg:px-8 text-slate-800 antialiased selection:bg-indigo-500 selection:text-white">
+      <div className="max-w-4xl mx-auto space-y-8">
+        
+        {/* Main Branding Header */}
+        <header className="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-6 md:p-8 text-center space-y-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 tracking-wider uppercase">
+            Live Weekly Updates
+          </div>
+          <h1 className="text-2xl md:text-4xl font-extrabold tracking-tight text-slate-900 uppercase">
+            Satta Matka Weekly Jodi & Panna
           </h1>
+          <div className="h-1 w-20 bg-indigo-600 mx-auto rounded-full" />
+          <h2 className="text-sm md:text-base font-semibold text-indigo-600 tracking-wide uppercase">
+            Satta Weekly Jodi Guessing Forum
+          </h2>
+          <p className="max-w-xl mx-auto text-xs md:text-sm text-slate-500 font-medium leading-relaxed">
+            Weekly jodi or panna, weekly jodi panna line, weekly jodi panna mumbai, matka guru weekly single jodi and panna, weekly jodi and panna in kalyan.
+          </p>
+        </header>
+
+        {/* Section 1: Panel / Patti Chart */}
+        <section className="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
+          <div className="bg-slate-900 px-6 py-4 text-white">
+            <h3 className="text-base md:text-lg font-bold tracking-wide">
+              Weekly Panel / Patti Chart
+            </h3>
+            <p className="text-xs text-slate-400 mt-1 font-medium">
+              Valid From <span className="text-amber-400 font-semibold">{startDate}</span> To <span className="text-amber-400 font-semibold">{endDate}</span> for Kalyan, Milan, Night Markets, Time & Main Bazar.
+            </p>
+          </div>
+          
+          <div className="divide-y divide-slate-100">
+            {panelChart.map((item) => (
+              <div 
+                key={item.digit} 
+                className="flex items-stretch hover:bg-slate-50 transition-colors duration-150"
+              >
+                <div className="w-16 md:w-24 bg-slate-50/50 flex items-center justify-center border-r border-slate-100 font-bold text-lg md:text-xl text-slate-900 shrink-0">
+                  {item.digit}
+                </div>
+                <div className="p-4 flex-1 font-mono tracking-wider font-semibold text-sm md:text-base text-indigo-600 flex items-center flex-wrap gap-2">
+                  {item.values.split(" ").map((val, idx) => (
+                    <span key={idx} className="bg-indigo-50/60 px-2.5 py-1 rounded border border-indigo-100/50">
+                      {val}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
 
-        <section className="bg-gradient-to-r from-purple-700 via-blue-700 to-cyan-600 text-white text-center border-b-4 border-cyan-400 py-4">
-          <h2 className="text-xl md:text-2xl font-black italic uppercase">
-            SATTA WEEKLY JODI GUESSING SITE
-          </h2>
-
-          <p className="mt-3 text-base md:text-lg italic font-semibold px-4 text-cyan-100">
-            weekly jodi or panna, weekly jodi panna line, weekly jodi panna
-            mumbai, matka guru weekly single jodi and panna, weekly jodi and
-            panna in kalyan
-          </p>
-        </section>
-
-        {/* Panel Chart Header */}
-        <div className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 border-y-4 border-cyan-400 text-center py-4">
-          <h3 className="font-black italic text-lg md:text-xl text-black px-2">
-            Weekly Panel Or Patti Chart From {startDate} To {endDate} For
-            Kalyan, Milan, Kalyan Night, Rajdhani Night, Time Bazar, Main Bazar
-            Market
-          </h3>
-        </div>
-
-        {/* Panel Chart */}
-        <div className="bg-slate-950 py-6 text-center space-y-2">
-          {panelChart.map((item) => (
-            <div
-              key={item.digit}
-              className="text-lg md:text-xl font-black italic leading-relaxed text-cyan-300"
-            >
-              <span className="text-pink-400">{item.digit}</span> =&gt;{" "}
-              <span className="text-yellow-300">{item.values}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* Weekly Jodi Header */}
-        <div className="bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 border-y-4 border-cyan-400 text-center py-4">
-          <h3 className="font-black italic text-lg md:text-xl text-white px-2">
-            Weekly Jodi Chart From {startDate} To {endDate} For Kalyan, Milan,
-            Kalyan Night, Rajdhani Night, Time Bazar, Main Bazar Market
-          </h3>
-        </div>
-
-        {/* Weekly Jodi */}
-        <div className="bg-slate-950 py-4 text-center space-y-2">
-          {weeklyJodi.map((item, index) => (
-            <div
-              key={index}
-              className="text-lg md:text-xl font-black italic leading-relaxed text-green-400"
-            >
-              {item}
-            </div>
-          ))}
-        </div>
-
-        {/* Weekly Open Close Header */}
-        <div className="bg-gradient-to-r from-green-500 via-emerald-600 to-teal-600 border-y-4 border-cyan-400 text-center py-4">
-          <h3 className="font-black italic text-lg md:text-xl text-white px-2">
-            Weekly Number Open To Close From {startDate} To {endDate} For
-            Kalyan, Milan, Kalyan Night, Rajdhani Night, Time Bazar, Main Bazar
-            Market
-          </h3>
-        </div>
-
-        {/* Weekly Open Close */}
-        <div className="bg-slate-950 py-6 text-center space-y-2">
-          {weeklyOpenClose.map((item) => (
-            <div
-              key={item.day}
-              className="text-lg md:text-xl font-black italic leading-relaxed"
-            >
-              <span className="text-orange-400">{item.day}</span> =&gt;{" "}
-              <span className="text-cyan-300">{item.value}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* Advertisement Section */}
-        <div className="bg-gradient-to-b from-pink-950 via-slate-900 to-black border-4 border-pink-500 py-4 text-center px-3">
-          <h2 className="text-yellow-300 text-2xl font-black mb-4 animate-pulse">
-            ☩ बुकिंग चालू ☩
-          </h2>
-
-          <p className="text-lg md:text-xl font-black italic px-4 text-pink-300">
-            कल्याण बाजार बम्पर धमाका अचूक जोड़ी पर कमाओ लाखों 100% फिक्स
-          </p>
-
-          <p className="text-xl font-black mt-4">
-            कॉल :{" "}
-            <span className="text-cyan-400 underline">
-              1234567890
-            </span>
-          </p>
-
-          <p className="text-xl font-black mt-2">
-            कॉल :{" "}
-            <span className="text-cyan-400 underline">
-              1234567890
-            </span>
-          </p>
-
-          <hr className="my-6 border-pink-500" />
-
-          <p className="text-red-400 text-lg font-black italic">
-            Note :- Don't Call For Trail Help
-          </p>
-        </div>
-
-        {/* Footer */}
-        <footer className="max-w-6xl mx-auto overflow-hidden rounded-b-2xl border-t-4 border-cyan-500 bg-gradient-to-b from-slate-900 to-black shadow-[0_0_20px_rgba(34,211,238,0.2)]">
-
-          <div className="text-center py-3 px-2 text-sm md:text-lg font-black leading-10">
-            <span className="text-cyan-400">Home</span>
-            {" | "}
-            <span className="text-pink-400">Matka Guessing</span>
-            {" | "}
-            <span className="text-yellow-400">Matka Chart</span>
-            {" | "}
-            <span className="text-blue-400">Matka Play</span>
-            {" | "}
-            <span className="text-green-400">Tara Matka</span>
-            {" | "}
-            <span className="text-orange-400">Fix Matka</span>
-            {" | "}
-            <span className="text-red-400">Sitemap</span>
+        {/* Section 2: Weekly Jodi Chart */}
+        <section className="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
+          <div className="bg-slate-900 px-6 py-4 text-white">
+            <h3 className="text-base md:text-lg font-bold tracking-wide">
+              Weekly Jodi Chart
+            </h3>
+            <p className="text-xs text-slate-400 mt-1 font-medium">
+              Active Jodi metrics tracked from {startDate} to {endDate}.
+            </p>
           </div>
 
-          <div className="border-t border-cyan-500" />
+          <div className="p-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {weeklyJodi.map((item, index) => (
+                <div 
+                  key={index} 
+                  className="bg-emerald-50/60 border border-emerald-100 rounded-xl p-4 text-center hover:shadow-sm transition-all"
+                >
+                  <span className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
+                    Set {index + 1}
+                  </span>
+                  <span className="font-mono text-lg font-bold text-emerald-700 tracking-widest">
+                    {item}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-          <div className="text-center py-4 px-2 space-y-2">
-            <h3 className="text-pink-400 text-lg md:text-xl font-black italic break-all">
-              https://sattamatkadpbos.com
+        {/* Section 3: Weekly Open Close */}
+        <section className="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
+          <div className="bg-slate-900 px-6 py-4 text-white">
+            <h3 className="text-base md:text-lg font-bold tracking-wide">
+              Weekly Open To Close Line
             </h3>
-
-            <p className="font-black text-lg md:text-xl text-white">
-              ALL RIGHTS RESERVED (2012-2026)
+            <p className="text-xs text-slate-400 mt-1 font-medium">
+              Daily structural layouts mapped through {startDate} - {endDate}.
             </p>
+          </div>
 
-            <p className="font-black text-lg md:text-xl text-cyan-300">
-              SITE OWNER:-
+          <div className="p-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+              {weeklyOpenClose.map((item) => (
+                <div 
+                  key={item.day} 
+                  className="bg-slate-50/80 border border-slate-200/60 rounded-xl p-4 flex flex-col items-center justify-center text-center"
+                >
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">
+                    {item.day}
+                  </span>
+                  <div className="h-px w-6 bg-slate-200 my-1" />
+                  <span className="font-mono font-extrabold text-base text-slate-800 tracking-wider mt-1">
+                    {item.value}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Section 4: Premium/VIP Booking Advertisement */}
+        <section className="bg-gradient-to-br from-rose-50 via-white to-orange-50 border-2 border-rose-200 rounded-2xl p-6 md:p-8 shadow-sm relative overflow-hidden text-center space-y-6">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-rose-100/40 rounded-full blur-3xl -z-10" />
+          
+          <div className="space-y-2">
+            <div className="inline-block animate-pulse bg-rose-600 text-white text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest">
+              ☩ बुकिंग चालू है ☩
+            </div>
+            <h2 className="text-xl md:text-2xl font-black text-rose-950 leading-snug max-w-xl mx-auto">
+              कल्याण बाजार बम्पर धमाका अचूक जोड़ी पर कमाओ लाखों 100% फिक्स गेम
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto">
+            <a 
+              href="tel:1234567890" 
+              className="flex items-center justify-center gap-3 bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-5 rounded-xl transition shadow-sm text-sm"
+            >
+              <span className="text-slate-400 font-medium">कॉल करें:</span> 1234567890
+            </a>
+            <a 
+              href="tel:1234567890" 
+              className="flex items-center justify-center gap-3 bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-5 rounded-xl transition shadow-sm text-sm"
+            >
+              <span className="text-slate-400 font-medium">कॉल करें:</span> 1234567890
+            </a>
+          </div>
+
+          <div className="pt-2 border-t border-slate-200/80 max-w-xs mx-auto">
+            <p className="text-xs text-rose-600 font-bold tracking-wide uppercase">
+              Note: Don't Call For Trial Help
             </p>
+          </div>
+        </section>
 
-            <p className="font-black underline text-xl md:text-2xl text-yellow-300">
-              FAST BOSS SIR
+        {/* Footer Design */}
+        <footer className="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden text-center">
+          {/* Fast Quick Links */}
+          <div className="bg-slate-50/80 border-b border-slate-200/60 py-4 px-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs md:text-sm font-bold text-slate-600">
+            <span className="hover:text-indigo-600 cursor-pointer transition">Home</span>
+            <span className="text-slate-300">|</span>
+            <span className="hover:text-indigo-600 cursor-pointer transition">Matka Guessing</span>
+            <span className="text-slate-300">|</span>
+            <span className="hover:text-indigo-600 cursor-pointer transition">Matka Chart</span>
+            <span className="text-slate-300">|</span>
+            <span className="hover:text-indigo-600 cursor-pointer transition">Matka Play</span>
+            <span className="text-slate-300">|</span>
+            <span className="hover:text-indigo-600 cursor-pointer transition">Tara Matka</span>
+            <span className="text-slate-300">|</span>
+            <span className="hover:text-indigo-600 cursor-pointer transition">Fix Matka</span>
+            <span className="text-slate-300">|</span>
+            <span className="hover:text-indigo-600 cursor-pointer transition">Sitemap</span>
+          </div>
+
+          {/* Legal / Admin Details */}
+          <div className="p-6 md:p-8 space-y-4 text-xs md:text-sm font-medium text-slate-500">
+            <p className="text-indigo-600 font-bold tracking-wide text-sm md:text-base">
+              https://sattamatkadpbos.com/
             </p>
+            
+            <div className="space-y-1">
+              <p className="text-slate-400 font-bold tracking-widest text-[10px] md:text-xs uppercase">
+                Site Owner & Administration
+              </p>
+              <p className="text-base md:text-lg font-black text-slate-800 tracking-wide uppercase">
+                Fast Boss Sir
+              </p>
+              <p className="text-slate-700 font-mono font-bold">{`+91 1234567890`}</p>
+            </div>
 
-            <p className="text-cyan-400 font-black text-lg md:text-xl mt-2 break-all">
-              1234567890
-            </p>
-
-            <p className="font-bold text-base md:text-lg mt-4 text-slate-300 break-all">
-              https://sattamatkadpbos.com
+            <p className="text-[10px] md:text-xs text-slate-400 font-bold tracking-wider pt-4 border-t border-slate-100">
+              © 2012 - 2026 ALL RIGHTS RESERVED
             </p>
           </div>
         </footer>
+
       </div>
     </main>
   );

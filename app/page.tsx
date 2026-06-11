@@ -1,4 +1,3 @@
-// app/page.js
 "use client";
 import { useState } from "react";
 import {
@@ -26,12 +25,12 @@ export default function Home() {
   const [open, setOpen] = useState<number | null>(0);
   const [active, setActive] = useState<number | null>(null);
   const [refreshingIndex, setRefreshingIndex] = useState<number | null>(null);
+
   /*
   |--------------------------------------------------------------------------
   | RTK QUERY API CALL
   |--------------------------------------------------------------------------
   */
-
   const {
     data: marketResponse,
     isLoading,
@@ -48,693 +47,349 @@ export default function Home() {
     error: appError,
   } = useGetAppDataQuery({});
 
-  /*
-  |--------------------------------------------------------------------------
-  | MARKET DATA
-  |--------------------------------------------------------------------------
-  */
-
   const marketList = marketResponse?.data || [];
 
   const toggle = (index: number) => {
-    console.log("click");
     setActive(active === index ? null : index);
   };
 
-  const currentDate = new Date()
-    .toLocaleDateString("en-GB")
-    .replace(/\//g, "-");
-
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black text-white py-2 px-2">
-      <div className="max-w-[1600px] mx-auto border-2 border-cyan-400 shadow-[0_0_25px_rgba(34,211,238,0.4)] overflow-hidden rounded-xl">
-        {/* Header */}
-        <div className="border-b-4 border-cyan-400 bg-gradient-to-r from-slate-900 via-cyan-950 to-slate-900 text-center py-5 px-2">
-          <p className="text-[15px] italic leading-5 text-cyan-200">
-            विश्व की पहली
-            <br />
-            भरोसेमंद वेबसाइट
+    <main className="min-h-screen bg-slate-50 text-slate-800 antialiased py-6 px-4 font-sans selection:bg-indigo-500 selection:text-white">
+      <div className="max-w-6xl mx-auto space-y-8">
+        
+        {/* Header Block */}
+        <header className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 text-center relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600"></div>
+          <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-2">
+            विश्व की पहली भरोसेमंद वेबसाइट
           </p>
-
-          <h1 className="text-cyan-300 text-3xl italic font-black tracking-wide">
-            Satta Matka
+          <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight sm:text-5xl">
+            Satta Matka <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">dpb</span>
           </h1>
+          <p className="text-slate-500 font-medium text-sm mt-2">sattamatkadpb.com</p>
+        </header>
 
-          <h2 className="text-pink-400 text-2xl italic font-bold mt-1">
-            sattamatkadpbos
-          </h2>
-        </div>
-
-        {/* Description */}
-        <div className="border-b-4 border-cyan-500 bg-slate-900 px-3 py-4 text-center">
-          <p className="text-[12px] italic leading-5 text-slate-200">
-            sattamatkadpbos is India's fastest and most trusted platform for
+        {/* Info Box */}
+        <section className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+          <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Platform Overview</h3>
+          <p className="text-slate-600 text-xs sm:text-sm leading-relaxed text-justify">
+            sattamatkadpb is India's fastest and most trusted platform for
             DPBoss Satta Matka result — Kalyan Matka, Milan Day Night, Rajdhani
             Day Night, Main Bazar, Time Bazar and 50+ markets — all updated
             daily at lightning speed, 100% free. Get live Kalyan Matka result,
             DPBoss 143 guessing, free Matka Guessing Forum, complete Jodi Chart
             and Panel Chart records from 1974 to 2026, Morning Syndicate result,
             Syndicate Night result, Date Fix Matka and weekly jodi predictions —
-            everything in one place. No login. No payment. Always free. India's
-            most complete Satta Matka platform — 50+ markets, 68+ chart records,
-            active guessing forum and expert fix jodi tips. We also provide
-            Morning Syndicate and Matka Bazar Syndicate Night results directly
-            from the Matka industry. Receive weekly game updates, Date Fix
-            information and a free Matka Number Guessing Formula. Visit us daily
-            for the fastest Matka tips and tricks. Bookmark this site for easy
-            access. Thank you!
+            everything in one place.
           </p>
-        </div>
+        </section>
 
-        {/* Lucky Number Section */}
-        <div className="border-y-4 border-cyan-500 bg-gradient-to-r from-slate-900 to-cyan-950">
-          <div className="bg-slate-950 text-center border-b border-cyan-500 py-2">
-            <h2 className="text-2xl italic font-black text-cyan-300">
-              Today Satta Matka Lucky Number
+        {/* Lucky Numbers Widget */}
+        <section className="bg-gradient-to-br from-slate-900 to-slate-950 text-white rounded-2xl p-6 shadow-xl relative overflow-hidden">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+          <div className="relative z-10">
+            <h2 className="text-lg font-bold text-slate-300 mb-6 flex items-center gap-2">
+              <span className="flex h-2 w-2 rounded-full bg-emerald-400"></span>
+              Today's Lucky Numbers
             </h2>
-          </div>
-
-          <div className="grid grid-cols-2 text-center py-3 px-1 gap-4">
-            <div>
-              <h3 className="text-pink-400 text-xl italic font-black">
-                Ank (शुभांक)
-              </h3>
-
-              <p className="text-3xl font-black text-white">
-                {" "}
-                {appData?.data?.Ank ?? "2-5-7-8"}
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-pink-400 text-xl italic font-black">
-                Final Ank
-              </h3>
-
-              <p className="text-2xl font-black text-white">
-                {" "}
-                {appData?.data?.FinalAnk ?? "K-5, M-*"}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Live Update */}
-        <div className="mt-3 border-2 border-cyan-500 rounded-lg overflow-hidden">
-          <div className="bg-gradient-to-r from-cyan-500 to-blue-700 py-2 ">
-            <div className="flex items-center justify-center gap-2">
-              <h2 className="text-xl italic text-white">📡 LIVE UPDATE</h2>
-
-              <Image src={download} alt="Image" width={35} height={35} />
-            </div>
-          </div>
-
-          <div className="bg-slate-900">
-            {/* LOADER */}
-            {isLoading && (
-              <div className="py-10 text-center">
-                <p className="text-cyan-300 text-2xl font-black animate-pulse">
-                  Loading Market Data...
-                </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 divide-y sm:divide-y-0 sm:divide-x divide-slate-800">
+              <div className="pt-4 sm:pt-0">
+                <span className="text-xs font-medium text-slate-400 block uppercase tracking-wider mb-1">Ank (शुभांक)</span>
+                <span className="text-3xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">
+                  {appData?.data?.Ank ?? "2-5-7-8"}
+                </span>
               </div>
-            )}
-
-            {/* ERROR */}
-            {isError && (
-              <div className="py-10 text-center">
-                <p className="text-red-400 text-xl font-bold">
-                  Failed To Load Market Data
-                </p>
-
-                <button
-                  onClick={() => refetch()}
-                  className="mt-4 px-6 py-2 rounded-lg bg-pink-500 text-white font-bold"
-                >
-                  Retry
-                </button>
+              <div className="pt-4 sm:pt-0 sm:pl-6">
+                <span className="text-xs font-medium text-slate-400 block uppercase tracking-wider mb-1">Final Ank</span>
+                <span className="text-3xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">
+                  {appData?.data?.FinalAnk ?? "K-5, M-*"}
+                </span>
               </div>
-            )}
-
-            {/* {!marketLoading &&
-              !isError &&
-              data?.data?.map((item: any, index: number) => (
-                <div
-                  key={index}
-                  className="border-b border-slate-700 py-5 text-center"
-                >
-                  <h3 className="text-cyan-300 text-2xl font-black italic">
-                    {item.name}
-                  </h3>
-
-                  <Link
-                    href={`/fatafat/${item?.name
-                      ?.toLowerCase()
-                      ?.replace(/\s+/g, "-")}-chart`}
-                  >
-                    <button className="mt-5 bg-cyan-500 text-black text-sm md:text-lg px-3 py-1 rounded-md font-black shadow">
-                      View Result
-                    </button>
-                  </Link>
-                </div>
-              ))} */}
-
-            {/* MARKET LIST */}
-            {!isLoading &&
-              !isError &&
-              marketList
-                ?.filter((item: any) =>
-                  [
-                    "SRIDEVI",
-                    "TIME BAZAR",
-                    "MILAN DAY",
-                    "RAJDHANI DAY",
-                    "KALYAN",
-                    "SRIDEVI NIGHT",
-                    "MILAN NIGHT",
-                    "RAJDHANI NIGHT",
-                    "KALYAN NIGHT",
-                    "MAIN BAZAR",
-                  ].includes(item?.name),
-                )
-                ?.filter((item: any) => {
-                  if (item.result === "Loading...") {
-                    return false;
-                  }
-
-                  const now = new Date();
-
-                  const convertToDate = (timeString: string) => {
-                    if (!timeString) return null;
-
-                    const [time, modifier] = timeString.split(" ");
-
-                    let [hours, minutes] = time.split(":").map(Number);
-
-                    if (modifier === "PM" && hours !== 12) {
-                      hours += 12;
-                    }
-
-                    if (modifier === "AM" && hours === 12) {
-                      hours = 0;
-                    }
-
-                    const date = new Date();
-
-                    date.setHours(hours);
-                    date.setMinutes(minutes);
-                    date.setSeconds(0);
-
-                    return date;
-                  };
-
-                  const openTime = convertToDate(item.open_time);
-                  const closeTime = convertToDate(item.close_time);
-
-                  if (!openTime || !closeTime) {
-                    return false;
-                  }
-
-                  closeTime.setMinutes(closeTime.getMinutes() + 10);
-
-                  return now >= openTime && now <= closeTime;
-                })
-
-                .map((item: any, index: number) => (
-                  <div
-                    key={index}
-                    className="border-b border-slate-700 py-5 text-center"
-                  >
-                    <h3 className="text-cyan-300 text-2xl font-black italic">
-                      {item.name}
-                    </h3>
-
-                    <p className="text-pink-400 text-2xl font-black mt-1">
-                      {item.result}
-                    </p>
-
-                    {/* <p className="text-white mt-2 text-lg">
-                      {item.open_time} - {item.close_time}
-                    </p> */}
-
-                    {/* REFRESH BUTTON */}
-                    <button
-                      onClick={async () => {
-                        setRefreshingIndex(index);
-
-                        await refetch();
-
-                        setRefreshingIndex(null);
-                      }}
-                      disabled={refreshingIndex === index}
-                      className={`mt-3 px-8 py-2 rounded-full text-white font-bold shadow-lg transition
-                
-              ${
-                refreshingIndex === index
-                  ? "bg-gray-500 cursor-not-allowed"
-                  : "bg-gradient-to-r from-cyan-500 to-blue-700 hover:scale-105"
-              }
-            `}
-                    >
-                      {refreshingIndex === index ? "Refreshing..." : "Refresh"}
-                    </button>
-                  </div>
-                ))}
+            </div>
           </div>
-        </div>
-      </div>
+        </section>
 
-      {/* Second Section */}
-      <div className="mt-4 mx-auto border-2 border-cyan-500 rounded-xl overflow-hidden shadow-[0_0_25px_rgba(34,211,238,0.25)]">
-        {/* Top Header */}
-        <div className="bg-gradient-to-r from-cyan-700 via-blue-900 to-slate-950 text-center py-3 px-2 border-b-4 border-cyan-400">
-          <p className="text-white text-xl font-black italic leading-relaxed">
-            अब मटका खेलना हुआ आसान ! घर बैठे मटका खेलो अब मोबाइल एप्लीकेशन पे और
-            जीतो ढेर सारी धनराशि।
-          </p>
-
+        {/* Promo Download Strip */}
+        <section className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-100/50 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="text-center md:text-left">
+            <h3 className="text-lg font-bold text-slate-900">अब मटका खेलना हुआ आसान !</h3>
+            <p className="text-sm text-slate-600 mt-1">घर बैठे खेलो मोबाइल एप्लीकेशन पे और जीतो ढेर सारी धनराशि।</p>
+          </div>
           <button
-            onClick={() => {
-              console.log("APK URL", appData?.data?.apk_url);
-
-              if (appData?.data?.apk_url) {
-                window.open(appData.data.apk_url, "_blank");
-              }
-            }}
-            className="mt-3 bg-pink-500 hover:bg-pink-600 transition text-white px-6 py-2 rounded-full text-lg italic font-bold shadow-lg"
+            onClick={() => appData?.data?.apk_url && window.open(appData.data.apk_url, "_blank")}
+            className="w-full md:w-auto bg-slate-900 hover:bg-slate-800 text-white font-semibold px-6 py-3 rounded-xl shadow-md transition-all text-sm whitespace-nowrap active:scale-98"
           >
             Play Online Matka
           </button>
+        </section>
 
-          <p className="text-cyan-300 text-xl font-bold italic mt-3">
-            India's Biggest & Most Trusted
-          </p>
-        </div>
-
-        {/* Live Result Header */}
-        <div className="bg-gradient-to-r from-pink-500 to-cyan-500 border-y-4 border-slate-950 text-center py-2">
-          <h2 className="text-xl font-black italic text-white">
-            📶 LIVE MATKA RESULT
-          </h2>
-        </div>
-
-        {/* Result List */}
-        <div className="bg-slate-900">
-          {/* LOADING */}
-          {isLoading && (
-            <div className="py-10 text-center">
-              <p className="text-cyan-300 text-2xl font-black animate-pulse">
-                Loading Market Data...
-              </p>
+        {/* Main Feed Framework */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          {/* Active Live Updates Column */}
+          <div className="lg:col-span-2 space-y-4">
+            <div className="flex items-center justify-between px-2">
+              <h2 className="text-xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
+                📡 Live Feed
+              </h2>
+              <Image src={download} alt="Live Icon" width={24} height={24} className="opacity-70" />
             </div>
-          )}
 
-          {/* ERROR */}
-          {isError && (
-            <div className="py-10 text-center">
-              <p className="text-red-400 text-xl font-bold">
-                Failed To Load Market List
-              </p>
-
-              <button
-                onClick={refetch}
-                className="mt-4 px-6 py-2 bg-pink-500 rounded-lg font-bold"
-              >
-                Retry
-              </button>
-            </div>
-          )}
-
-          {/* MARKET LIST */}
-          {!isLoading &&
-            !isError &&
-            marketList
-              ?.filter((item: any) =>
-                [
-                  "SRIDEVI",
-                  "TIME BAZAR",
-                  "MILAN DAY",
-                  "RAJDHANI DAY",
-                  "KALYAN",
-                  "SRIDEVI NIGHT",
-                  "MILAN NIGHT",
-                  "RAJDHANI NIGHT",
-                  "KALYAN NIGHT",
-                  "MAIN BAZAR",
-                ].includes(item?.name),
-              )
-              ?.map((item: any, index: number) => (
-                <div
-                  key={index}
-                  className={`border-b relative py-5 px-2 ${
-                    item?.bg_yellow_status == 1
-                      ? "bg-yellow-300 border-yellow-500"
-                      : "border-slate-700"
-                  }`}
-                >
-                  {/* LEFT BUTTON */}
-                  <Link
-                    href={`/jodi-chart/${item?.name
-                      ?.toLowerCase()
-                      ?.replace(/\s+/g, "-")}-chart`}
-                  >
-                    <button className="absolute left-2 top-1/2 -translate-y-1/2 bg-cyan-500 text-black text-sm md:text-lg px-3 py-1 rounded-md font-black shadow">
-                      Jodi
-                    </button>
-                  </Link>
-
-                  {/* CENTER */}
-                  <div
-                    className={`text-center ${
-                      item?.bg_yellow_status == 1 ? "text-black" : "text-white"
-                    }`}
-                  >
-                    <h3
-                      className={`text-2xl font-black italic uppercase ${
-                        item?.bg_yellow_status == 1
-                          ? "text-black"
-                          : "text-pink-400"
-                      }`}
-                    >
-                      {item?.name}
-                    </h3>
-
-                    <p className="text-3xl font-black mt-1">{item?.result}</p>
-
-                    <p
-                      className={`text-lg font-bold italic mt-1 ${
-                        item?.bg_yellow_status == 1
-                          ? "text-black"
-                          : "text-cyan-300"
-                      }`}
-                    >
-                      Open {item?.open_time} - Close {item?.close_time}
-                    </p>
-                  </div>
-
-                  {/* RIGHT BUTTON */}
-                  <Link
-                    href={`/panel-chart/${item?.name
-                      ?.toLowerCase()
-                      ?.replace(/\s+/g, "-")}-chart`}
-                  >
-                    <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-pink-500 text-white text-sm md:text-lg px-3 py-1 rounded-md font-black shadow">
-                      Panel
-                    </button>
-                  </Link>
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden divide-y divide-slate-100">
+              {isLoading && (
+                <div className="p-12 text-center text-slate-400 font-medium animate-pulse">
+                  Fetching marketplace stream...
                 </div>
-              ))}
-        </div>
+              )}
 
-        {/* Support Section */}
-        <div className="mt-4 border-2 border-cyan-500">
-          <div className="bg-gradient-to-r from-cyan-500 to-blue-700 text-center py-3">
-            <h2 className="text-white text-xl italic font-black">
-              Contact For Any Support And Queries
-            </h2>
+              {isError && (
+                <div className="p-8 text-center space-y-3">
+                  <p className="text-slate-500 font-medium text-sm">Failed to sync feed updates</p>
+                  <button onClick={() => refetch()} className="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-4 py-2 rounded-lg transition">
+                    Retry Stream
+                  </button>
+                </div>
+              )}
+
+              {!isLoading && !isError && marketList
+                ?.filter((item: any) => [
+                  "SRIDEVI", "TIME BAZAR", "MILAN DAY", "RAJDHANI DAY", "KALYAN",
+                  "SRIDEVI NIGHT", "MILAN NIGHT", "RAJDHANI NIGHT", "KALYAN NIGHT", "MAIN BAZAR"
+                ].includes(item?.name))
+                ?.filter((item: any) => {
+                  if (item.result === "Loading...") return false;
+                  const now = new Date();
+                  const convertToDate = (timeString: string) => {
+                    if (!timeString) return null;
+                    const [time, modifier] = timeString.split(" ");
+                    let [hours, minutes] = time.split(":").map(Number);
+                    if (modifier === "PM" && hours !== 12) hours += 12;
+                    if (modifier === "AM" && hours === 12) hours = 0;
+                    const date = new Date();
+                    date.setHours(hours, minutes, 0);
+                    return date;
+                  };
+                  const openTime = convertToDate(item.open_time);
+                  const closeTime = convertToDate(item.close_time);
+                  if (!openTime || !closeTime) return false;
+                  closeTime.setMinutes(closeTime.getMinutes() + 10);
+                  return now >= openTime && now <= closeTime;
+                })
+                ?.map((item: any, index: number) => (
+                  <div key={index} className="p-6 flex flex-col sm:flex-row items-center justify-between gap-4 hover:bg-slate-50 transition-colors">
+                    <div className="text-center sm:text-left">
+                      <h4 className="font-bold text-slate-900 tracking-tight text-lg">{item.name}</h4>
+                      <p className="text-xs text-slate-400 font-medium mt-0.5">{item.open_time} - {item.close_time}</p>
+                    </div>
+                    <span className="text-2xl font-black text-indigo-600 font-mono tracking-wider bg-indigo-50/50 px-4 py-1.5 rounded-xl border border-indigo-100/30">
+                      {item.result}
+                    </span>
+                    <button
+                      onClick={async () => {
+                        setRefreshingIndex(index);
+                        await refetch();
+                        setRefreshingIndex(null);
+                      }}
+                      disabled={refreshingIndex === index}
+                      className="w-full sm:w-auto text-xs bg-slate-100 hover:bg-slate-200 disabled:bg-slate-50 text-slate-700 font-semibold px-4 py-2.5 rounded-xl transition"
+                    >
+                      {refreshingIndex === index ? "Updating..." : "Refresh"}
+                    </button>
+                  </div>
+                ))}
+            </div>
+
+            {/* Static Complete Stream */}
+            <div className="mt-6">
+              <h2 className="text-xl font-extrabold text-slate-900 tracking-tight px-2 mb-4">📶 Live Board</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {!isLoading && !isError && marketList
+                  ?.filter((item: any) => [
+                    "SRIDEVI", "TIME BAZAR", "MILAN DAY", "RAJDHANI DAY", "KALYAN",
+                    "SRIDEVI NIGHT", "MILAN NIGHT", "RAJDHANI NIGHT", "KALYAN NIGHT", "MAIN BAZAR"
+                  ].includes(item?.name))
+                  ?.map((item: any, index: number) => (
+                    <div 
+                      key={index} 
+                      className={`p-5 rounded-2xl border transition-all shadow-sm ${
+                        item?.bg_yellow_status == 1 
+                          ? "bg-amber-50/70 border-amber-200/60" 
+                          : "bg-white border-slate-100"
+                      }`}
+                    >
+                      <div className="flex justify-between items-start mb-3">
+                        <span className="text-xs font-semibold text-slate-400 tracking-wider uppercase">Market Board</span>
+                        <span className="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">Live</span>
+                      </div>
+                      <h4 className="font-extrabold text-slate-900 text-lg uppercase tracking-tight">{item?.name}</h4>
+                      <div className="my-3 font-mono text-2xl font-black text-slate-800 tracking-widest">{item?.result}</div>
+                      <p className="text-xs font-medium text-slate-400 mb-4">Open {item?.open_time} - Close {item?.close_time}</p>
+                      
+                      <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100">
+                        <Link href={`/jodi-chart/${item?.name?.toLowerCase()?.replace(/\s+/g, "-")}-chart`} className="w-full">
+                          <button className="w-full text-xs font-bold text-center bg-slate-50 hover:bg-indigo-50 text-indigo-600 py-2 rounded-xl transition">Jodi</button>
+                        </Link>
+                        <Link href={`/panel-chart/${item?.name?.toLowerCase()?.replace(/\s+/g, "-")}-chart`} className="w-full">
+                          <button className="w-full text-xs font-bold text-center bg-slate-50 hover:bg-pink-50 text-pink-600 py-2 rounded-xl transition">Panel</button>
+                        </Link>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
           </div>
 
-          <div className="bg-slate-950 text-center py-3">
-            <p className="text-cyan-200 text-lg italic font-semibold">
-              Email us, and we will get back to you shortly.
-            </p>
-          </div>
+          {/* Sidebar / Forum and Fast Channels */}
+          <div className="space-y-6">
+            <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm space-y-4">
+              <h3 className="text-base font-bold text-slate-900 tracking-tight">Community Channels</h3>
+              <div className="space-y-2.5">
+                {forumLinks.map((item, index) => {
+                  const isTelegram = item.title === "Join Telegram Channel";
+                  return (
+                    <div key={index} className="group border border-slate-100 hover:border-indigo-100 hover:bg-indigo-50/20 rounded-xl p-3 transition-all">
+                      <div className="flex items-center gap-3">
+                        <Image src={item.image} alt="" width={24} height={24} className="rounded-lg object-contain" />
+                        {isTelegram ? (
+                          <a href={appData?.data?.telegram_channel || "#"} target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-slate-700 group-hover:text-indigo-600 transition-colors">
+                            {item?.title}
+                          </a>
+                        ) : (
+                          <Link href={item.url} className="text-sm font-bold text-slate-700 group-hover:text-indigo-600 transition-colors">
+                            {item?.title}
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
 
-          <div className="bg-slate-900 flex justify-center py-5">
-            <div className="bg-gradient-to-r from-cyan-500 to-pink-500 px-5 py-3 rounded-full shadow-xl">
-              <p className="text-black text-xl font-black italic">
+            {/* Quick Chart Archive List */}
+            <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+              <h3 className="text-base font-bold text-slate-900 tracking-tight mb-4">Historical Archives</h3>
+              <div className="max-h-[340px] overflow-y-auto pr-1 space-y-1 scrollbar-thin">
+                {!isLoading && !isError && marketList
+                  ?.filter((item: any) => [
+                    "SRIDEVI", "TIME BAZAR", "MILAN DAY", "RAJDHANI DAY", "KALYAN",
+                    "SRIDEVI NIGHT", "MILAN NIGHT", "RAJDHANI NIGHT", "KALYAN NIGHT", "MAIN BAZAR"
+                  ].includes(item?.name))
+                  ?.map((item: any, index: number) => (
+                    <a
+                      key={index}
+                      href={`/jodi-chart/${item?.name.toLowerCase().replace(/\s+/g, "-")}-chart`}
+                      className="block text-sm font-semibold text-slate-600 hover:text-indigo-600 hover:bg-slate-50 px-3 py-2.5 rounded-xl transition"
+                    >
+                      {item?.name} Record
+                    </a>
+                  ))}
+              </div>
+            </div>
+
+            {/* Support Desk */}
+            <div className="bg-gradient-to-br from-indigo-600 to-blue-700 text-white rounded-2xl p-6 shadow-md text-center">
+              <h3 className="font-bold text-base mb-1">Helpdesk Support</h3>
+              <p className="text-xs text-indigo-100 mb-4">Reach out to our platform managers directly</p>
+              <div className="bg-white/10 backdrop-blur-md rounded-xl py-2.5 px-4 font-mono text-sm tracking-wide select-all border border-white/10">
                 {appData?.data?.support_email}
-              </p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Forum Section */}
-        <div className="mt-4 border-2 border-pink-500">
-          <div className="bg-gradient-to-r from-pink-600 to-cyan-600 py-3 text-center">
-            <h2 className="text-white text-xl font-black italic">
-              MEMBER'S FORUM AND FREE SATTA MATKA ZONE
-            </h2>
-          </div>
-
-          <div className="bg-slate-900 p-3 space-y-3">
-            {forumLinks.map((item, index) => {
-              const isTelegram = item.title === "Join Telegram Channel";
-
-              return (
-                <div
-                  key={index}
-                  className="border-2 border-cyan-500 bg-slate-950 rounded-lg py-2 px-2"
-                >
-                  <div className="flex items-center justify-center gap-3">
-                    <Image
-                      src={item.image}
-                      alt="Image"
-                      width={30}
-                      height={30}
-                    />
-
-                    {isTelegram ? (
-                      <a
-                        href={appData?.data?.telegram_channel || "#"}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-cyan-300 text-lg font-black italic text-center"
-                        onClick={() =>
-                          console.log(
-                            "appData",
-                            appData?.data?.telegram_channel,
-                          )
-                        }
-                      >
-                        {item?.title}
-                      </a>
-                    ) : (
-                      <Link
-                        href={item.url}
-                        className="text-cyan-300 text-lg font-black italic text-center"
-                      >
-                        {item?.title}
-                      </Link>
-                    )}
-
-                    <Image
-                      src={item.image}
-                      alt="Image"
-                      width={30}
-                      height={30}
-                    />
-                  </div>
+        {/* Dynamic Accordion Area */}
+        <section className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+          <h3 className="text-xl font-extrabold text-slate-900 tracking-tight mb-6">Frequently Answered Queries</h3>
+          <div className="space-y-3">
+            {faqData2.map((item, index) => (
+              <div key={index} onClick={() => toggle(index)} className="border border-slate-100 rounded-xl overflow-hidden transition-all cursor-pointer bg-slate-50/50">
+                <div className="flex items-center justify-between p-4 text-left select-none">
+                  <span className="text-sm font-bold text-slate-800">{item.question}</span>
+                  <span className={`text-slate-400 transition-transform duration-200 ${active === index ? 'rotate-180' : ''}`}>▼</span>
                 </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Bottom Fixed Buttons */}
-        <div className="fixed bottom-3 left-2 z-50 flex flex-col gap-2">
-          <button className="bg-gradient-to-r from-pink-500 to-red-600 text-white px-3 py-2 rounded-md text-lg font-bold shadow-lg">
-            Fast Result
-          </button>
-
-          <button
-            onClick={() => {
-              console.log("APK URL", appData?.data?.apk_url);
-
-              if (appData?.data?.apk_url) {
-                window.open(appData.data.apk_url, "_blank");
-              }
-            }}
-            className="bg-gradient-to-r from-cyan-500 to-blue-700 text-white px-4 py-2 rounded-md text-lg font-bold shadow-lg"
-          >
-            Matka Play
-          </button>
-        </div>
-
-        {/* Refresh Button */}
-        <div className="fixed bottom-4 right-3 z-50">
-          <button className="bg-slate-950 border-4 border-cyan-400 text-cyan-300 px-3 py-2 rounded-2xl text-lg italic font-black shadow-2xl">
-            Refresh
-          </button>
-        </div>
-      </div>
-
-      {/* Chart Records */}
-      <div className="mt-4 bg-gradient-to-r from-cyan-700 to-blue-900 text-white font-black italic text-lg px-3 py-2 rounded-t-xl">
-        ⇒ SATTA MATKA JODI CHART RECORDS
-      </div>
-
-      <section className="bg-slate-900 rounded-b-xl overflow-hidden border border-cyan-500">
-        {!isLoading &&
-          !isError &&
-          marketList
-            ?.filter((item: any) =>
-              [
-                "SRIDEVI",
-                "TIME BAZAR",
-                "MILAN DAY",
-                "RAJDHANI DAY",
-                "KALYAN",
-                "SRIDEVI NIGHT",
-                "MILAN NIGHT",
-                "RAJDHANI NIGHT",
-                "KALYAN NIGHT",
-                "MAIN BAZAR",
-              ].includes(item?.name),
-            )
-            ?.map((item: any, index: number) => (
-              <a
-                key={index}
-                href={`/jodi-chart/${item?.name.toLowerCase().replace(/\s+/g, "-")}-chart`}
-                className="block text-center py-3 text-xl font-bold text-cyan-300 border-b border-slate-700 hover:bg-slate-800 transition"
-              >
-                {item?.name}
-              </a>
+                <div className={`transition-all duration-300 ${active === index ? "max-h-[300px] border-t border-slate-100" : "max-h-0 opacity-0"}`}>
+                  <p className="p-4 text-xs sm:text-sm text-slate-500 leading-relaxed bg-white">{item.answer}</p>
+                </div>
+              </div>
             ))}
-      </section>
+          </div>
+        </section>
 
-      {/* FAQ */}
-      <div className="mt-6 bg-gradient-to-r from-pink-600 to-cyan-600 text-center py-3 text-white font-black italic rounded-xl">
-        FREQUENTLY ASKED QUESTIONS — SATTA MATKA DPBOSS
+        {/* Disclaimer Area */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+          <div className="bg-white border border-slate-200/70 text-slate-500 rounded-2xl p-6 space-y-2">
+            <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Legal Disclaimer</h4>
+            <p className="leading-relaxed">
+              यह वेबसाइट (sattamatkadpb) केवल मनोरंजन और सूचना के उद्देश्य के लिए है। हम किसी भी अवैध व्यवसाय से नहीं जुड़े हैं। यहाँ दिखाए गए सभी परिणाम इंटरनेट पर उपलब्ध डेटा पर आधारित हैं।
+            </p>
+          </div>
+          <div className="bg-white border border-slate-200/70 text-slate-500 rounded-2xl p-6 space-y-2">
+            <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Live Stream Tracker</h4>
+            <p className="leading-relaxed">
+              यदि आप इंटरनेट पर सबसे तेज़ कल्याण मटका रिजल्ट और DPBoss गेसिंग खोज रहे हैं, तो आप सही जगह पर हैं। हमारी वेबसाइट आपको मिलन डे, मिलन नाइट परिणाम बिना किसी देरी के प्रदान करती है।
+            </p>
+          </div>
+        </section>
+
+        {/* Professional Footer Structure */}
+        <footer className="bg-white rounded-2xl border border-slate-100 p-8 shadow-sm space-y-6 text-center sm:text-left">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pb-6 border-b border-slate-100">
+            <div className="space-y-1">
+              <h3 className="font-extrabold text-slate-900 text-lg">sattamatkadpb</h3>
+              <p className="text-xs text-slate-400 font-medium">Platform Infrastructure Governance &copy; 2012 - 2026</p>
+            </div>
+            <div className="text-center sm:text-right">
+              <span className="text-xs font-semibold text-slate-400 block uppercase tracking-wider mb-0.5">Technical Operator</span>
+              <span className="font-bold text-slate-800 text-base">FAST BOSS SIR</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-semibold text-slate-500">
+            <a href="/satta-matka-chart" className="hover:text-indigo-600 transition">Satta Matka Chart</a>
+            <a href="/tara-matka-mumbai" className="hover:text-indigo-600 transition">Tara Matka</a>
+            <a href="/fix-matka-number" className="hover:text-indigo-600 transition">Fix Matka</a>
+            <a href="/about-us" className="hover:text-indigo-600 transition">About Us</a>
+            <a href="/privacy-policy" className="hover:text-indigo-600 transition">Privacy Policy</a>
+            <a href="/disclaimer" className="hover:text-indigo-600 transition">Disclaimer</a>
+            <a href="/contact" className="hover:text-indigo-600 transition">Contact Us</a>
+            <span className="text-slate-700 font-mono select-all bg-slate-50 px-2 py-1 rounded border border-slate-100 text-center">
+              {appData?.data?.whatsapp_number ?? "1234567890"}
+            </span>
+          </div>
+
+          {/* Quality Rating Matrix */}
+          <div className="bg-slate-50 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2">
+              <span className="text-xl font-bold text-slate-800">4.9</span>
+              <div className="text-amber-400 tracking-tighter text-sm">★★★★★</div>
+              <span className="text-xs text-slate-400 font-medium">(Based on 14,850 regular votes)</span>
+            </div>
+            <p className="text-xs text-slate-400 font-medium text-center sm:text-right">Fastest Results and Accurate Charts trusted by thousands daily.</p>
+          </div>
+        </footer>
       </div>
 
-      <section className="py-4">
-        <div className="w-full">
-          {faqData2.map((item, index) => (
-            <div
-              key={index}
-              onClick={() => toggle(index)}
-              className="mb-3 cursor-pointer overflow-hidden rounded-lg border-2 border-cyan-500"
-            >
-              <div className="flex w-full items-center bg-slate-900 px-3 py-3 text-left">
-                <span className="flex-1 text-center text-[16px] font-black italic text-pink-400">
-                  {item.question}
-                </span>
-              </div>
+      {/* Floating Action Bars */}
+      <div className="fixed bottom-4 left-4 z-50 flex items-center gap-2 bg-white/80 backdrop-blur-md p-1.5 rounded-xl shadow-lg border border-slate-200/50">
+        <button className="bg-slate-900 hover:bg-slate-800 text-white px-3 py-2 rounded-lg text-xs font-bold transition">
+          Fast Result
+        </button>
+        <button
+          onClick={() => appData?.data?.apk_url && window.open(appData.data.apk_url, "_blank")}
+          className="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded-lg text-xs font-bold transition"
+        >
+          Matka Play
+        </button>
+      </div>
 
-              <div
-                className={`overflow-hidden transition-all duration-300 ${
-                  active === index
-                    ? "max-h-[500px] opacity-100"
-                    : "max-h-0 opacity-0"
-                }`}
-              >
-                <div className="bg-slate-800 px-3 py-3 text-[13px] leading-relaxed text-slate-200">
-                  {item.answer}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Disclaimer */}
-      <section className="max-w-4xl mx-auto px-2 space-y-4">
-        <div className="bg-slate-900 text-white rounded-xl p-6 border-2 border-cyan-500">
-          <h3 className="text-center text-pink-400 font-black text-3xl mb-4">
-            !! DISCLAIMER !!
-          </h3>
-
-          <p className="text-slate-300 leading-7">
-            यह वेबसाइट (sattamatkadpbos) केवल मनोरंजन और सूचना के उद्देश्य के
-            लिए है। हम किसी भी अवैध सट्टा मटका व्यवसाय से नहीं जुड़े हैं। यहाँ
-            दिखाए गए सभी परिणाम इंटरनेट पर उपलब्ध डेटा पर आधारित हैं। हम जुए या
-            सट्टा खेलने का समर्थन नहीं करते हैं। कृपया अपने देश के कानूनों का
-            पालन करें। किसी भी लाभ या हानि के लिए आप स्वयं जिम्मेदार होंगे।
-          </p>
-
-          <p className="text-slate-300 leading-7">
-            Note: This site is for educational purposes only. View at your own
-            risk.
-          </p>
-        </div>
-
-        <div className="bg-gradient-to-r from-pink-600 to-cyan-600 text-white rounded-xl p-6">
-          <h3 className="font-black text-center text-2xl">
-            Satta Matka DPBoss: सबसे तेज़ लाइव अपडेट
-          </h3>
-
-          <p className="mt-3 leading-7">
-            यदि आप इंटरनेट पर सबसे तेज़ कल्याण मटका रिजल्ट और DPBoss गेसिंग खोज
-            रहे हैं, तो आप सही जगह पर हैं। हमारी वेबसाइट आपको मिलन डे, मिलन
-            नाइट, राजधानी, और मेन बाजार जैसे सभी मार्केट के परिणाम बिना किसी
-            देरी के प्रदान करती है।
-          </p>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <div className="max-w-7xl mx-auto mt-8">
-        <div className="bg-gradient-to-r from-slate-950 via-cyan-950 to-slate-950 border border-cyan-500 rounded-xl py-6 px-4">
-          <div className="flex flex-wrap justify-center gap-8 text-cyan-300 font-bold text-lg uppercase">
-            <a href="/satta-matka-chart">Satta Matka Chart</a>
-            <a href="/tara-matka-mumbai">Tara Matka</a>
-            <a href="/fix-matka-number">Fix Matka</a>
-            <a href="/sitemap.xml">Sitemap</a>
-          </div>
-
-          <div className="border-t border-cyan-700 my-4"></div>
-
-          <div className="flex flex-wrap justify-center gap-8 text-pink-300 font-bold text-lg uppercase">
-            <a href="/about-us">About Us</a>
-            <a href="/contact">Contact Us</a>
-            <a href="/privacy-policy">Privacy Policy</a>
-            <a href="/disclaimer">Disclaimer</a>
-          </div>
-        </div>
-
-        {/* Rating Card */}
-        <div className="flex justify-center mt-10">
-          <div className="w-full max-w-xl bg-gradient-to-b from-slate-900 to-black border-2 border-cyan-500 rounded-3xl p-8 text-center shadow-[0_0_25px_rgba(34,211,238,0.3)]">
-            <h2 className="text-cyan-300 text-1xl font-black mb-6">
-              DPBoss User Reviews & Ratings
-            </h2>
-
-            <div className="flex items-center justify-center gap-3 mb-4">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <span key={i} className="text-pink-400 text-3xl">
-                  ★
-                </span>
-              ))}
-
-              <span className="text-cyan-300 text-1xl font-black">4.9 / 5</span>
-            </div>
-
-            <p className="text-slate-400 italic text-lg">
-              (Based on 14,850 votes)
-            </p>
-
-            <p className="text-slate-300 mt-8 text-1xl leading-relaxed">
-              Fastest Satta Matka Results and Accurate Charts trusted by
-              thousands of users daily.
-            </p>
-          </div>
-        </div>
-
-        {/* Footer Card */}
-        <div className="flex justify-center mt-10 mb-10">
-          <div className="bg-slate-900 border border-cyan-500 rounded-3xl shadow-lg w-full max-w-md text-center p-8">
-            <h3 className="text-cyan-300 text-2xl font-black italic">
-              sattamatkadpbos
-            </h3>
-
-            <p className="text-slate-300 mt-4 font-semibold">
-              ALL RIGHTS RESERVED (2012-2026)
-            </p>
-
-            <hr className="my-6 border-slate-700" />
-
-            <p className="text-pink-400 uppercase font-semibold">Site Owner:</p>
-
-            <h4 className="text-white text-2xl font-black mt-4">
-              FAST BOSS SIR
-            </h4>
-
-            <p className="text-cyan-300 text-xl italic mt-6">
-              {" "}
-              {appData?.data?.whatsapp_number ?? "1234567890"}
-            </p>
-          </div>
-        </div>
+      <div className="fixed bottom-4 right-4 z-50">
+        <button 
+          onClick={() => refetch()}
+          className="bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 px-4 py-2 rounded-xl text-xs font-bold shadow-md transition"
+        >
+          Refresh Stream
+        </button>
       </div>
     </main>
   );

@@ -25,7 +25,7 @@ export async function generateMetadata({
     title: `${formattedSlug} Chart Result`,
     description: `Get ${formattedSlug} satta matka chart, panel chart, jodi chart and daily result updates.`,
     alternates: {
-      canonical: `https://sattamatkadpbos.com/jodi-chart/${slug}-chart`,
+      canonical: `https://sattamatkadpbos.com//jodi-chart/${slug}-chart`,
     },
   };
 }

@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const BASE_URL = "https://sattamatkadpbos.com/";
+const BASE_URL = "https://sattamatkadpbos.com//";
 
 export const apiClient = createApi({
   reducerPath: "api",
@@ -62,7 +62,7 @@ export const apiClient = createApi({
 
     getAppData: builder.query({
       query: () => ({
-        url: `https://manage.sattamatkadpbos.com/api/getdata`,
+        url: `https://manage.sattamatkadpb.net/api/getdata`,
         method: "GET",
       }),
     }),

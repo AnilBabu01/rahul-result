@@ -100,48 +100,63 @@ export default function OpenToCloseClient() {
 
           {!isLoading &&
             !isError &&
-            marketList?.slice(0, 20)?.map((market: any, index: number) => (
-              <div
-                key={index}
-                className="rounded-xl border border-cyan-500 bg-gradient-to-r from-slate-900 to-slate-800 text-center py-4 px-3 shadow-md hover:scale-[1.01] transition-all duration-300"
-              >
-                <span
-                  className={`${market.color} inline-block rounded-md px-4 py-1 text-sm md:text-lg font-black italic text-white shadow`}
+            marketList
+              ?.filter((item: any) =>
+                [
+                  "SRIDEVI",
+                  "TIME BAZAR",
+                  "MILAN DAY",
+                  "RAJDHANI DAY",
+                  "KALYAN",
+                  "SRIDEVI NIGHT",
+                  "MILAN NIGHT",
+                  "RAJDHANI NIGHT",
+                  "KALYAN NIGHT",
+                  "MAIN BAZAR",
+                ].includes(item?.name),
+              )
+              ?.map((market: any, index: number) => (
+                <div
+                  key={index}
+                  className="rounded-xl border border-cyan-500 bg-gradient-to-r from-slate-900 to-slate-800 text-center py-4 px-3 shadow-md hover:scale-[1.01] transition-all duration-300"
                 >
-                  {market.name}
-                </span>
+                  <span
+                    className={`${market.color} inline-block rounded-md px-4 py-1 text-sm md:text-lg font-black italic text-white shadow`}
+                  >
+                    {market.name}
+                  </span>
 
-                {"title" in market ? (
-                  <div className="mt-3 space-y-1">
-                    <div className="text-cyan-300 text-lg md:text-2xl font-black italic">
-                      {market.title}
-                    </div>
+                  {"title" in market ? (
+                    <div className="mt-3 space-y-1">
+                      <div className="text-cyan-300 text-lg md:text-2xl font-black italic">
+                        {market.title}
+                      </div>
 
-                    <div className="text-white text-lg md:text-xl font-bold italic">
-                      CALL KARE
-                    </div>
+                      <div className="text-white text-lg md:text-xl font-bold italic">
+                        CALL KARE
+                      </div>
 
-                    <div className="text-pink-400 text-xl md:text-3xl font-black italic break-all">
-                      {market.phone}
+                      <div className="text-pink-400 text-xl md:text-3xl font-black italic break-all">
+                        {market.phone}
+                      </div>
                     </div>
-                  </div>
-                ) : (
-                  <div className="mt-3 space-y-1">
-                    <div className="text-cyan-300 text-lg md:text-2xl italic font-black">
-                      ({market.open_time} - {market.close_time})
-                    </div>
+                  ) : (
+                    <div className="mt-3 space-y-1">
+                      <div className="text-cyan-300 text-lg md:text-2xl italic font-black">
+                        ({market.open_time} - {market.close_time})
+                      </div>
 
-                    <div className="text-white text-lg md:text-2xl italic font-black">
-                      {market.close}
-                    </div>
+                      <div className="text-white text-lg md:text-2xl italic font-black">
+                        {market.close}
+                      </div>
 
-                    <div className="text-pink-400 text-xl md:text-3xl italic font-black">
-                      {market.result}
+                      <div className="text-pink-400 text-xl md:text-3xl italic font-black">
+                        {market.result}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            ))}
+                  )}
+                </div>
+              ))}
         </div>
 
         {/* INFO SECTION */}

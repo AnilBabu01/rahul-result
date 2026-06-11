@@ -30,7 +30,20 @@ export default function SattaMatkaChartClient() {
 
           {!isLoading &&
             !isError &&
-            marketList?.slice(0,20)?.map((item: any, index: number) => (
+            marketList?.filter((item: any) =>
+                  [
+                    "SRIDEVI",
+                    "TIME BAZAR",
+                    "MILAN DAY",
+                    "RAJDHANI DAY",
+                    "KALYAN",
+                    "SRIDEVI NIGHT",
+                    "MILAN NIGHT",
+                    "RAJDHANI NIGHT",
+                    "KALYAN NIGHT",
+                    "MAIN BAZAR",
+                  ].includes(item?.name),
+                )?.map((item: any, index: number) => (
               <a
                 key={index}
                 href={`/jodi-chart/${item?.name

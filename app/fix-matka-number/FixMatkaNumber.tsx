@@ -233,7 +233,6 @@ export default function FixMatkaNumber() {
                   className={`text-xl italic font-black ${
                     item?.bg_yellow_status == 1
                       ? "text-black"
-               
                       : "text-yellow-300"
                   }`}
                 >
@@ -242,9 +241,7 @@ export default function FixMatkaNumber() {
 
                 <p
                   className={`text-xl font-black ${
-                    item?.bg_yellow_status == 1
-                      ? "text-black"
-                      : "text-white"
+                    item?.bg_yellow_status == 1 ? "text-black" : "text-white"
                   }`}
                 >
                   {item.result}
@@ -294,17 +291,32 @@ export default function FixMatkaNumber() {
 
         {!isLoading &&
           !isError &&
-          marketList?.slice(0, 20)?.map((item: any, index: number) => (
-            <a
-              key={index}
-              href={`/jodi-chart/${item?.name
-                ?.toLowerCase()
-                .replace(/\s+/g, "-")}-chart`}
-              className="block text-center py-4 text-xl font-black text-yellow-300 border-b border-zinc-800 hover:bg-orange-900 transition-all duration-300"
-            >
-              {item?.name}
-            </a>
-          ))}
+          marketList
+            ?.filter((item: any) =>
+              [
+                "SRIDEVI",
+                "TIME BAZAR",
+                "MILAN DAY",
+                "RAJDHANI DAY",
+                "KALYAN",
+                "SRIDEVI NIGHT",
+                "MILAN NIGHT",
+                "RAJDHANI NIGHT",
+                "KALYAN NIGHT",
+                "MAIN BAZAR",
+              ].includes(item?.name),
+            )
+            ?.map((item: any, index: number) => (
+              <a
+                key={index}
+                href={`/jodi-chart/${item?.name
+                  ?.toLowerCase()
+                  .replace(/\s+/g, "-")}-chart`}
+                className="block text-center py-4 text-xl font-black text-yellow-300 border-b border-zinc-800 hover:bg-orange-900 transition-all duration-300"
+              >
+                {item?.name}
+              </a>
+            ))}
       </section>
 
       {/* Fixed Buttons */}

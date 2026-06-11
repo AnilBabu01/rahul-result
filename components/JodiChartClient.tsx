@@ -4,7 +4,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-
+import { useGetAppDataQuery } from "@/app/redux/api/apiClient";
 type Props = {
   slug: string;
 };
@@ -31,6 +31,14 @@ export default function JodiChartClient({ slug }: Props) {
   // =========================
   // FETCH DATA AUTOMATICALLY
   // =========================
+
+  const {
+    data: appData,
+    isLoading: appLoading,
+    error: appError,
+  } = useGetAppDataQuery({});
+
+  console.log("appData", appData?.data?.WhatsAppchannel);
 
   useEffect(() => {
     fetchChartData();
@@ -63,7 +71,10 @@ export default function JodiChartClient({ slug }: Props) {
 
         for (let i = 0; i < data.data.length; i += 7) {
           rows.push(
-            data?.data?.reverse()?.slice(i, i + 7).map((item: any) => item.result || "--"),
+            data?.data
+              ?.reverse()
+              ?.slice(i, i + 7)
+              .map((item: any) => item.result || "--"),
           );
         }
 
@@ -107,13 +118,13 @@ export default function JodiChartClient({ slug }: Props) {
         {/* Header */}
         <div className="overflow-hidden border-2 border-cyan-500 shadow-lg shadow-cyan-500/20 rounded-lg">
           <div className="bg-gradient-to-r from-cyan-700 to-blue-900 py-4 text-center">
-            <h1 className="text-xl sm:text-2xl md:text-4xl font-black italic uppercase text-cyan-300 tracking-wide">
+            <h1 className="text-xl sm:text-2xl md:text-2xl font-black italic uppercase text-cyan-300 tracking-wide">
               {formattedTitle}
             </h1>
           </div>
 
           <div className="border-t-2 border-pink-500 bg-slate-900 py-4 text-center">
-            <h2 className="text-lg sm:text-xl md:text-3xl font-black italic text-pink-400">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-black italic text-pink-400">
               {formattedTitle}
             </h2>
 
@@ -135,7 +146,7 @@ export default function JodiChartClient({ slug }: Props) {
             {formattedTitle}
           </h2>
 
-          <div className="mt-2 text-3xl md:text-5xl font-black text-pink-400 tracking-wider">
+          <div className="mt-2 text-3xl md:text-2xl font-black text-pink-400 tracking-wider">
             {latestResult}
           </div>
 
@@ -214,7 +225,9 @@ export default function JodiChartClient({ slug }: Props) {
                           >
                             {typeof num === "string" && num.includes("-")
                               ? num.split("-")[1]
-                              : num}
+                              : num == "Loading.."
+                                ? "-"
+                                : "-"}
                           </td>
                         ))}
                       </tr>
@@ -252,7 +265,7 @@ export default function JodiChartClient({ slug }: Props) {
           {formattedTitle}
         </h1>
 
-        <div className="mt-2 text-2xl md:text-4xl font-black text-pink-400">
+        <div className="mt-2 text-2xl md:text-2xl font-black text-pink-400">
           {latestResult}
         </div>
 
@@ -266,7 +279,14 @@ export default function JodiChartClient({ slug }: Props) {
 
       {/* Whatsapp Banner */}
       <div className="flex justify-center mt-4 px-2">
-        <div className="bg-gradient-to-r from-green-500 to-emerald-700 text-white px-5 py-3 rounded-xl text-sm md:text-lg font-black shadow-2xl text-center">
+        <div
+          onClick={() => {
+            if (appData?.data?.WhatsAppchannel) {
+              window.open(appData.data.WhatsAppchannel, "_blank");
+            }
+          }}
+          className="bg-gradient-to-r from-green-500 to-emerald-700 text-white px-5 py-3 rounded-xl text-sm md:text-lg font-black shadow-2xl text-center cursor-pointer hover:scale-105 transition-transform duration-200"
+        >
           Join our WhatsApp channel for fast Result
         </div>
       </div>
@@ -335,7 +355,7 @@ export default function JodiChartClient({ slug }: Props) {
         </div>
 
         <div className="mt-2 text-cyan-300 text-sm md:text-xl font-black">
-          1234567890
+           {appData?.data?.whatsapp_number??"1234567890"}
         </div>
 
         <div className="mt-3 text-xs md:text-base font-bold text-slate-400 break-all px-2">

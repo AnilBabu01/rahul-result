@@ -1,7 +1,10 @@
 "use client";
 import { markets } from "@/data/games";
 import Link from "next/link";
-import { useGetMarketListQuery } from "../redux/api/apiClient";
+import {
+  useGetMarketListQuery,
+  useGetAppDataQuery,
+} from "../redux/api/apiClient";
 
 const markets2 = [
   "Kalyan",
@@ -47,6 +50,12 @@ export default function OpenToCloseClient() {
   } = useGetMarketListQuery({});
 
   const marketList = marketResponse?.data || [];
+
+  const {
+    data: appData,
+    isLoading: appLoading,
+    error: appError,
+  } = useGetAppDataQuery({});
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black  text-white">
@@ -321,7 +330,7 @@ export default function OpenToCloseClient() {
           </p>
 
           <p className="text-cyan-400 font-black text-1xl md:text-1xl mt-2 break-all">
-            1234567890
+            {appData?.data?.whatsapp_number ?? "1234567890"}
           </p>
 
           <p className="font-bold text-base md:text-1xl mt-4 text-slate-300 break-all">

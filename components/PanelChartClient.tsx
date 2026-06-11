@@ -5,7 +5,10 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 
-import { useGetMarketResultQuery } from "@/app/redux/api/apiClient";
+import {
+  useGetMarketResultQuery,
+  useGetAppDataQuery,
+} from "@/app/redux/api/apiClient";
 import { games } from "@/data/games";
 
 type Props = {
@@ -114,6 +117,8 @@ function formatDate(date: Date) {
 
   return `${dd}/${mm}/${yyyy}`;
 }
+
+
 
 function apiDateToObj(dateStr: string) {
   // 06-06-2026
@@ -287,6 +292,7 @@ export default function PanelChartClient({ slug }: Props) {
     toDate,
   });
 
+
   /* =========================================================
      API DATA
   ========================================================= */
@@ -303,12 +309,21 @@ export default function PanelChartClient({ slug }: Props) {
     return generateWeeklyChart(apiData);
   }, [apiData]);
 
+  const {
+  data: appData,
+  isLoading: appLoading,
+  error: appError,
+} = useGetAppDataQuery({});
+
+console.log("appData", appData?.data?.WhatsAppchannel);
+
   /* =========================================================
      LATEST RESULT
   ========================================================= */
 
   const latestResult =
     apiData?.length > 0 ? apiData[apiData.length - 1]?.result : "Loading...";
+
 
   return (
     <div
@@ -485,7 +500,14 @@ export default function PanelChartClient({ slug }: Props) {
       </div>
       {/* Whatsapp Banner */}
       <div className="flex justify-center mt-4 px-2">
-        <div className="bg-gradient-to-r from-green-500 to-emerald-700 text-white px-5 py-3 rounded-xl text-sm md:text-lg font-black shadow-2xl text-center">
+        <div
+          onClick={() => {
+            if (appData?.data?.WhatsAppchannel) {
+              window.open(appData.data.WhatsAppchannel, "_blank");
+            }
+          }}
+          className="bg-gradient-to-r from-green-500 to-emerald-700 text-white px-5 py-3 rounded-xl text-sm md:text-lg font-black shadow-2xl text-center cursor-pointer hover:scale-105 transition-transform duration-200"
+        >
           Join our WhatsApp channel for fast Result
         </div>
       </div>
@@ -554,7 +576,7 @@ export default function PanelChartClient({ slug }: Props) {
         </div>
 
         <div className="mt-2 text-cyan-300 text-sm md:text-xl font-black">
-          1234567890
+          {appData?.data?.whatsapp_number ?? "1234567890"}
         </div>
 
         <div className="mt-3 text-xs md:text-base font-bold text-slate-400 break-all px-2">

@@ -48,8 +48,6 @@ export default function Home() {
     error: appError,
   } = useGetAppDataQuery({});
 
-  console.log("appData", appData?.data?.telegram_channel);
-
   /*
   |--------------------------------------------------------------------------
   | MARKET DATA
@@ -122,7 +120,10 @@ export default function Home() {
                 Ank (शुभांक)
               </h3>
 
-              <p className="text-3xl font-black text-white">2-5-7-8</p>
+              <p className="text-3xl font-black text-white">
+                {" "}
+                {appData?.data?.Ank ?? "2-5-7-8"}
+              </p>
             </div>
 
             <div>
@@ -130,7 +131,10 @@ export default function Home() {
                 Final Ank
               </h3>
 
-              <p className="text-2xl font-black text-white">K-5, M-*</p>
+              <p className="text-2xl font-black text-white">
+                {" "}
+                {appData?.data?.Ank ?? "K-5, M-*"}
+              </p>
             </div>
           </div>
         </div>
@@ -646,7 +650,7 @@ export default function Home() {
         {/* Rating Card */}
         <div className="flex justify-center mt-10">
           <div className="w-full max-w-xl bg-gradient-to-b from-slate-900 to-black border-2 border-cyan-500 rounded-3xl p-8 text-center shadow-[0_0_25px_rgba(34,211,238,0.3)]">
-            <h2 className="text-cyan-300 text-3xl font-black mb-6">
+            <h2 className="text-cyan-300 text-1xl font-black mb-6">
               DPBoss User Reviews & Ratings
             </h2>
 
@@ -657,14 +661,14 @@ export default function Home() {
                 </span>
               ))}
 
-              <span className="text-cyan-300 text-3xl font-black">4.9 / 5</span>
+              <span className="text-cyan-300 text-1xl font-black">4.9 / 5</span>
             </div>
 
             <p className="text-slate-400 italic text-lg">
               (Based on 14,850 votes)
             </p>
 
-            <p className="text-slate-300 mt-8 text-xl leading-relaxed">
+            <p className="text-slate-300 mt-8 text-1xl leading-relaxed">
               Fastest Satta Matka Results and Accurate Charts trusted by
               thousands of users daily.
             </p>
@@ -686,11 +690,14 @@ export default function Home() {
 
             <p className="text-pink-400 uppercase font-semibold">Site Owner:</p>
 
-            <h4 className="text-white text-3xl font-black mt-4">
+            <h4 className="text-white text-2xl font-black mt-4">
               FAST BOSS SIR
             </h4>
 
-            <p className="text-cyan-300 text-xl italic mt-6">1234567890</p>
+            <p className="text-cyan-300 text-xl italic mt-6">
+              {" "}
+              {appData?.data?.whatsapp_number ?? "1234567890"}
+            </p>
           </div>
         </div>
       </div>
